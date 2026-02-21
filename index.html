@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DigiBooth</title>
-  
+  <link rel="icon" type="image/png" href="capybara/cute-capibara-character-different-poses.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1104,7 +1104,17 @@
     // Start camera
     startBtn.addEventListener('click', async () => {
       try {
-        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+              facingMode: 'user',
+              width: { ideal: 1920, min: 1280 },
+              height: { ideal: 1080, min: 720 }
+            }
+          });
+        } catch (resErr) {
+          stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+        }
         video.srcObject = stream;
         placeholder.classList.add('hidden');
         captureBtn.disabled = false;
@@ -1122,6 +1132,8 @@
       const ctx = canvas.getContext('2d');
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
       ctx.save();
       ctx.translate(canvas.width, 0);
       ctx.scale(-1, 1);
@@ -1274,7 +1286,7 @@
       if (typeof html2canvas === 'undefined' || !navigator.share) return;
       html2canvas(loveLetterCard, {
         backgroundColor: null,
-        scale: 2,
+        scale: 3,
         useCORS: true,
         logging: false
       }).then(async cvs => {
@@ -1300,7 +1312,7 @@
       }
       html2canvas(loveLetterCard, {
         backgroundColor: null,
-        scale: 2,
+        scale: 3,
         useCORS: true,
         logging: false
       }).then(canvas => {
