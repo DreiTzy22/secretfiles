@@ -1146,6 +1146,97 @@
       display: flex;
     }
 
+    /* About button */
+    .about-btn-wrap {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-btn {
+      padding: 0.4rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--capybara-sage);
+      background: transparent;
+      color: var(--capybara-brown);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .about-btn:hover {
+      background: rgba(156, 175, 136, 0.2);
+      border-color: var(--capybara-brown);
+    }
+
+    /* Modal overlay */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 1rem;
+    }
+
+    .modal-overlay.hidden {
+      display: none;
+    }
+
+    .modal-box {
+      background: linear-gradient(145deg, var(--white), var(--nursing-soft));
+      border-radius: 20px;
+      padding: 1.75rem;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+      border: 2px solid var(--nursing-blue);
+    }
+
+    .modal-box h3 {
+      font-family: 'Quicksand', sans-serif;
+      color: var(--nursing-blue);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .modal-box input[type="password"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--nursing-light);
+      border-radius: 12px;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .modal-box input:focus {
+      outline: none;
+      border-color: var(--nursing-blue);
+    }
+
+    .modal-box .modal-error {
+      color: var(--nursing-red);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .modal-box .modal-actions {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+    }
+
+    .modal-box .about-content {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .hidden { display: none !important; }
+
   </style>
 </head>
 <body>
@@ -1159,6 +1250,39 @@
   <div class="mode-selector">
     <button type="button" class="mode-btn active" data-mode="photobooth">📷 Photo Booth</button>
     <button type="button" class="mode-btn" data-mode="minigames">🩺 Mini Games</button>
+  </div>
+
+  <div class="about-btn-wrap">
+    <button type="button" class="about-btn" id="about-btn">ℹ️ About</button>
+  </div>
+
+  <!-- Password modal -->
+  <div class="modal-overlay hidden" id="password-modal">
+    <div class="modal-box">
+      <h3>🔐 Enter password to view</h3>
+      <p class="modal-error hidden" id="password-error">Incorrect password. Please try again.</p>
+      <input type="password" id="password-input" placeholder="Password" autocomplete="off">
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="password-cancel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="password-submit">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- About content modal -->
+  <div class="modal-overlay hidden" id="about-modal">
+    <div class="modal-box">
+      <h3>💌 To My Dearest Bea</h3>
+      <div class="about-content">
+        <p>I want you to know how much you mean to me. Every day with you adds something good to my life. Your presence gives me peace and strength. Your smile lifts my mood even on difficult days.</p>
+        <p>I will keep choosing you. I will keep supporting you in your goals and standing beside you in hard moments. I value what we have and I will take care of it.</p>
+        <p style="margin-top: 0.75rem;">You are important to me. Always and Forever. I Love You </p>
+        <p style="margin-top: 0.75rem;">-Dean Andrei <3 </p>
+      </div>
+      <div class="modal-actions" style="margin-top: 1rem;">
+        <button type="button" class="btn btn-primary" id="about-close">Close</button>
+      </div>
+    </div>
   </div>
 
   <div class="container">
@@ -1330,6 +1454,46 @@
     const shareLoveLetterBtn = document.getElementById('share-love-letter-btn');
     const loveLetterCard = document.getElementById('love-letter-card');
     const confettiContainer = document.getElementById('confetti-container');
+
+    const ABOUT_PASSWORD = 'BEAutifulSanctuary0921';
+    const passwordModal = document.getElementById('password-modal');
+    const aboutModal = document.getElementById('about-modal');
+    const passwordInput = document.getElementById('password-input');
+    const passwordError = document.getElementById('password-error');
+
+    document.getElementById('about-btn').addEventListener('click', () => {
+      passwordError.classList.add('hidden');
+      passwordInput.value = '';
+      passwordModal.classList.remove('hidden');
+      passwordInput.focus();
+    });
+
+    document.getElementById('password-cancel').addEventListener('click', () => {
+      passwordModal.classList.add('hidden');
+    });
+
+    document.getElementById('password-submit').addEventListener('click', () => {
+      if (passwordInput.value === ABOUT_PASSWORD) {
+        passwordModal.classList.add('hidden');
+        aboutModal.classList.remove('hidden');
+      } else {
+        passwordError.classList.remove('hidden');
+      }
+    });
+
+    passwordInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') document.getElementById('password-submit').click();
+    });
+
+    document.getElementById('about-close').addEventListener('click', () => {
+      aboutModal.classList.add('hidden');
+    });
+
+    [passwordModal, aboutModal].forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.add('hidden');
+      });
+    });
 
     let stream = null;
     let capturedPhotos = [];
