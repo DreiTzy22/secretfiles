@@ -637,6 +637,7 @@
 
     .quiz-subject.med-surg { background: var(--nursing-teal); }
     .quiz-subject.psych { background: var(--pink-accent); }
+    .quiz-subject.pharmacology { background: #9C27B0; }
     .quiz-subject.ethics { background: var(--capybara-brown); }
     .quiz-subject.procedures { background: var(--capybara-sage); }
 
@@ -680,6 +681,41 @@
     .quiz-option.wrong {
       border-color: #E57373;
       background: #FFEBEE;
+    }
+
+    .quiz-wrong-review {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: #FFF8E1;
+      border-radius: 12px;
+      border: 1px solid #FFE082;
+    }
+    .quiz-wrong-review h4 {
+      margin: 0 0 1rem;
+      font-size: 1rem;
+      color: var(--capybara-brown);
+    }
+    .quiz-wrong-item {
+      padding: 0.75rem;
+      margin-bottom: 0.75rem;
+      background: #fff;
+      border-radius: 10px;
+      border-left: 4px solid #E57373;
+    }
+    .quiz-wrong-item:last-child { margin-bottom: 0; }
+    .quiz-wrong-item .wrong-q {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--capybara-brown);
+    }
+    .quiz-wrong-item .wrong-your {
+      color: #C62828;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+    .quiz-wrong-item .wrong-correct {
+      color: #2E7D32;
+      font-weight: 600;
     }
 
     /* Word Scramble */
@@ -1409,6 +1445,7 @@
           <button class="btn btn-primary" id="quiz-share" style="display:none;">📤 Share Score</button>
         </div>
         <div class="minigame-win" id="quiz-win"></div>
+        <div class="quiz-wrong-review" id="quiz-wrong-review"></div>
       </div>
 
       <!-- Word Scramble -->
@@ -2548,7 +2585,112 @@
       { q: 'Word salad refers to:', opts: ['Incoherent jumble of words', 'Organized list making', 'Repetitive phrases', 'Silent refusal to speak'], a: 0, subj: 'Psych' },
       { q: 'Priority for acutely suicidal patient:', opts: ['Maintain safety, 1:1 if needed', 'Discuss feelings at length', 'Allow private time', 'Delay hospitalization'], a: 0, subj: 'Psych' },
       { q: 'Akathisia from antipsychotics presents as:', opts: ['Motor restlessness, inability to sit still', 'Drowsiness', 'Rigidity', 'Tremor at rest'], a: 0, subj: 'Psych' },
-      { q: 'Black box warning for antidepressants:', opts: ['Increased suicidal ideation in young adults', 'Weight gain', 'Sexual dysfunction', 'Withdrawal symptoms'], a: 0, subj: 'Psych' }
+      { q: 'Black box warning for antidepressants:', opts: ['Increased suicidal ideation in young adults', 'Weight gain', 'Sexual dysfunction', 'Withdrawal symptoms'], a: 0, subj: 'Psych' },
+      /* Pharmacology */
+      { q: 'ACE inhibitors (e.g., lisinopril) may cause:', opts: ['Dry cough, angioedema, hyperkalemia', 'Hypokalemia', 'Hypotension only', 'No notable side effects'], a: 0, subj: 'Pharmacology' },
+      { q: 'Beta-blockers should be used cautiously in:', opts: ['Asthma, heart block, bradycardia', 'Hypertension only', 'Diabetes only', 'No contraindications'], a: 0, subj: 'Pharmacology' },
+      { q: 'Metformin should be held before:', opts: ['Contrast dye procedures (risk of lactic acidosis)', 'Surgery only', 'Meals', 'Exercise'], a: 0, subj: 'Pharmacology' },
+      { q: 'Warfarin interacts with:', opts: ['Vitamin K-rich foods, many drugs, NSAIDs', 'Only alcohol', 'Only aspirin', 'Nothing significant'], a: 0, subj: 'Pharmacology' },
+      { q: 'Aminoglycosides (e.g., gentamicin) can cause:', opts: ['Nephrotoxicity, ototoxicity', 'Hepatotoxicity only', 'No major toxicity', 'Bone marrow suppression'], a: 0, subj: 'Pharmacology' },
+      { q: 'Opioids require monitoring for:', opts: ['Respiratory depression, constipation, dependence', 'Hypertension only', 'Hyperactivity', 'Hypoglycemia'], a: 0, subj: 'Pharmacology' },
+      { q: 'Naloxone is used to reverse:', opts: ['Opioid overdose', 'Benzodiazepine overdose', 'Acetaminophen overdose', 'Aspirin overdose'], a: 0, subj: 'Pharmacology' },
+      { q: 'NSAIDs should be used cautiously in patients with:', opts: ['Renal impairment, GI ulcers, bleeding disorders', 'No specific cautions', 'Diabetes only', 'Asthma only'], a: 0, subj: 'Pharmacology' },
+      { q: 'Digoxin toxicity signs include:', opts: ['Nausea, vision changes, cardiac arrhythmias', 'Hypertension', 'Hyperkalemia', 'Hyperglycemia'], a: 0, subj: 'Pharmacology' },
+      { q: 'Heparin is monitored with:', opts: ['aPTT (activated partial thromboplastin time)', 'PT/INR', 'CBC only', 'No monitoring needed'], a: 0, subj: 'Pharmacology' },
+      { q: 'Insulin should be given:', opts: ['Subcutaneously (typically abdomen, thigh, arm)', 'Orally', 'Intramuscular only', 'Intravenously only'], a: 0, subj: 'Pharmacology' },
+      { q: 'IV push medications require:', opts: ['Slow administration, compatibility check', 'Rapid push', 'No dilution', 'Oral alternative preferred'], a: 0, subj: 'Pharmacology' },
+      { q: 'Calcium channel blockers (e.g., amlodipine) can cause:', opts: ['Peripheral edema, dizziness, hypotension', 'Hyperkalemia only', 'Dry cough', 'Hyperglycemia'], a: 0, subj: 'Pharmacology' },
+      { q: 'Statins may cause:', opts: ['Myopathy, elevated liver enzymes', 'Hypotension', 'Hypoglycemia', 'Hyperkalemia'], a: 0, subj: 'Pharmacology' },
+      { q: 'Anticholinergic side effects include:', opts: ['Dry mouth, urinary retention, constipation', 'Diarrhea', 'Increased sweating', 'Bradycardia'], a: 0, subj: 'Pharmacology' },
+      { q: 'Vancomycin requires:', opts: ['Trough level monitoring, slow IV infusion', 'Peak levels only', 'No levels', 'Oral administration only'], a: 0, subj: 'Pharmacology' },
+      { q: 'Phenytoin (Dilantin) has a narrow therapeutic index and:', opts: ['Requires blood level monitoring', 'No monitoring needed', 'Is safe in pregnancy', 'Has no drug interactions'], a: 0, subj: 'Pharmacology' },
+      { q: 'Corticosteroids (e.g., prednisone) long-term use may cause:', opts: ['Hyperglycemia, osteoporosis, immunosuppression', 'Hypoglycemia only', 'Weight loss', 'Hyponatremia'], a: 0, subj: 'Pharmacology' },
+      { q: 'Fluoroquinolones (e.g., ciprofloxacin) can cause:', opts: ['Tendon rupture, QT prolongation', 'Nephrotoxicity only', 'No major risks', 'Ototoxicity only'], a: 0, subj: 'Pharmacology' },
+      { q: 'Proton pump inhibitors (PPIs) long-term may increase risk of:', opts: ['Fractures, C. diff, magnesium deficiency', 'Hypertension', 'Hyperkalemia', 'No risks'], a: 0, subj: 'Pharmacology' },
+      /* More Fundamentals (20) */
+      { q: 'Jaundice presents as:', opts: ['Yellow tint to skin and sclera', 'Blue tint', 'Pale skin', 'Red rash'], a: 0, subj: 'Fundamentals' },
+      { q: 'Hematemesis means:', opts: ['Vomiting blood', 'Blood in stool', 'Blood in urine', 'Nosebleed'], a: 0, subj: 'Fundamentals' },
+      { q: 'Melena refers to:', opts: ['Dark, tarry stools from digested blood', 'Bright red blood in stool', 'Pale stools', 'Diarrhea'], a: 0, subj: 'Fundamentals' },
+      { q: 'Nosocomial infection means:', opts: ['Acquired in a healthcare setting', 'Community-acquired', 'Congenital', 'Viral only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Turgor assessment checks:', opts: ['Skin elasticity for hydration status', 'Blood pressure', 'Heart rate', 'Temperature'], a: 0, subj: 'Fundamentals' },
+      { q: 'Reflex assessment uses:', opts: ['Graded 0–4 scale', 'Yes/no only', 'Pain scale', 'No grading'], a: 0, subj: 'Fundamentals' },
+      { q: 'Percussion assesses:', opts: ['Density of underlying structures', 'Skin color only', 'Pulse strength', 'Temperature'], a: 0, subj: 'Fundamentals' },
+      { q: 'Auscultation involves:', opts: ['Listening with stethoscope', 'Tapping body surfaces', 'Palpating', 'Observing only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Stridor indicates:', opts: ['Upper airway obstruction', 'Lower airway disease', 'Normal breathing', 'Heart murmur'], a: 0, subj: 'Fundamentals' },
+      { q: 'Wheezing suggests:', opts: ['Narrowed lower airways', 'Upper airway blockage', 'Normal lungs', 'Cardiac issue'], a: 0, subj: 'Fundamentals' },
+      { q: 'Crepitus indicates:', opts: ['Air or gas under tissue', 'Normal joint movement', 'Muscle spasm', 'Bone fracture only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Phlebitis is:', opts: ['Inflammation of a vein', 'Artery blockage', 'Lymph node swelling', 'Skin infection'], a: 0, subj: 'Fundamentals' },
+      { q: 'Extravasation means:', opts: ['IV fluid leaking into surrounding tissue', 'Normal IV flow', 'Vein collapse', 'Clot formation'], a: 0, subj: 'Fundamentals' },
+      { q: 'PO means:', opts: ['By mouth (orally)', 'As needed', 'Every hour', 'Nothing by mouth'], a: 0, subj: 'Fundamentals' },
+      { q: 'IM means:', opts: ['Intramuscular', 'Intravenous', 'By mouth', 'Subcutaneous'], a: 0, subj: 'Fundamentals' },
+      { q: 'Subcutaneous injection angle is typically:', opts: ['45–90 degrees', '15–30 degrees', '0 degrees', '180 degrees'], a: 0, subj: 'Fundamentals' },
+      { q: 'Z-track technique is used for:', opts: ['IM injections to prevent leakage', 'IV starts', 'Subcutaneous', 'Oral medications'], a: 0, subj: 'Fundamentals' },
+      { q: 'Asepsis means:', opts: ['Absence of pathogens', 'Sterilization', 'Disinfection only', 'Clean technique'], a: 0, subj: 'Fundamentals' },
+      { q: 'Medical asepsis (clean technique) aims to:', opts: ['Reduce microorganisms', 'Eliminate all pathogens', 'Sterilize equipment', 'No specific aim'], a: 0, subj: 'Fundamentals' },
+      { q: 'Contaminated items should be:', opts: ['Disposed of or reprocessed per protocol', 'Reused immediately', 'Left at bedside', 'Given to patient'], a: 0, subj: 'Fundamentals' },
+      /* More Med-Surg (20) */
+      { q: 'Hyperthyroidism symptoms include:', opts: ['Weight loss, tachycardia, heat intolerance', 'Weight gain, bradycardia', 'Cold intolerance', 'Hypotension'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hypothyroidism presents with:', opts: ['Fatigue, weight gain, cold intolerance', 'Weight loss, heat intolerance', 'Tachycardia', 'Hyperactivity'], a: 0, subj: 'Med-Surg' },
+      { q: 'Myocardial infarction troponin:', opts: ['Increases with heart muscle damage', 'Decreases with MI', 'Unchanged', 'Only used for stroke'], a: 0, subj: 'Med-Surg' },
+      { q: 'Asthma attack management includes:', opts: ['Bronchodilators, corticosteroids, oxygen', 'Fluid restriction', 'Bed rest only', 'Antibiotics first'], a: 0, subj: 'Med-Surg' },
+      { q: 'Pneumonia crackles are heard:', opts: ['On auscultation, often in lower lobes', 'Only on x-ray', 'Never', 'In heart sounds'], a: 0, subj: 'Med-Surg' },
+      { q: 'Urinary retention requires:', opts: ['Catheterization if unable to void', 'Diuretics', 'Fluid restriction', 'No intervention'], a: 0, subj: 'Med-Surg' },
+      { q: 'Bowel obstruction presents with:', opts: ['Abdominal distension, absent bowel sounds', 'Diarrhea', 'Hyperactive bowel sounds only', 'No abdominal changes'], a: 0, subj: 'Med-Surg' },
+      { q: 'Shock priority intervention is:', opts: ['Restore perfusion, fluid resuscitation', 'Give food', 'Cool the patient', 'Document only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Anaphylaxis requires:', opts: ['Epinephrine, airway support, IV fluids', 'Antihistamine only', 'Wait and see', 'Antibiotics'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hematocrit measures:', opts: ['Percentage of blood that is RBCs', 'White blood cell count', 'Platelet count', 'Hemoglobin only'], a: 0, subj: 'Med-Surg' },
+      { q: 'BUN and creatinine indicate:', opts: ['Kidney function', 'Liver function only', 'Heart function', 'Lung function'], a: 0, subj: 'Med-Surg' },
+      { q: 'Albumin reflects:', opts: ['Nutritional status, liver function', 'Kidney function only', 'Cardiac output', 'Respiratory status'], a: 0, subj: 'Med-Surg' },
+      { q: 'INR monitors:', opts: ['Anticoagulation (e.g., warfarin)', 'Blood sugar', 'Kidney function', 'Liver function'], a: 0, subj: 'Med-Surg' },
+      { q: 'Osteoporosis increases risk of:', opts: ['Fractures', 'Infection only', 'Bleeding', 'Stroke'], a: 0, subj: 'Med-Surg' },
+      { q: 'Rheumatoid arthritis is:', opts: ['Autoimmune, systemic', 'Wear and tear only', 'Infectious', 'Trauma-related'], a: 0, subj: 'Med-Surg' },
+      { q: 'Gout is caused by:', opts: ['Uric acid crystal buildup', 'Calcium deposits', 'Infection', 'Trauma'], a: 0, subj: 'Med-Surg' },
+      { q: 'Guillain-Barré syndrome affects:', opts: ['Peripheral nerves, ascending weakness', 'Brain only', 'Heart', 'Kidneys'], a: 0, subj: 'Med-Surg' },
+      { q: 'Multiple sclerosis involves:', opts: ['Demyelination of CNS', 'Peripheral neuropathy', 'Muscle degeneration', 'Bone loss'], a: 0, subj: 'Med-Surg' },
+      { q: 'Parkinson\'s disease hallmark is:', opts: ['Tremor, rigidity, bradykinesia', 'Weakness', 'Seizures', 'Memory loss only'], a: 0, subj: 'Med-Surg' },
+      { q: 'ALS (Lou Gehrig\'s disease) affects:', opts: ['Motor neurons, progressive weakness', 'Sensory nerves only', 'Heart', 'Kidneys'], a: 0, subj: 'Med-Surg' },
+      /* More Psych (20) */
+      { q: 'Denial as defense mechanism means:', opts: ['Refusing to acknowledge reality', 'Blaming others', 'Making excuses', 'Acting opposite'], a: 0, subj: 'Psych' },
+      { q: 'Rationalization means:', opts: ['Justifying behavior with logical excuses', 'Forgetting entirely', 'Redirecting feelings', 'Reverting to earlier stage'], a: 0, subj: 'Psych' },
+      { q: 'Regression is:', opts: ['Reverting to earlier developmental stage', 'Moving forward', 'Staying neutral', 'Avoiding growth'], a: 0, subj: 'Psych' },
+      { q: 'Sublimation redirects unacceptable urges into:', opts: ['Socially acceptable activities', 'Aggression', 'Withdrawal', 'Denial'], a: 0, subj: 'Psych' },
+      { q: 'Displacement means:', opts: ['Redirecting feelings to safer target', 'Expressing directly', 'Suppressing entirely', 'Forgetting'], a: 0, subj: 'Psych' },
+      { q: 'Antisocial personality disorder features:', opts: ['Disregard for others, lack of remorse', 'Anxiety', 'Depression', 'Hallucinations'], a: 0, subj: 'Psych' },
+      { q: 'Obsessive-compulsive disorder involves:', opts: ['Intrusive thoughts and repetitive behaviors', 'Only depression', 'Only anxiety', 'Mood swings'], a: 0, subj: 'Psych' },
+      { q: 'Generalized anxiety disorder includes:', opts: ['Excessive worry about many things', 'Single phobia only', 'Panic attacks only', 'No physical symptoms'], a: 0, subj: 'Psych' },
+      { q: 'Panic disorder features:', opts: ['Sudden intense fear, physical symptoms', 'Gradual anxiety', 'Only worry', 'No physical component'], a: 0, subj: 'Psych' },
+      { q: 'Phobia is:', opts: ['Irrational fear of specific object/situation', 'General anxiety', 'Depression', 'Psychosis'], a: 0, subj: 'Psych' },
+      { q: 'Dissociative identity disorder involves:', opts: ['Multiple distinct identities', 'Memory loss only', 'Depersonalization only', 'Anxiety'], a: 0, subj: 'Psych' },
+      { q: 'Somatic symptom disorder involves:', opts: ['Physical symptoms without medical explanation', 'Faking illness', 'Malingering', 'Hypochondria only'], a: 0, subj: 'Psych' },
+      { q: 'Cognitive behavioral therapy (CBT) focuses on:', opts: ['Thoughts, behaviors, and their link', 'Unconscious only', 'Medication only', 'Past trauma only'], a: 0, subj: 'Psych' },
+      { q: 'Dialectical behavior therapy (DBT) is used for:', opts: ['Borderline PD, emotional regulation', 'Schizophrenia only', 'Depression only', 'Anxiety only'], a: 0, subj: 'Psych' },
+      { q: 'Group therapy benefits include:', opts: ['Support, feedback, shared experience', 'Individual focus only', 'No interaction', 'Medication management'], a: 0, subj: 'Psych' },
+      { q: 'Therapeutic milieu includes:', opts: ['Safe, structured, supportive environment', 'Isolation', 'Unlimited freedom', 'Punishment'], a: 0, subj: 'Psych' },
+      { q: 'Seclusion is used when:', opts: ['Patient poses imminent danger, least restrictive', 'Convenience', 'Punishment', 'Routine'], a: 0, subj: 'Psych' },
+      { q: 'Avolition means:', opts: ['Lack of motivation or initiative', 'Excess energy', 'Anxiety', 'Hallucinations'], a: 0, subj: 'Psych' },
+      { q: 'Anhedonia is:', opts: ['Inability to feel pleasure', 'Excess pleasure', 'Anxiety', 'Anger'], a: 0, subj: 'Psych' },
+      { q: 'Circumstantiality in speech means:', opts: ['Excessive detail before answering', 'Quick answers', 'Incoherence', 'Silence'], a: 0, subj: 'Psych' },
+      /* More Pharmacology (20) */
+      { q: 'Aspirin in children may cause:', opts: ['Reye\'s syndrome', 'No risk', 'Hypertension', 'Hypoglycemia'], a: 0, subj: 'Pharmacology' },
+      { q: 'Acetaminophen overdose can cause:', opts: ['Hepatotoxicity', 'Nephrotoxicity only', 'Cardiotoxicity', 'Neurotoxicity'], a: 0, subj: 'Pharmacology' },
+      { q: 'Acetylcysteine is the antidote for:', opts: ['Acetaminophen overdose', 'Opioid overdose', 'Aspirin overdose', 'Iron overdose'], a: 0, subj: 'Pharmacology' },
+      { q: 'Benzodiazepines (e.g., lorazepam) should be tapered to avoid:', opts: ['Withdrawal, seizures', 'Hypertension', 'Hypoglycemia', 'No withdrawal'], a: 0, subj: 'Pharmacology' },
+      { q: 'Flumazenil reverses:', opts: ['Benzodiazepines', 'Opioids', 'Acetaminophen', 'Warfarin'], a: 0, subj: 'Pharmacology' },
+      { q: 'Thiazide diuretics can cause:', opts: ['Hypokalemia, hyperglycemia', 'Hyperkalemia', 'Hyponatremia only', 'No electrolyte changes'], a: 0, subj: 'Pharmacology' },
+      { q: 'Loop diuretics (e.g., furosemide) act on:', opts: ['Ascending loop of Henle', 'Proximal tubule', 'Collecting duct', 'Glomerulus'], a: 0, subj: 'Pharmacology' },
+      { q: 'Potassium-sparing diuretics include:', opts: ['Spironolactone, amiloride', 'Furosemide', 'Hydrochlorothiazide', 'Mannitol'], a: 0, subj: 'Pharmacology' },
+      { q: 'Nitroglycerin is given for:', opts: ['Angina, sublingual', 'Hypertension', 'Heart failure', 'Arrhythmia'], a: 0, subj: 'Pharmacology' },
+      { q: 'Morphine in acute MI helps by:', opts: ['Reducing pain, preload, anxiety', 'Increasing BP', 'Stopping arrhythmia', 'Dissolving clot'], a: 0, subj: 'Pharmacology' },
+      { q: 'Anticoagulants do NOT:', opts: ['Dissolve existing clots', 'Prevent new clots', 'Prolong clotting time', 'Require monitoring'], a: 0, subj: 'Pharmacology' },
+      { q: 'Antiplatelet drugs (e.g., aspirin, clopidogrel) prevent:', opts: ['Platelet aggregation', 'Fibrin formation', 'Clot dissolution', 'Bleeding'], a: 0, subj: 'Pharmacology' },
+      { q: 'H2 blockers (e.g., ranitidine) reduce:', opts: ['Stomach acid production', 'GI motility', 'Pancreatic enzymes', 'Bile secretion'], a: 0, subj: 'Pharmacology' },
+      { q: 'Metoclopramide promotes:', opts: ['GI motility, gastric emptying', 'Constipation', 'Acid secretion', 'Bile flow'], a: 0, subj: 'Pharmacology' },
+      { q: 'Ondansetron is an:', opts: ['Antiemetic (5-HT3 antagonist)', 'Antacid', 'Laxative', 'Antidiarrheal'], a: 0, subj: 'Pharmacology' },
+      { q: 'Diphenhydramine causes:', opts: ['Sedation, anticholinergic effects', 'Stimulation', 'No CNS effects', 'Hypertension'], a: 0, subj: 'Pharmacology' },
+      { q: 'Epinephrine in anaphylaxis is given:', opts: ['IM (thigh), repeat as needed', 'Orally', 'Slow IV only', 'Subcutaneous only'], a: 0, subj: 'Pharmacology' },
+      { q: 'Albuterol is a:', opts: ['Short-acting bronchodilator (SABA)', 'Corticosteroid', 'Anticholinergic', 'Antihistamine'], a: 0, subj: 'Pharmacology' },
+      { q: 'Magnesium sulfate in obstetrics is used for:', opts: ['Seizure prevention in preeclampsia', 'Pain relief', 'Inducing labor', 'Stopping contractions'], a: 0, subj: 'Pharmacology' },
+      { q: 'Levothyroxine treats:', opts: ['Hypothyroidism', 'Hyperthyroidism', 'Diabetes', 'Adrenal insufficiency'], a: 0, subj: 'Pharmacology' }
     ];
     const QUIZ_GAME_SIZE = 20;
     const quizArea = document.getElementById('quiz-area');
@@ -2556,7 +2698,8 @@
     const quizCurrentEl = document.getElementById('quiz-current');
     const quizWinEl = document.getElementById('quiz-win');
     const quizShareBtn = document.getElementById('quiz-share');
-    let quizState = { index: 0, score: 0, answered: false, currentQuestions: [] };
+    const quizWrongReview = document.getElementById('quiz-wrong-review');
+    let quizState = { index: 0, score: 0, answered: false, currentQuestions: [], wrongAnswers: [] };
 
     function initQuiz() {
       const indices = [];
@@ -2564,8 +2707,10 @@
         const r = Math.floor(Math.random() * QUIZ_QUESTIONS.length);
         if (!indices.includes(r)) indices.push(r);
       }
-      quizState = { index: 0, score: 0, answered: false, currentQuestions: indices.map(i => QUIZ_QUESTIONS[i]) };
+      quizState = { index: 0, score: 0, answered: false, currentQuestions: indices.map(i => QUIZ_QUESTIONS[i]), wrongAnswers: [] };
       quizWinEl.classList.remove('visible');
+      quizWrongReview.innerHTML = '';
+      if (quizShareBtn) quizShareBtn.style.display = 'none';
       renderQuizQuestion();
     }
 
@@ -2598,6 +2743,7 @@
           if (quizState.answered) return;
           quizState.answered = true;
           const isCorrect = opt.dataset.correct === 'true';
+          if (!isCorrect) quizState.wrongAnswers.push({ q, selectedText: opt.textContent.trim() });
           opt.classList.add(isCorrect ? 'correct' : 'wrong');
           if (isCorrect) quizState.score++;
           quizScoreEl.textContent = quizState.score;
@@ -2607,6 +2753,7 @@
               quizWinEl.textContent = quizState.score === QUIZ_GAME_SIZE ? '🎉 Perfect score! You know your care!' : `Quiz complete! You got ${quizState.score}/${QUIZ_GAME_SIZE}.`;
               quizWinEl.classList.add('visible');
               if (quizShareBtn) quizShareBtn.style.display = 'inline-block';
+              renderQuizWrongReview();
             } else {
               quizState.answered = false;
               renderQuizQuestion();
@@ -2614,6 +2761,25 @@
           }, 800);
         });
       });
+    }
+
+    function renderQuizWrongReview() {
+      if (quizState.wrongAnswers.length === 0) {
+        quizWrongReview.innerHTML = '';
+        return;
+      }
+      const subjClass = (s) => (s || 'Fundamentals').toLowerCase().replace('-', '-');
+      quizWrongReview.innerHTML = `
+        <h4>📋 Questions answered incorrectly (${quizState.wrongAnswers.length})</h4>
+        ${quizState.wrongAnswers.map(({ q, selectedText }) => `
+          <div class="quiz-wrong-item">
+            <div class="quiz-subject ${subjClass(q.subj)}">${q.subj || 'Fundamentals'}</div>
+            <div class="wrong-q">${q.q}</div>
+            ${selectedText ? `<div class="wrong-your">Your answer: ${selectedText}</div>` : ''}
+            <div class="wrong-correct">Correct: ${q.opts[q.a]}</div>
+          </div>
+        `).join('')}
+      `;
     }
 
     document.getElementById('quiz-reset').addEventListener('click', initQuiz);
