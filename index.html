@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bea — Interactive Photo Booth</title>
+  <title>DigiBooth</title>
+  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -1062,7 +1064,7 @@
         const raw = detectFace();
         if (raw) {
           const mapped = videoNormToOverlay(raw.x, raw.y, filterOverlay.width, filterOverlay.height, video.videoWidth, video.videoHeight);
-          facePos = { x: 1 - mapped.x / filterOverlay.width, y: mapped.y / filterOverlay.height };
+          facePos = { x: mapped.x / filterOverlay.width, y: mapped.y / filterOverlay.height };
         }
       }
       drawFilter(ctx, filterOverlay.width, filterOverlay.height, facePos);
@@ -1126,11 +1128,11 @@
       ctx.drawImage(video, 0, 0);
       ctx.restore();
       if (currentFilter !== 'none') {
-        const flippedFace = lastFacePosition ? { x: 1 - lastFacePosition.x, y: lastFacePosition.y } : null;
+        const facePos = lastFacePosition ? { x: lastFacePosition.x, y: lastFacePosition.y } : null;
         ctx.save();
         ctx.translate(canvas.width, 0);
         ctx.scale(-1, 1);
-        drawFilter(ctx, video.videoWidth, video.videoHeight, flippedFace);
+        drawFilter(ctx, video.videoWidth, video.videoHeight, facePos);
         ctx.restore();
       }
       const dataUrl = canvas.toDataURL('image/png');
