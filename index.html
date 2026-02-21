@@ -480,6 +480,253 @@
       font-style: italic;
     }
 
+    /* Nursing Mini Game */
+    .minigame-section {
+      background: linear-gradient(145deg, var(--white), var(--nursing-soft));
+      border-radius: 24px;
+      padding: 1.75rem 2rem;
+      box-shadow: 0 8px 32px var(--shadow), 0 0 0 1px rgba(100, 181, 246, 0.3);
+      border: 2px solid var(--nursing-blue);
+    }
+
+    .minigame-section h2 {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--nursing-blue);
+      font-weight: 700;
+    }
+
+    .minigame-section h2::before { content: '🩺 '; }
+
+    .minigame-section > p {
+      font-size: 0.9rem;
+      color: var(--capybara-brown);
+      margin-bottom: 1rem;
+    }
+
+    .minigame-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.6rem;
+      max-width: 320px;
+      margin: 0 auto 1rem;
+    }
+
+    .minigame-card {
+      aspect-ratio: 1;
+      background: linear-gradient(145deg, var(--nursing-light), var(--nursing-soft));
+      border: 2px solid var(--nursing-blue);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      user-select: none;
+    }
+
+    .minigame-card:hover:not(.flipped):not(.matched) {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(100, 181, 246, 0.4);
+    }
+
+    .minigame-card.flipped,
+    .minigame-card.matched {
+      cursor: default;
+      background: linear-gradient(145deg, #fff, var(--pink-light));
+      border-color: var(--pink-accent);
+    }
+
+    .minigame-card.matched {
+      opacity: 0.9;
+      box-shadow: 0 0 0 2px var(--pink-accent);
+    }
+
+    .minigame-card .card-back {
+      color: var(--nursing-blue);
+      font-size: 1.5rem;
+    }
+
+    .minigame-stats {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--capybara-brown);
+    }
+
+    .minigame-actions {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .minigame-win {
+      text-align: center;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--pink-light), var(--nursing-soft));
+      border-radius: 16px;
+      margin-top: 1rem;
+      font-weight: 700;
+      color: var(--pink-dark);
+      display: none;
+    }
+
+    .minigame-win.visible {
+      display: block;
+      animation: minigame-celebration 0.5s ease-out;
+    }
+
+    @keyframes minigame-celebration {
+      0% { transform: scale(0.9); opacity: 0; }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .minigame-panel { display: none; }
+    .minigame-panel.visible { display: block; }
+
+    .game-selector {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .game-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      border: 2px solid var(--nursing-blue);
+      background: var(--nursing-soft);
+      color: var(--nursing-blue);
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .game-btn:hover {
+      background: var(--nursing-light);
+      transform: translateY(-1px);
+    }
+
+    .game-btn.active {
+      background: linear-gradient(135deg, var(--nursing-blue), var(--nursing-teal));
+      border-color: var(--capybara-brown);
+      color: white;
+    }
+
+    /* Care Quiz */
+    .quiz-subject {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: white;
+      background: var(--nursing-blue);
+      padding: 0.25rem 0.6rem;
+      border-radius: 8px;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.05em;
+    }
+
+    .quiz-subject.med-surg { background: var(--nursing-teal); }
+    .quiz-subject.psych { background: var(--pink-accent); }
+    .quiz-subject.ethics { background: var(--capybara-brown); }
+    .quiz-subject.procedures { background: var(--capybara-sage); }
+
+    .quiz-question {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--capybara-brown);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 400px;
+      margin: 0 auto 1rem;
+    }
+
+    .quiz-option {
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      border: 2px solid var(--nursing-light);
+      background: var(--pink-light);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--nursing-blue);
+      background: var(--nursing-soft);
+    }
+
+    .quiz-option.correct {
+      border-color: #4CAF50;
+      background: #E8F5E9;
+    }
+
+    .quiz-option.wrong {
+      border-color: #E57373;
+      background: #FFEBEE;
+    }
+
+    /* Word Scramble */
+    .scramble-display {
+      font-size: 2rem;
+      letter-spacing: 0.3em;
+      font-weight: 700;
+      color: var(--capybara-brown);
+      margin: 1rem 0;
+      font-family: 'Quicksand', monospace;
+      min-height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scramble-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      min-height: 60px;
+    }
+    .scramble-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 2px solid var(--nursing-blue);
+      background: var(--nursing-soft);
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .scramble-btn:hover {
+      background: var(--nursing-light);
+      transform: scale(1.05);
+    }
+    .scramble-chosen {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 52px;
+      margin: 1rem 0;
+    }
+
     /* Capture preview */
     #capture-preview {
       display: none;
@@ -661,6 +908,124 @@
       font-style: italic;
     }
 
+    /* Flower picker for love letter decoration */
+    .flower-picker {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: linear-gradient(145deg, #fff9fc, rgba(255, 192, 217, 0.15));
+      border-radius: 16px;
+      border: 1px solid rgba(233, 30, 140, 0.15);
+    }
+
+    .flower-picker-label {
+      font-size: 0.9rem;
+      color: var(--capybara-brown);
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .flower-picker-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .flower-picker-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 64px;
+      padding: 6px 4px 4px;
+      border-radius: 12px;
+      border: 2px solid rgba(156, 175, 136, 0.4);
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      overflow: hidden;
+    }
+
+    .flower-picker-btn img {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .flower-picker-btn .flower-name {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--capybara-brown);
+      margin-top: 3px;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .flower-picker-btn:hover {
+      border-color: var(--nursing-blue);
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(100, 181, 246, 0.25);
+    }
+
+    .love-letter-flowers {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .love-letter-flowers .flower-wrapper {
+      pointer-events: auto;
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      pointer-events: auto;
+      cursor: grab;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+    .love-letter-flowers .flower-wrapper:active {
+      cursor: grabbing;
+    }
+
+    .love-letter-flowers .flower-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0.9;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .love-letter-flowers .flower-remove {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(233, 30, 140, 0.9);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: auto;
+    }
+
+    .love-letter-flowers .flower-wrapper:hover .flower-remove {
+      opacity: 1;
+    }
+
     .love-letter-actions {
       margin-top: 1.5rem;
       display: flex;
@@ -736,6 +1101,51 @@
       }
     }
 
+    /* Mode selector - Photo Booth / Mini Games */
+    .mode-selector {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .mode-btn {
+      padding: 0.6rem 1.5rem;
+      border-radius: 16px;
+      border: 2px solid var(--pink-mid);
+      background: var(--pink-light);
+      color: var(--pink-dark);
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mode-btn:hover {
+      background: var(--pink-mid);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .mode-btn.active {
+      background: linear-gradient(135deg, var(--pink-accent), var(--nursing-teal));
+      border-color: var(--capybara-brown);
+      color: white;
+      box-shadow: 0 4px 15px rgba(233, 30, 140, 0.3);
+    }
+
+    .mode-content {
+      display: none;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .mode-content.visible {
+      display: flex;
+    }
+
   </style>
 </head>
 <body>
@@ -746,7 +1156,14 @@
   </div>
   <p class="tagline">Care <span>♥</span> Chill <span>♥</span> Capture</p>
 
+  <div class="mode-selector">
+    <button type="button" class="mode-btn active" data-mode="photobooth">📷 Photo Booth</button>
+    <button type="button" class="mode-btn" data-mode="minigames">🩺 Mini Games</button>
+  </div>
+
   <div class="container">
+    <!-- Photo Booth mode content -->
+    <div id="photobooth-content" class="mode-content visible">
     <!-- 1. Message Card -->
     <section class="message-card">
       <h2>Message Card</h2>
@@ -806,12 +1223,18 @@
     <section class="love-letter-section">
       <h2>💌 Your Love Letter</h2>
 
+      <div class="flower-picker">
+        <span class="flower-picker-label">🌸 Add flowers (click to add, drag to move)</span>
+        <div class="flower-picker-grid" id="flower-picker-grid"></div>
+      </div>
+
       <div class="love-letter-output" id="love-letter-card">
+        <div class="love-letter-flowers" id="love-letter-flowers"></div>
         <div class="love-letter-content">
           <p class="love-letter-title">With Love ✿ Care • Chill</p>
           <div class="love-letter-photos-wrap">
             <div id="love-letter-photos" class="love-letter-photos"></div>
-            <div id="love-letter-photo-placeholder" class="love-letter-photo-placeholder">Click photos above to add them to your love letter</div>
+            <div id="love-letter-photo-placeholder" class="love-letter-photo-placeholder">Click a photo above to add it to your love letter</div>
           </div>
           <p id="love-letter-message" class="love-letter-message empty">Write your message above...</p>
         </div>
@@ -821,9 +1244,73 @@
         <button class="btn btn-outline" id="share-love-letter-btn" disabled title="Share on mobile">Share</button>
       </div>
     </section>
+
+    </div>
+    <!-- End Photo Booth content -->
+
+    <!-- Mini Games mode content -->
+    <div id="minigame-content" class="mode-content">
+    <section class="minigame-section">
+      <h2>Mini Games</h2>
+      <div class="game-selector">
+        <button type="button" class="game-btn active" data-game="match">🃏 Care Match</button>
+        <button type="button" class="game-btn" data-game="quiz">❓ Care Quiz</button>
+        <button type="button" class="game-btn" data-game="scramble">🔤 Word Scramble</button>
+      </div>
+
+      <!-- Care Match -->
+      <div id="game-match" class="minigame-panel visible">
+        <p>Flip the cards to find matching nursing care items!</p>
+        <div class="minigame-stats">
+          <span>Moves: <strong id="minigame-moves">0</strong></span>
+          <span>Matches: <strong id="minigame-matches">0</strong>/8</span>
+        </div>
+        <div class="minigame-board" id="minigame-board"></div>
+        <div class="minigame-actions">
+          <button class="btn btn-secondary" id="minigame-reset">New Game</button>
+        </div>
+        <div class="minigame-win" id="minigame-win">🎉 Great care! You matched them all!</div>
+      </div>
+
+      <!-- Care Quiz -->
+      <div id="game-quiz" class="minigame-panel">
+        <p>Test your nursing knowledge with quick care questions!</p>
+        <div class="minigame-stats">
+          <span>Score: <strong id="quiz-score">0</strong>/20</span>
+          <span>Question: <strong id="quiz-current">1</strong>/20</span>
+        </div>
+        <div id="quiz-area"></div>
+        <div class="minigame-actions">
+          <button class="btn btn-secondary" id="quiz-reset">New Quiz</button>
+          <button class="btn btn-primary" id="quiz-share" style="display:none;">📤 Share Score</button>
+        </div>
+        <div class="minigame-win" id="quiz-win"></div>
+      </div>
+
+      <!-- Word Scramble -->
+      <div id="game-scramble" class="minigame-panel">
+        <p>Unscramble the nursing & care word! Tap letters in order.</p>
+        <div class="minigame-stats">
+          <span>Words: <strong id="scramble-score">0</strong></span>
+        </div>
+        <p id="scramble-hint">Tap a letter to start</p>
+        <div class="scramble-display" id="scramble-display">_</div>
+        <div class="scramble-chosen" id="scramble-chosen"></div>
+        <div class="scramble-buttons" id="scramble-buttons"></div>
+        <div class="minigame-actions">
+          <button type="button" class="btn btn-secondary" id="scramble-skip">Skip</button>
+          <button type="button" class="btn btn-secondary" id="scramble-reset">New Word</button>
+        </div>
+        <div class="minigame-win" id="scramble-win">✓ Correct!</div>
+      </div>
+
+    </section>
+    </div>
+    <!-- End Mini Games content -->
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="flower_embed.js"></script>
 
   <script>
     const video = document.getElementById('video');
@@ -847,6 +1334,15 @@
     let stream = null;
     let capturedPhotos = [];
     let selectedPhotoIndices = [];
+    let flowerDecorations = []; // { path, x, y } - x,y as 0-100 percentages
+
+    const FLOWER_OPTIONS = [
+      { path: 'flowers/anemone.webp', name: 'Anemone' },
+      { path: 'flowers/carnation.webp', name: 'Carnation' },
+      { path: 'flowers/lily.webp', name: 'Lily' },
+      { path: 'flowers/orchid.webp', name: 'Orchid' },
+      { path: 'flowers/rose.webp', name: 'Rose' }
+    ];
     let timerSeconds = 0;
     let countdownInterval = null;
     let currentFilter = 'none';
@@ -858,6 +1354,110 @@
     const cameraContainer = document.querySelector('.camera-container');
 
     const STORAGE_KEY = 'bea-photobooth-draft';
+
+    // Mode selector: Photo Booth / Mini Games (only one visible at a time)
+    const photoboothContent = document.getElementById('photobooth-content');
+    const minigameContent = document.getElementById('minigame-content');
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const isPhotobooth = btn.dataset.mode === 'photobooth';
+        photoboothContent.classList.toggle('visible', isPhotobooth);
+        minigameContent.classList.toggle('visible', !isPhotobooth);
+      });
+    });
+
+    // Flower picker - click to add flower (same flower can be added multiple times)
+    const flowerPickerGrid = document.getElementById('flower-picker-grid');
+    const loveLetterFlowers = document.getElementById('love-letter-flowers');
+    FLOWER_OPTIONS.forEach((flower) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'flower-picker-btn';
+      btn.dataset.path = flower.path;
+      btn.title = flower.name + ' (click to add)';
+      const img = document.createElement('img');
+      img.src = flower.path;
+      img.alt = flower.name;
+      const label = document.createElement('span');
+      label.className = 'flower-name';
+      label.textContent = flower.name;
+      btn.appendChild(img);
+      btn.appendChild(label);
+      btn.addEventListener('click', () => {
+        const x = 15 + Math.random() * 70;
+        const y = 15 + Math.random() * 70;
+        flowerDecorations.push({ path: flower.path, x, y });
+        updateLoveLetterFlowers();
+        saveDraft();
+      });
+      flowerPickerGrid.appendChild(btn);
+    });
+
+    function updateLoveLetterFlowers() {
+      loveLetterFlowers.innerHTML = '';
+      flowerDecorations.forEach((fd, i) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'flower-wrapper';
+        wrap.style.left = fd.x + '%';
+        wrap.style.top = fd.y + '%';
+        wrap.dataset.index = String(i);
+        const img = document.createElement('img');
+        img.src = fd.path;
+        img.alt = 'Flower';
+        img.draggable = false;
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'flower-remove';
+        removeBtn.innerHTML = '×';
+        removeBtn.title = 'Remove flower';
+        removeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          flowerDecorations.splice(i, 1);
+          updateLoveLetterFlowers();
+          saveDraft();
+        });
+        wrap.appendChild(img);
+        wrap.appendChild(removeBtn);
+
+        const startDrag = (clientX, clientY) => {
+          const onMove = (e) => {
+            const cx = e.touches ? e.touches[0].clientX : e.clientX;
+            const cy = e.touches ? e.touches[0].clientY : e.clientY;
+            const rect = loveLetterCard.getBoundingClientRect();
+            const pctX = ((cx - rect.left) / rect.width) * 100;
+            const pctY = ((cy - rect.top) / rect.height) * 100;
+            flowerDecorations[i].x = Math.max(0, Math.min(100, pctX));
+            flowerDecorations[i].y = Math.max(0, Math.min(100, pctY));
+            wrap.style.left = flowerDecorations[i].x + '%';
+            wrap.style.top = flowerDecorations[i].y + '%';
+          };
+          const onUp = () => {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+            document.removeEventListener('touchmove', onMove, { passive: false });
+            document.removeEventListener('touchend', onUp);
+            saveDraft();
+          };
+          document.addEventListener('mousemove', onMove);
+          document.addEventListener('mouseup', onUp);
+          document.addEventListener('touchmove', onMove, { passive: false });
+          document.addEventListener('touchend', onUp);
+        };
+
+        wrap.addEventListener('mousedown', (e) => {
+          if (e.target.classList.contains('flower-remove')) return;
+          e.preventDefault();
+          startDrag(e.clientX, e.clientY);
+        });
+        wrap.addEventListener('touchstart', (e) => {
+          if (e.target.classList.contains('flower-remove')) return;
+          e.preventDefault();
+          startDrag(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: false });
+        loveLetterFlowers.appendChild(wrap);
+      });
+    }
 
     function playShutterSound() {
       try {
@@ -903,6 +1503,14 @@
         if (saved) {
           const data = JSON.parse(saved);
           if (data.message) messageInput.value = data.message;
+          if (Array.isArray(data.flowers)) {
+            flowerDecorations = data.flowers.filter(f => FLOWER_OPTIONS.some(o => o.path === f.path)).map(f => ({
+              path: f.path,
+              x: typeof f.x === 'number' ? Math.max(0, Math.min(100, f.x)) : 50,
+              y: typeof f.y === 'number' ? Math.max(0, Math.min(100, f.y)) : 50
+            }));
+            updateLoveLetterFlowers();
+          }
         }
       } catch (_) {}
     }
@@ -911,6 +1519,7 @@
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify({
           message: messageInput.value,
+          flowers: flowerDecorations,
           savedAt: Date.now()
         }));
       } catch (_) {}
@@ -1149,7 +1758,7 @@
       }
       const dataUrl = canvas.toDataURL('image/png');
       capturedPhotos.push(dataUrl);
-      selectedPhotoIndices.push(capturedPhotos.length - 1);
+      selectedPhotoIndices = [capturedPhotos.length - 1];
 
       playShutterSound();
       showConfettiBurst();
@@ -1214,10 +1823,9 @@
           if (!e.target.classList.contains('download-btn') && !e.target.classList.contains('delete-btn')) {
             const idx = selectedPhotoIndices.indexOf(i);
             if (idx >= 0) {
-              selectedPhotoIndices.splice(idx, 1);
+              selectedPhotoIndices = [];
             } else {
-              selectedPhotoIndices.push(i);
-              selectedPhotoIndices.sort((a, b) => a - b);
+              selectedPhotoIndices = [i];
             }
             renderGallery();
             updateLoveLetter();
@@ -1274,8 +1882,9 @@
         }
       });
 
-      downloadLoveLetterBtn.disabled = !(msg || hasPhotos);
-      shareLoveLetterBtn.disabled = !(msg || hasPhotos);
+      const hasFlowers = flowerDecorations.length > 0;
+      downloadLoveLetterBtn.disabled = !(msg || hasPhotos || hasFlowers);
+      shareLoveLetterBtn.disabled = !(msg || hasPhotos || hasFlowers);
     }
     if (!('share' in navigator)) {
       shareLoveLetterBtn.style.display = 'none';
@@ -1323,6 +1932,41 @@
       ctx.strokeStyle = 'rgba(139, 115, 85, 0.12)';
       ctx.lineWidth = 1 * SCALE;
       ctx.strokeRect(cardX + 36, cardY + 36, cardW - 72, cardH - 72);
+
+      // Load image without tainting canvas (works with file:// and http)
+      async function loadImageUntainted(url) {
+        const dataUrl = typeof FLOWER_DATA_URLS !== 'undefined' && FLOWER_DATA_URLS[url];
+        if (dataUrl) {
+          const img = new Image();
+          await new Promise((resolve, reject) => {
+            img.onload = () => resolve();
+            img.onerror = () => reject(new Error('Failed to load image'));
+            img.src = dataUrl;
+          });
+          return img;
+        }
+        const res = await fetch(url);
+        const blob = await res.blob();
+        const objectUrl = URL.createObjectURL(blob);
+        const img = new Image();
+        await new Promise((resolve, reject) => {
+          img.onload = () => { URL.revokeObjectURL(objectUrl); resolve(); };
+          img.onerror = () => { URL.revokeObjectURL(objectUrl); reject(new Error('Failed to load image')); };
+          img.src = objectUrl;
+        });
+        return img;
+      }
+
+      // Free-form flowers (x,y as 0-100 % of content area)
+      const FLOWER_SIZE = 64 * SCALE;
+      const contentW = cardW - 72;
+      const contentH = cardH - 72;
+      for (const fd of flowerDecorations) {
+        const drawX = cardX + 36 + (fd.x / 100) * contentW - FLOWER_SIZE / 2;
+        const drawY = cardY + 36 + (fd.y / 100) * contentH - FLOWER_SIZE / 2;
+        const img = await loadImageUntainted(fd.path);
+        ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, drawX, drawY, FLOWER_SIZE, FLOWER_SIZE);
+      }
 
       let y = cardY + 40 * SCALE;
 
@@ -1438,6 +2082,618 @@
       updateLoveLetter();
       saveDraft();
     });
+
+    // Mini Game selector - switch between games
+    document.querySelectorAll('.game-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.game-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.minigame-panel').forEach(p => p.classList.remove('visible'));
+        const panel = document.getElementById('game-' + btn.dataset.game);
+        if (panel) {
+          panel.classList.add('visible');
+          if (btn.dataset.game === 'scramble' && typeof renderScramble === 'function' && scrambleState) {
+            renderScramble();
+          }
+        }
+      });
+    });
+
+    // Care Match (memory game)
+    const NURSING_PAIRS = ['❤️', '💊', '🩹', '💉', '🏥', '🩺', '🌡️', '🧴'];
+    const minigameBoard = document.getElementById('minigame-board');
+    const minigameMoves = document.getElementById('minigame-moves');
+    const minigameMatches = document.getElementById('minigame-matches');
+    const minigameWin = document.getElementById('minigame-win');
+    let minigameState = { cards: [], flipped: [], moves: 0, matched: 0, matchedIndices: [] };
+
+    function initMinigame() {
+      const doubled = [...NURSING_PAIRS, ...NURSING_PAIRS];
+      for (let i = doubled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [doubled[i], doubled[j]] = [doubled[j], doubled[i]];
+      }
+      minigameState = { cards: doubled, flipped: [], moves: 0, matched: 0, matchedIndices: [] };
+      renderMinigame();
+    }
+
+    function renderMinigame() {
+      minigameBoard.innerHTML = '';
+      minigameMoves.textContent = minigameState.moves;
+      minigameMatches.textContent = minigameState.matched;
+      minigameWin.classList.remove('visible');
+      minigameState.cards.forEach((emoji, i) => {
+        const card = document.createElement('div');
+        card.className = 'minigame-card';
+        card.dataset.index = i;
+        const isMatched = minigameState.matchedIndices.includes(i);
+        const isFlipped = minigameState.flipped.includes(i) || isMatched;
+        if (isMatched) card.classList.add('flipped', 'matched');
+        else if (isFlipped) card.classList.add('flipped');
+        card.innerHTML = `<span class="card-back">${isFlipped ? emoji : '❓'}</span>`;
+        card.addEventListener('click', () => handleMinigameClick(i));
+        minigameBoard.appendChild(card);
+      });
+    }
+
+    function handleMinigameClick(i) {
+      if (minigameState.flipped.length >= 2 || minigameState.flipped.includes(i) || minigameState.matchedIndices.includes(i)) return;
+      const card = minigameBoard.children[i];
+      minigameState.flipped.push(i);
+      card.classList.add('flipped');
+      card.querySelector('.card-back').textContent = minigameState.cards[i];
+      if (minigameState.flipped.length === 2) {
+        minigameState.moves++;
+        minigameMoves.textContent = minigameState.moves;
+        const [a, b] = minigameState.flipped;
+        if (minigameState.cards[a] === minigameState.cards[b]) {
+          minigameState.matched++;
+          minigameState.matchedIndices.push(a, b);
+          minigameMatches.textContent = minigameState.matched;
+          minigameBoard.children[a].classList.add('matched');
+          minigameBoard.children[b].classList.add('matched');
+          minigameState.flipped = [];
+          if (minigameState.matched === 8) {
+            setTimeout(() => minigameWin.classList.add('visible'), 300);
+          }
+        } else {
+          setTimeout(() => {
+            minigameBoard.children[a].classList.remove('flipped');
+            minigameBoard.children[b].classList.remove('flipped');
+            minigameBoard.children[a].querySelector('.card-back').textContent = '❓';
+            minigameBoard.children[b].querySelector('.card-back').textContent = '❓';
+            minigameState.flipped = [];
+          }, 600);
+        }
+      }
+    }
+
+    document.getElementById('minigame-reset').addEventListener('click', initMinigame);
+    initMinigame();
+
+    // Care Quiz - 100 questions, 10 random per game
+    const QUIZ_QUESTIONS = [
+      { q: 'What should you do first when a patient says they feel dizzy?', opts: ['Have them sit or lie down', 'Check blood pressure immediately', 'Administer anti-dizziness medication', 'Order lab work'], a: 0, subj: 'Fundamentals' },
+      { q: 'The best way to prevent infection spread is:', opts: ['Handwashing', 'Wearing a mask only', 'Using hand sanitizer only', 'Wearing gloves only'], a: 0, subj: 'Fundamentals' },
+      { q: 'When should you reposition a bedbound patient?', opts: ['Every 2 hours', 'Every 4 hours', 'Every 6 hours', 'Once per shift'], a: 0, subj: 'Fundamentals' },
+      { q: 'A normal adult resting heart rate is about:', opts: ['60–100 beats per minute', '50–70 bpm', '80–120 bpm', '100–130 bpm'], a: 0, subj: 'Fundamentals' },
+      { q: 'Comfort and empathy are part of:', opts: ['Patient-centered care', 'Evidence-based practice only', 'Diagnostic accuracy', 'Efficiency metrics'], a: 0, subj: 'Fundamentals' },
+      { q: 'Before any procedure, you must obtain:', opts: ['Informed consent', 'A doctor\'s note', 'Family approval only', 'Insurance clearance'], a: 0, subj: 'Fundamentals' },
+      { q: 'Patient information should be:', opts: ['Kept confidential', 'Shared with family freely', 'Posted in common areas', 'Discussed in elevators'], a: 0, subj: 'Fundamentals' },
+      { q: 'Normal adult body temperature in Celsius is:', opts: ['36.5–37.5°C', '35.5–36.5°C', '37.5–38.5°C', '38–39°C'], a: 0, subj: 'Fundamentals' },
+      { q: 'When a patient refuses treatment, you should:', opts: ['Document and respect their decision', 'Force the treatment', 'Ignore the refusal', 'Call security'], a: 0, subj: 'Fundamentals' },
+      { q: 'Hand hygiene should be performed:', opts: ['Before and after patient contact', 'Only after contact', 'Only when hands look dirty', 'Once per shift'], a: 0, subj: 'Fundamentals' },
+      { q: 'Normal systolic blood pressure range is:', opts: ['90–120 mmHg', '80–100 mmHg', '120–140 mmHg', '100–130 mmHg'], a: 0, subj: 'Fundamentals' },
+      { q: 'You witness a colleague make a medication error. You should:', opts: ['Report it immediately', 'Ignore it', 'Fix it quietly', 'Tell the patient only'], a: 0, subj: 'Fundamentals' },
+      { q: 'The five rights of medication administration include:', opts: ['Right patient, drug, dose, route, time', 'Right room, bed, chart, doctor', 'Right time, place, person, thing', 'Right doctor, nurse, pharmacy, family'], a: 0, subj: 'Fundamentals' },
+      { q: 'When lifting a patient, you should:', opts: ['Use proper body mechanics', 'Bend at the waist', 'Lift with arms only', 'Quick jerk upward'], a: 0, subj: 'Fundamentals' },
+      { q: 'A DNR order means:', opts: ['Do Not Resuscitate', 'Document No Restraints', 'Daily Nursing Review', 'Discharge Not Ready'], a: 0, subj: 'Fundamentals' },
+      { q: 'Signs of a pressure ulcer in early stage include:', opts: ['Non-blanchable redness', 'Deep wound', 'Bone visible', 'No visible change'], a: 0, subj: 'Fundamentals' },
+      { q: 'Before administering medication, you verify the patient by:', opts: ['Name and date of birth', 'Room number only', 'Bed position', 'Appearance'], a: 0, subj: 'Fundamentals' },
+      { q: 'Hypoxia refers to:', opts: ['Low oxygen in tissues', 'High blood pressure', 'Low blood sugar', 'High fever'], a: 0, subj: 'Fundamentals' },
+      { q: 'Ethically, you must advocate for the patient when:', opts: ['Their needs are not being met', 'The doctor disagrees', 'Family complains', 'Never'], a: 0, subj: 'Fundamentals' },
+      { q: 'Standard precautions apply to:', opts: ['All patients', 'Only known infectious patients', 'Only ICU patients', 'Only when requested'], a: 0, subj: 'Fundamentals' },
+      { q: 'Normal respiratory rate for an adult is:', opts: ['12–20 breaths per minute', '8–12 bpm', '20–28 bpm', '25–35 bpm'], a: 0, subj: 'Fundamentals' },
+      { q: 'You discover a patient has fallen. First action:', opts: ['Assess for injury, call for help', 'Move them immediately', 'Document only', 'Leave to get supplies'], a: 0, subj: 'Fundamentals' },
+      { q: 'Informed consent requires that the patient:', opts: ['Understands risks, benefits, and alternatives', 'Simply signs a form', 'Has family present', 'Is sedated'], a: 0, subj: 'Fundamentals' },
+      { q: 'Fowler\'s position is:', opts: ['Semi-sitting, head elevated', 'Lying flat on back', 'On stomach', 'Side-lying'], a: 0, subj: 'Fundamentals' },
+      { q: 'You may share patient info with:', opts: ['Care team with need to know', 'Anyone who asks', 'Social media', 'Other patients'], a: 0, subj: 'Fundamentals' },
+      { q: 'When delegating tasks to unlicensed staff, you:', opts: ['Remain accountable for the task', 'Transfer all responsibility', 'Assume they know how', 'Never delegate'], a: 0, subj: 'Fundamentals' },
+      { q: 'Normal oxygen saturation (SpO2) is:', opts: ['95–100%', '90–94%', '88–92%', '85–90%'], a: 0, subj: 'Fundamentals' },
+      { q: 'Aseptic technique is used to:', opts: ['Prevent infection', 'Speed up procedures', 'Save supplies', 'Please supervisors'], a: 0, subj: 'Fundamentals' },
+      { q: 'A patient asks you to keep a secret about abuse. You should:', opts: ['Report per mandatory reporting laws', 'Keep the secret', 'Tell only your supervisor', 'Ask the patient\'s permission'], a: 0, subj: 'Fundamentals' },
+      { q: 'Before wound care, you clean:', opts: ['From clean to dirty', 'From dirty to clean', 'In circles', 'Only the center'], a: 0, subj: 'Fundamentals' },
+      { q: 'Restraints require:', opts: ['Medical order and frequent reassessment', 'No order needed', 'Family consent only', 'One-time application'], a: 0, subj: 'Fundamentals' },
+      { q: 'Hypertension is:', opts: ['High blood pressure', 'Low blood pressure', 'Normal BP', 'Irregular pulse'], a: 0, subj: 'Fundamentals' },
+      { q: 'You must report a nurse suspected of impairment to:', opts: ['Board of Nursing or supervisor', 'The nurse directly only', 'Other staff', 'No one'], a: 0, subj: 'Fundamentals' },
+      { q: 'Trendelenburg position is used for:', opts: ['Shock (head lower than feet)', 'Respiratory distress', 'Eating', 'Sleeping'], a: 0, subj: 'Fundamentals' },
+      { q: 'Documentation should be:', opts: ['Accurate, timely, and factual', 'Brief and vague', 'Written at shift end only', 'Oral only'], a: 0, subj: 'Fundamentals' },
+      { q: 'When a patient is confused, you should:', opts: ['Reorient gently, ensure safety', 'Restrain immediately', 'Ignore them', 'Argue with them'], a: 0, subj: 'Fundamentals' },
+      { q: 'Normal blood glucose range (fasting) is:', opts: ['70–100 mg/dL', '60–70 mg/dL', '100–126 mg/dL', '126–140 mg/dL'], a: 0, subj: 'Fundamentals' },
+      { q: 'You receive an order you believe is harmful. You should:', opts: ['Clarify with prescriber, refuse if unsafe', 'Document concerns and proceed', 'Ask a colleague to double-check only', 'Follow chain of command without refusing'], a: 0, subj: 'Fundamentals' },
+      { q: 'Isolation precautions protect:', opts: ['Patients and staff', 'Only staff', 'Only visitors', 'No one'], a: 0, subj: 'Fundamentals' },
+      { q: 'PRN means:', opts: ['As needed', 'Every hour', 'Immediately', 'Never'], a: 0, subj: 'Fundamentals' },
+      { q: 'Cultural competence in nursing means:', opts: ['Respecting diverse beliefs and practices', 'Treating everyone the same', 'Ignoring differences', 'Only serving one culture'], a: 0, subj: 'Fundamentals' },
+      { q: 'Before blood draw, you confirm:', opts: ['Patient ID and tube labels', 'Room number only', 'Time of day', 'Doctor\'s name'], a: 0, subj: 'Fundamentals' },
+      { q: 'A patient has a living will. You must:', opts: ['Honor their documented wishes', 'Override with family wishes', 'Ignore it', 'Only follow if family agrees'], a: 0, subj: 'Fundamentals' },
+      { q: 'Supine position is:', opts: ['Lying on back', 'Lying on stomach', 'Side-lying', 'Sitting'], a: 0, subj: 'Fundamentals' },
+      { q: 'Verbal orders should be:', opts: ['Written and signed by prescriber promptly', 'Followed without documentation', 'Ignored', 'Only taken from family'], a: 0, subj: 'Fundamentals' },
+      { q: 'Tachycardia is:', opts: ['Heart rate over 100 bpm', 'Heart rate under 60 bpm', 'Normal heart rate', 'Irregular rhythm'], a: 0, subj: 'Fundamentals' },
+      { q: 'You must respect patient autonomy, meaning:', opts: ['Their right to make own decisions', 'Making decisions for them', 'Family makes all decisions', 'Doctor decides everything'], a: 0, subj: 'Fundamentals' },
+      { q: 'When transferring a patient, you ensure:', opts: ['Safe body mechanics and patient stability', 'Speed over safety', 'Patient walks alone', 'No assistive devices'], a: 0, subj: 'Fundamentals' },
+      { q: 'NPO means:', opts: ['Nothing by mouth', 'New patient only', 'No precautions', 'Normal post-op'], a: 0, subj: 'Fundamentals' },
+      { q: 'A breach of confidentiality occurs if you:', opts: ['Share info without authorization', 'Document in chart', 'Report abuse', 'Discuss in private report'], a: 0, subj: 'Fundamentals' },
+      { q: 'Prone position is:', opts: ['Lying on stomach', 'Lying on back', 'Side-lying', 'Semi-sitting'], a: 0, subj: 'Fundamentals' },
+      { q: 'Fall prevention includes:', opts: ['Call bell, non-slip footwear, clutter-free', 'Restraints only', 'Sedation', 'Ignoring risk'], a: 0, subj: 'Fundamentals' },
+      { q: 'Bradycardia is:', opts: ['Heart rate under 60 bpm', 'Heart rate over 100 bpm', 'Normal rate', 'Irregular rate'], a: 0, subj: 'Fundamentals' },
+      { q: 'Beneficence in nursing means:', opts: ['Acting for the patient\'s good', 'Minimizing care', 'Following orders only', 'Avoiding patients'], a: 0, subj: 'Fundamentals' },
+      { q: 'Before IV insertion, you:', opts: ['Verify site, cleanse, use aseptic technique', 'Insert quickly', 'Skip cleansing', 'Use same site repeatedly'], a: 0, subj: 'Fundamentals' },
+      { q: 'A patient\'s advance directive:', opts: ['Must be followed per their wishes', 'Can be ignored by family', 'Expires daily', 'Only applies in hospital'], a: 0, subj: 'Fundamentals' },
+      { q: 'Lateral position is:', opts: ['Side-lying', 'On back', 'On stomach', 'Sitting'], a: 0, subj: 'Fundamentals' },
+      { q: 'Incident reports are used to:', opts: ['Improve safety, not punish', 'Fire staff', 'Blame patients', 'Hide errors'], a: 0, subj: 'Fundamentals' },
+      { q: 'Hypotension is:', opts: ['Low blood pressure', 'High blood pressure', 'Normal BP', 'Irregular BP'], a: 0, subj: 'Fundamentals' },
+      { q: 'Nonmaleficence means:', opts: ['Do no harm', 'Do more always', 'Ignore risks', 'Defer to family'], a: 0, subj: 'Fundamentals' },
+      { q: 'When giving an injection, you use:', opts: ['Appropriate site, needle size, angle', 'Same site every time', 'Largest needle', 'No aspiration needed'], a: 0, subj: 'Fundamentals' },
+      { q: 'A competent patient refuses a life-saving treatment. You:', opts: ['Respect the refusal, document', 'Force the treatment', 'Restrain and treat', 'Call police'], a: 0, subj: 'Fundamentals' },
+      { q: 'Sims position is:', opts: ['Left side-lying, leg flexed', 'On back', 'Prone', 'Sitting'], a: 0, subj: 'Fundamentals' },
+      { q: 'Chain of command is used when:', opts: ['Resolving concerns or unsafe situations', 'Gossiping', 'Avoiding work', 'Bypassing everyone'], a: 0, subj: 'Fundamentals' },
+      { q: 'Febrile means:', opts: ['Having a fever', 'No fever', 'Low temperature', 'Normal temp'], a: 0, subj: 'Fundamentals' },
+      { q: 'Justice in healthcare means:', opts: ['Fair allocation of resources', 'Favoring some patients', 'Ignoring needs', 'Only treating paying patients'], a: 0, subj: 'Fundamentals' },
+      { q: 'Sterile field must remain:', opts: ['Above waist, within sight', 'On the floor', 'Touched by non-sterile items', 'Reused'], a: 0, subj: 'Fundamentals' },
+      { q: 'You suspect elder abuse. You must:', opts: ['Report per state law', 'Ask the family first', 'Ignore it', 'Document only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Lithotomy position is used for:', opts: ['Pelvic exams, childbirth', 'Chest x-ray', 'Eating', 'Sleeping'], a: 0, subj: 'Fundamentals' },
+      { q: 'SBAR stands for:', opts: ['Situation, Background, Assessment, Recommendation', 'Safe, Brief, Accurate, Report', 'Sign, Background, Action, Result', 'Status, Before, After, Review'], a: 0, subj: 'Fundamentals' },
+      { q: 'Afebrile means:', opts: ['Without fever', 'With fever', 'High fever', 'Low temp'], a: 0, subj: 'Fundamentals' },
+      { q: 'Fidelity in nursing means:', opts: ['Keeping promises, being trustworthy', 'Lying to comfort', 'Breaking confidences', 'Avoiding commitment'], a: 0, subj: 'Fundamentals' },
+      { q: 'When a patient has an allergic reaction, first:', opts: ['Assess airway, call for help', 'Give food', 'Wait and see', 'Document only'], a: 0, subj: 'Fundamentals' },
+      { q: 'HIPAA protects:', opts: ['Patient health information', 'Hospital profits', 'Staff schedules', 'Visitor lists'], a: 0, subj: 'Fundamentals' },
+      { q: 'Dorsal recumbent position is:', opts: ['On back, knees bent', 'On stomach', 'Side-lying', 'Standing'], a: 0, subj: 'Fundamentals' },
+      { q: 'Double-checking high-alert medications means:', opts: ['Two nurses verify before administration', 'Patient verifies', 'One quick look', 'Skip if busy'], a: 0, subj: 'Fundamentals' },
+      { q: 'Dyspnea means:', opts: ['Difficulty breathing', 'Easy breathing', 'Slow breathing', 'No breathing'], a: 0, subj: 'Fundamentals' },
+      { q: 'Veracity means:', opts: ['Truthfulness', 'Deception', 'Secrecy', 'Omission'], a: 0, subj: 'Fundamentals' },
+      { q: 'When a patient codes, you:', opts: ['Start CPR, call for help, get defibrillator', 'Wait for doctor', 'Document first', 'Leave the room'], a: 0, subj: 'Fundamentals' },
+      { q: 'Protected health information (PHI) includes:', opts: ['Name, DOB, diagnoses, treatments', 'Only diagnoses', 'Only names', 'Nothing'], a: 0, subj: 'Fundamentals' },
+      { q: 'Knee-chest position is used for:', opts: ['Rectal exams, sigmoidoscopy', 'Chest x-ray', 'IV placement', 'Eating'], a: 0, subj: 'Fundamentals' },
+      { q: 'You make a medication error. You must:', opts: ['Report immediately, assess patient', 'Hide it', 'Blame pharmacy', 'Only tell the patient'], a: 0, subj: 'Fundamentals' },
+      { q: 'Tachypnea means:', opts: ['Rapid breathing', 'Slow breathing', 'Normal breathing', 'No breathing'], a: 0, subj: 'Fundamentals' },
+      { q: 'Patient advocacy includes:', opts: ['Speaking up for patient rights and needs', 'Agreeing with doctors always', 'Ignoring concerns', 'Deferring to family only'], a: 0, subj: 'Fundamentals' },
+      { q: 'When applying a dressing, you:', opts: ['Use clean or sterile technique as ordered', 'Reuse old dressing', 'Leave wound exposed', 'Apply tight bandage'], a: 0, subj: 'Fundamentals' },
+      { q: 'A patient asks to see their chart. You:', opts: ['Facilitate per facility policy', 'Refuse always', 'Give them the original', 'Tell them no'], a: 0, subj: 'Fundamentals' },
+      { q: 'Orthopnea is:', opts: ['Shortness of breath when lying flat', 'Easy breathing', 'No breathing', 'Fast breathing'], a: 0, subj: 'Fundamentals' },
+      { q: 'Accountability in nursing means:', opts: ['Taking responsibility for your actions', 'Blaming others', 'Hiding errors', 'Avoiding documentation'], a: 0, subj: 'Fundamentals' },
+      { q: 'Nasogastric tube placement is verified by:', opts: ['X-ray confirmation', 'Auscultation only', 'Patient feeling', 'No verification'], a: 0, subj: 'Fundamentals' },
+      { q: 'Gift-giving from patients:', opts: ['May have policy limits; avoid conflict of interest', 'Always accept', 'Refuse always', 'Demand more'], a: 0, subj: 'Fundamentals' },
+      { q: 'Cyanosis indicates:', opts: ['Blue tint from lack of oxygen', 'Healthy color', 'Jaundice', 'Pale only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Scope of practice means:', opts: ['Legal limits of your role', 'What you want to do', 'Whatever doctor says', 'No limits'], a: 0, subj: 'Fundamentals' },
+      { q: 'Catheter care includes:', opts: ['Clean per protocol, secure, check drainage', 'Leave unchanged', 'Ignore output', 'Remove daily'], a: 0, subj: 'Fundamentals' },
+      { q: 'Social media and patient info:', opts: ['Never mix; no posting patient details', 'OK if no names', 'OK with consent', 'Always allowed'], a: 0, subj: 'Fundamentals' },
+      { q: 'Edema is:', opts: ['Swelling from fluid retention', 'Dry skin', 'Bruising', 'Rash'], a: 0, subj: 'Fundamentals' },
+      { q: 'Mandatory reporting applies to:', opts: ['Abuse, neglect, certain diseases', 'Nothing', 'Only crimes', 'Only medication errors'], a: 0, subj: 'Fundamentals' },
+      { q: 'Before suctioning, you:', opts: ['Hyperoxygenate the patient', 'Suction quickly', 'Skip pre-oxygenation', 'Never suction'], a: 0, subj: 'Fundamentals' },
+      { q: 'Impaired colleague protocol:', opts: ['Report to protect patients', 'Cover for them', 'Ignore', 'Tell patients'], a: 0, subj: 'Fundamentals' },
+      { q: 'Oxygen is a medication and requires:', opts: ['Order, monitoring, safety precautions', 'No order', 'Patient request only', 'No monitoring'], a: 0, subj: 'Fundamentals' },
+      { q: 'End-of-life care prioritizes:', opts: ['Comfort, dignity, patient wishes', 'Cure only', 'Family wishes over patient', 'Avoiding discussion'], a: 0, subj: 'Fundamentals' },
+      { q: 'Surgical asepsis means:', opts: ['Sterile technique, no pathogens', 'Clean technique', 'Handwashing only', 'No special care'], a: 0, subj: 'Fundamentals' },
+      { q: 'Moral distress occurs when:', opts: ['You know right action but cannot do it', 'Patient is difficult', 'Family disagrees', 'Shift is long'], a: 0, subj: 'Fundamentals' },
+      { q: 'Tracheostomy care includes:', opts: ['Cleaning stoma, securing tube, suctioning', 'Ignoring tube', 'Removing daily', 'No hygiene'], a: 0, subj: 'Fundamentals' },
+      { q: 'Whistleblower protection exists for:', opts: ['Those reporting illegal/unethical acts', 'No one', 'Only supervisors', 'Only doctors'], a: 0, subj: 'Fundamentals' },
+      { q: 'Normal urine output is about:', opts: ['30 mL/hour or 0.5 mL/kg/hr', '10–20 mL/hour', '50–80 mL/hour', '100–150 mL/hour'], a: 0, subj: 'Fundamentals' },
+      { q: 'Boundary violation examples:', opts: ['Romantic relationship, over-involvement', 'Being kind', 'Documenting', 'Advocating'], a: 0, subj: 'Fundamentals' },
+      { q: 'When discontinuing IV, you:', opts: ['Apply pressure, check site, dispose safely', 'Pull quickly', 'Leave catheter in', 'No pressure needed'], a: 0, subj: 'Fundamentals' },
+      { q: 'Quality improvement focuses on:', opts: ['Improving outcomes and safety', 'Blaming individuals', 'Cutting costs only', 'Ignoring data'], a: 0, subj: 'Fundamentals' },
+      { q: 'Syncope is:', opts: ['Fainting or loss of consciousness', 'Seizure only', 'Stroke', 'Headache'], a: 0, subj: 'Fundamentals' },
+      { q: 'Ethical dilemma resolution may use:', opts: ['Ethics committee, framework, dialogue', 'Ignoring', 'Guessing', 'Picking randomly'], a: 0, subj: 'Fundamentals' },
+      { q: 'Central line care requires:', opts: ['Sterile technique, dressing changes, assessment', 'No special care', 'Daily removal', 'Ignore site'], a: 0, subj: 'Fundamentals' },
+      { q: 'Informed consent can be withdrawn:', opts: ['At any time by the patient', 'Never', 'Only by doctor', 'Only by family'], a: 0, subj: 'Fundamentals' },
+      { q: 'Oliguria is:', opts: ['Decreased urine output', 'Increased output', 'No output', 'Blood in urine'], a: 0, subj: 'Fundamentals' },
+      { q: 'Professional boundaries protect:', opts: ['Patient and nurse', 'Only nurse', 'Only patient', 'No one'], a: 0, subj: 'Fundamentals' },
+      { q: 'Pain assessment uses:', opts: ['Patient self-report as primary', 'Staff opinion only', 'Vital signs only', 'Family report only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Consent for minors typically requires:', opts: ['Parent/guardian in most cases', 'Child only', 'No consent', 'Teacher'], a: 0, subj: 'Fundamentals' },
+      { q: 'Anuria is:', opts: ['No urine output', 'High output', 'Bloody urine', 'Cloudy urine'], a: 0, subj: 'Fundamentals' },
+      { q: 'Conflict of interest means:', opts: ['Personal gain may override patient care', 'Having opinions', 'Working overtime', 'Being tired'], a: 0, subj: 'Fundamentals' },
+      { q: 'Fall risk assessment includes:', opts: ['History, mobility, medications, environment', 'Age only', 'Nothing', 'Guardian opinion'], a: 0, subj: 'Fundamentals' },
+      { q: 'Telehealth requires:', opts: ['Patient consent, privacy, appropriate use', 'No consent', 'Any device', 'No privacy needed'], a: 0, subj: 'Fundamentals' },
+      { q: 'Pallor means:', opts: ['Paleness', 'Redness', 'Blue tint', 'Yellow tint'], a: 0, subj: 'Fundamentals' },
+      { q: 'Moral courage is:', opts: ['Standing up for what is right despite risk', 'Avoiding conflict', 'Following orders blindly', 'Ignoring problems'], a: 0, subj: 'Fundamentals' },
+      /* Med-Surg */
+      { q: 'Post-op ileus is characterized by:', opts: ['Absent bowel sounds, no flatus', 'Diarrhea', 'Normal digestion', 'Increased peristalsis'], a: 0, subj: 'Med-Surg' },
+      { q: 'Deep vein thrombosis (DVT) prevention includes:', opts: ['Early ambulation, SCDs, anticoagulants', 'Bed rest only', 'Tight leg wraps', 'No fluids'], a: 0, subj: 'Med-Surg' },
+      { q: 'Signs of pulmonary embolism include:', opts: ['Sudden dyspnea, chest pain, tachycardia', 'Bradycardia only', 'No symptoms', 'Rash'], a: 0, subj: 'Med-Surg' },
+      { q: 'CHF patients should be taught to:', opts: ['Weigh daily, limit sodium, report edema', 'Drink unlimited fluids', 'Increase sodium', 'Avoid all activity'], a: 0, subj: 'Med-Surg' },
+      { q: 'Acute MI (heart attack) classic symptom is:', opts: ['Crushing substernal chest pain', 'Leg pain', 'Headache', 'Rash'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hypoglycemia symptoms include:', opts: ['Sweating, tremor, confusion, hunger', 'Polyuria and polydipsia', 'Kussmaul respirations', 'Fruity breath odor'], a: 0, subj: 'Med-Surg' },
+      { q: 'Diabetic ketoacidosis (DKA) presents with:', opts: ['Hyperglycemia, ketones, metabolic acidosis', 'Hypoglycemia', 'Normal blood sugar', 'Alkalosis'], a: 0, subj: 'Med-Surg' },
+      { q: 'COPD patients need:', opts: ['Low-flow oxygen, pursed-lip breathing', 'High-flow oxygen (6L+) always', 'Oxygen only when SpO2 below 90%', 'Continuous positive pressure only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Post-op atelectasis is prevented by:', opts: ['Incentive spirometry, coughing, turning', 'Bed rest', 'No deep breathing', 'Fluid restriction'], a: 0, subj: 'Med-Surg' },
+      { q: 'Acute kidney injury may cause:', opts: ['Electrolyte imbalance, fluid overload', 'Hypovolemia only', 'No changes', 'Hypernatremia only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Cushing\'s triad (ICP) includes:', opts: ['Hypertension, bradycardia, irregular respirations', 'Hypotension, tachycardia', 'Fever, chills', 'Rash, itching'], a: 0, subj: 'Med-Surg' },
+      { q: 'Stroke (CVA) assessment uses:', opts: ['FAST: Face, Arms, Speech, Time', 'Only BP check', 'X-ray', 'No urgent assessment'], a: 0, subj: 'Med-Surg' },
+      { q: 'SIADH causes:', opts: ['Hyponatremia, diluted blood', 'Hypernatremia', 'Hypervolemia', 'Dehydration'], a: 0, subj: 'Med-Surg' },
+      { q: 'Addisonian crisis presents with:', opts: ['Hypotension, weakness, hyperpigmentation', 'Hypertension', 'Hyperglycemia', 'No symptoms'], a: 0, subj: 'Med-Surg' },
+      { q: 'Post-thyroidectomy priority is:', opts: ['Airway, bleeding, hypocalcemia', 'Eating immediately', 'Ambulation', 'IV removal'], a: 0, subj: 'Med-Surg' },
+      { q: 'Cirrhosis patients should avoid:', opts: ['Alcohol, hepatotoxic drugs, high protein', 'All food', 'Fluids', 'Rest'], a: 0, subj: 'Med-Surg' },
+      { q: 'Heparin is reversed with:', opts: ['Protamine sulfate', 'Vitamin K', 'Fresh frozen plasma', 'Factor VIIa'], a: 0, subj: 'Med-Surg' },
+      { q: 'Warfarin is reversed with:', opts: ['Vitamin K', 'Protamine sulfate', 'Andexanet alfa', 'Idarucizumab'], a: 0, subj: 'Med-Surg' },
+      { q: 'Paralytic ileus post-op is normal for:', opts: ['24–72 hours', '12–24 hours', '3–5 days', 'Up to 1 week'], a: 0, subj: 'Med-Surg' },
+      { q: 'T tube care includes:', opts: ['Keep below drainage level, clamp before meals', 'Remove immediately', 'No drainage check', 'Elevate always'], a: 0, subj: 'Med-Surg' },
+      { q: 'Colostomy output should be:', opts: ['Pasty, formed (depends on location)', 'Always liquid', 'Always solid', 'No output'], a: 0, subj: 'Med-Surg' },
+      { q: 'Bowel prep before colonoscopy aims to:', opts: ['Empty colon for clear visualization', 'Hydrate only', 'Give antibiotics', 'Sedate'], a: 0, subj: 'Med-Surg' },
+      { q: 'ARDS management includes:', opts: ['Low tidal volume, PEEP, prone positioning', 'High tidal volume', 'No ventilator', 'Fluid boluses'], a: 0, subj: 'Med-Surg' },
+      { q: 'Sepsis early signs include:', opts: ['Fever, tachycardia, tachypnea, altered mental status', 'Bradycardia only', 'Hypothermia only', 'No fever'], a: 0, subj: 'Med-Surg' },
+      { q: 'Surgical wound dehiscence requires:', opts: ['Notify provider, cover with sterile saline dressing', 'Push organs back', 'Suture at bedside', 'Ignore'], a: 0, subj: 'Med-Surg' },
+      { q: 'Evisceration means:', opts: ['Organs protruding through wound', 'Infection', 'Normal healing', 'Scar formation'], a: 0, subj: 'Med-Surg' },
+      { q: 'NG tube irrigation uses:', opts: ['Normal saline, gentle pressure', 'Water only', 'Never irrigate', 'HCl'], a: 0, subj: 'Med-Surg' },
+      { q: 'Fistula between bowel and skin causes:', opts: ['Drainage of stool through skin', 'No drainage', 'Urine only', 'Blood only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Peritonitis signs include:', opts: ['Rigid abdomen, rebound tenderness, fever', 'Soft abdomen', 'No pain', 'Rash'], a: 0, subj: 'Med-Surg' },
+      { q: 'Pancreatitis patients should:', opts: ['NPO, NG tube, pain control', 'Eat normally', 'High fat diet', 'No pain meds'], a: 0, subj: 'Med-Surg' },
+      /* Psych */
+      { q: 'Therapeutic communication includes:', opts: ['Open-ended questions, reflection, silence', 'Giving advice', 'Changing subject', 'Minimizing feelings'], a: 0, subj: 'Psych' },
+      { q: 'A patient says "Nobody cares." Best response:', opts: ['"It sounds like you feel alone."', '"That\'s not true."', '"Cheer up."', '"I have to go."'], a: 0, subj: 'Psych' },
+      { q: 'Defense mechanism: projecting means:', opts: ['Attributing own feelings to others', 'Forgetting entirely', 'Making excuses', 'Acting opposite'], a: 0, subj: 'Psych' },
+      { q: 'Milieu therapy emphasizes:', opts: ['Structured, therapeutic environment', 'Isolation', 'Unlimited freedom', 'No structure'], a: 0, subj: 'Psych' },
+      { q: 'PRN medications in psych are used for:', opts: ['Agitation, anxiety, insomnia as needed', 'Routine only', 'Never', 'With every meal'], a: 0, subj: 'Psych' },
+      { q: 'Extrapyramidal side effects (EPS) of antipsychotics include:', opts: ['Dystonia, akathisia, parkinsonism', 'Weight gain only', 'Dry mouth only', 'No side effects'], a: 0, subj: 'Psych' },
+      { q: 'Tardive dyskinesia is:', opts: ['Involuntary movements from long-term antipsychotics', 'Acute reaction', 'Allergic reaction', 'Curable easily'], a: 0, subj: 'Psych' },
+      { q: 'Neuroleptic malignant syndrome (NMS) includes:', opts: ['Fever, rigidity, altered mental status', 'Rash only', 'Mild sedation', 'No symptoms'], a: 0, subj: 'Psych' },
+      { q: 'SSRIs may cause initially:', opts: ['Increased anxiety, GI upset, sexual dysfunction', 'No side effects', 'Hypertension', 'Hypoglycemia'], a: 0, subj: 'Psych' },
+      { q: 'Lithium requires:', opts: ['Therapeutic levels, fluid balance, thyroid/renal monitoring', 'No monitoring', 'Weekly only', 'No labs'], a: 0, subj: 'Psych' },
+      { q: 'Suicide risk is highest when:', opts: ['Depression lifts and energy returns', 'Deeply depressed', 'Asleep', 'With family'], a: 0, subj: 'Psych' },
+      { q: 'Contracting for safety means:', opts: ['Patient agrees to seek help before self-harm', 'Legal document', 'Discharge', 'No suicide risk'], a: 0, subj: 'Psych' },
+      { q: 'Transference is when:', opts: ['Patient redirects feelings from past onto nurse', 'Nurse likes patient', 'Family intervenes', 'Doctor disagrees'], a: 0, subj: 'Psych' },
+      { q: 'Countertransference is when:', opts: ['Nurse\'s own feelings affect care', 'Patient is angry', 'Family is present', 'Medication works'], a: 0, subj: 'Psych' },
+      { q: 'Schizophrenia positive symptoms include:', opts: ['Hallucinations, delusions, disorganized speech', 'Flat affect only', 'Social withdrawal only', 'No symptoms'], a: 0, subj: 'Psych' },
+      { q: 'Schizophrenia negative symptoms include:', opts: ['Flat affect, avolition, anhedonia', 'Hallucinations', 'Delusions', 'Agitation'], a: 0, subj: 'Psych' },
+      { q: 'Bipolar manic episode features:', opts: ['Elevated mood, grandiosity, decreased need for sleep', 'Depression only', 'Anxiety only', 'No mood change'], a: 0, subj: 'Psych' },
+      { q: 'Borderline personality disorder may show:', opts: ['Splitting, fear of abandonment, impulsivity', 'No emotions', 'Stable relationships', 'No treatment needed'], a: 0, subj: 'Psych' },
+      { q: 'Splitting means:', opts: ['Seeing people as all good or all bad', 'Dividing tasks', 'Sharing feelings', 'Avoiding conflict'], a: 0, subj: 'Psych' },
+      { q: 'Delirium differs from dementia in that delirium:', opts: ['Is acute, fluctuating, often reversible', 'Is chronic', 'Has no confusion', 'Is irreversible'], a: 0, subj: 'Psych' },
+      { q: 'Crisis intervention focuses on:', opts: ['Immediate safety, brief support, referral', 'Long therapy', 'Medication only', 'Family only'], a: 0, subj: 'Psych' },
+      { q: 'De-escalation techniques include:', opts: ['Calm voice, space, avoid arguing', 'Restraints first', 'Yelling back', 'Ignoring'], a: 0, subj: 'Psych' },
+      { q: 'Restraints in psych require:', opts: ['Order, least restrictive, frequent reassessment', 'No order', 'Family consent only', 'Permanent use'], a: 0, subj: 'Psych' },
+      { q: 'Anorexia nervosa may cause:', opts: ['Electrolyte imbalance, cardiac issues, osteoporosis', 'Obesity', 'No physical effects', 'Hypertension'], a: 0, subj: 'Psych' },
+      { q: 'Bulimia involves:', opts: ['Binge eating and purging', 'Only restricting', 'Only overeating', 'No eating'], a: 0, subj: 'Psych' },
+      { q: 'PTSD symptoms include:', opts: ['Flashbacks, avoidance, hyperarousal', 'No memory', 'Only anxiety', 'Only depression'], a: 0, subj: 'Psych' },
+      { q: 'ECT (electroconvulsive therapy) is used for:', opts: ['Severe depression, catatonia when other treatments fail', 'First-line always', 'Anxiety only', 'Personality disorders'], a: 0, subj: 'Psych' },
+      { q: 'Monoamine oxidase inhibitors (MAOIs) require:', opts: ['Tyramine-free diet, drug interactions', 'No diet', 'High protein', 'No restrictions'], a: 0, subj: 'Psych' },
+      { q: 'Serotonin syndrome symptoms include:', opts: ['Agitation, confusion, hyperthermia, tremor', 'None', 'Hypothermia', 'Bradycardia'], a: 0, subj: 'Psych' },
+      { q: 'A patient with paranoia may need:', opts: ['Clear explanations, consistency, low stimulation', 'Secrets', 'Surprises', 'Crowds'], a: 0, subj: 'Psych' },
+      /* Additional Fundamentals */
+      { q: 'Sharps should be disposed in:', opts: ['Puncture-resistant sharps container', 'Regular trash bag', 'Red bag only', 'Sink'], a: 0, subj: 'Fundamentals' },
+      { q: 'A pulse oximeter measures:', opts: ['Oxygen saturation and pulse rate', 'Blood pressure only', 'Temperature only', 'Respiratory rate'], a: 0, subj: 'Fundamentals' },
+      { q: 'RACE in fire safety stands for:', opts: ['Rescue, Alarm, Contain, Extinguish', 'Run, Alert, Call, Exit', 'Remove, Activate, Control, Evacuate', 'Retreat, Announce, Clear, Extinguish'], a: 0, subj: 'Fundamentals' },
+      { q: 'PASS for fire extinguisher means:', opts: ['Pull, Aim, Squeeze, Sweep', 'Press, Activate, Spray, Stop', 'Point, Alert, Spray, Secure', 'Pull, Aim, Spray, Sweep'], a: 0, subj: 'Fundamentals' },
+      { q: 'Correct order for donning PPE is:', opts: ['Gown, mask, goggles, gloves', 'Gloves, gown, mask, goggles', 'Mask, gown, gloves, goggles', 'Goggles, gloves, gown, mask'], a: 0, subj: 'Fundamentals' },
+      { q: 'Correct doffing order for PPE is:', opts: ['Gloves, goggles, gown, mask', 'Gown, gloves, goggles, mask', 'Mask first, then rest', 'All at once'], a: 0, subj: 'Fundamentals' },
+      { q: 'A standing order differs from a protocol in that:', opts: ['It is pre-approved for specific situations', 'It requires physician presence', 'It cannot be delegated', 'It expires daily'], a: 0, subj: 'Fundamentals' },
+      { q: 'First step in nursing process is:', opts: ['Assessment', 'Diagnosis', 'Planning', 'Implementation'], a: 0, subj: 'Fundamentals' },
+      { q: 'Maslow\'s hierarchy prioritizes:', opts: ['Physiological needs first', 'Self-actualization first', 'Safety after love', 'Esteem before safety'], a: 0, subj: 'Fundamentals' },
+      { q: 'Active listening involves:', opts: ['Reflecting, summarizing, minimal encouragers', 'Giving advice quickly', 'Finishing patient sentences', 'Redirecting to solutions'], a: 0, subj: 'Fundamentals' },
+      /* Additional Med-Surg */
+      { q: 'Signs of fluid overload include:', opts: ['Crackles, edema, weight gain, JVD', 'Dry mucous membranes only', 'Hypotension', 'Decreased urine output'], a: 0, subj: 'Med-Surg' },
+      { q: 'Atrial fibrillation increases risk of:', opts: ['Stroke from clot formation', 'MI only', 'DVT only', 'Pulmonary edema only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Patient on diuretic should be taught to:', opts: ['Take in morning, report dizziness', 'Take at bedtime', 'Double dose if missed', 'Avoid all potassium'], a: 0, subj: 'Med-Surg' },
+      { q: 'Priority intervention for chest tube disconnection:', opts: ['Clamp tube close to chest, call provider', 'Reconnect immediately', 'Place in water', 'Leave open to air'], a: 0, subj: 'Med-Surg' },
+      { q: 'Signs of compartment syndrome include:', opts: ['Pain, pallor, pulselessness, paresthesia', 'Warmth and redness only', 'Decreased pain', 'Normal pulses'], a: 0, subj: 'Med-Surg' },
+      { q: 'MET form for fall risk means:', opts: ['Multifactorial assessment and intervention', 'Minimum exposure time', 'Maximum effort test', 'Medication evaluation tool'], a: 0, subj: 'Med-Surg' },
+      { q: 'C. diff requires:', opts: ['Contact precautions, soap and water handwash', 'Droplet precautions only', 'Alcohol hand sanitizer only', 'No special precautions'], a: 0, subj: 'Med-Surg' },
+      { q: 'MRSA colonization vs infection:', opts: ['Colonization = present without symptoms', 'Same treatment for both', 'Colonization requires isolation', 'Infection needs no precautions'], a: 0, subj: 'Med-Surg' },
+      { q: 'Priority for post-op nausea and vomiting:', opts: ['Assess airway, position on side', 'Give antiemetic immediately', 'Document only', 'Increase PO fluids'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hyperkalemia EKG changes include:', opts: ['Peaked T waves, widened QRS', 'Flat T waves only', 'Shortened QT', 'Normal EKG'], a: 0, subj: 'Med-Surg' },
+      /* Additional Psych */
+      { q: 'Flight of ideas is seen in:', opts: ['Manic episodes', 'Depression', 'Anxiety', 'Schizophrenia negative symptoms'], a: 0, subj: 'Psych' },
+      { q: 'Word salad refers to:', opts: ['Incoherent jumble of words', 'Organized list making', 'Repetitive phrases', 'Silent refusal to speak'], a: 0, subj: 'Psych' },
+      { q: 'Priority for acutely suicidal patient:', opts: ['Maintain safety, 1:1 if needed', 'Discuss feelings at length', 'Allow private time', 'Delay hospitalization'], a: 0, subj: 'Psych' },
+      { q: 'Akathisia from antipsychotics presents as:', opts: ['Motor restlessness, inability to sit still', 'Drowsiness', 'Rigidity', 'Tremor at rest'], a: 0, subj: 'Psych' },
+      { q: 'Black box warning for antidepressants:', opts: ['Increased suicidal ideation in young adults', 'Weight gain', 'Sexual dysfunction', 'Withdrawal symptoms'], a: 0, subj: 'Psych' }
+    ];
+    const QUIZ_GAME_SIZE = 20;
+    const quizArea = document.getElementById('quiz-area');
+    const quizScoreEl = document.getElementById('quiz-score');
+    const quizCurrentEl = document.getElementById('quiz-current');
+    const quizWinEl = document.getElementById('quiz-win');
+    const quizShareBtn = document.getElementById('quiz-share');
+    let quizState = { index: 0, score: 0, answered: false, currentQuestions: [] };
+
+    function initQuiz() {
+      const indices = [];
+      while (indices.length < QUIZ_GAME_SIZE) {
+        const r = Math.floor(Math.random() * QUIZ_QUESTIONS.length);
+        if (!indices.includes(r)) indices.push(r);
+      }
+      quizState = { index: 0, score: 0, answered: false, currentQuestions: indices.map(i => QUIZ_QUESTIONS[i]) };
+      quizWinEl.classList.remove('visible');
+      renderQuizQuestion();
+    }
+
+    function shuffleOptions(opts, correctIndex) {
+      const arr = opts.map((text, i) => ({ text, correct: i === correctIndex }));
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function renderQuizQuestion() {
+      const q = quizState.currentQuestions[quizState.index];
+      if (!q) return;
+      quizCurrentEl.textContent = quizState.index + 1;
+      quizScoreEl.textContent = quizState.score;
+      const shuffled = shuffleOptions(q.opts, q.a);
+      const subj = q.subj || 'Fundamentals';
+      const subjClass = subj.toLowerCase().replace('-', '-');
+      quizArea.innerHTML = `
+        <div class="quiz-subject ${subjClass}">${subj}</div>
+        <div class="quiz-question">${q.q}</div>
+        <div class="quiz-options">
+          ${shuffled.map((o, i) => `<button class="quiz-option" data-correct="${o.correct}">${o.text}</button>`).join('')}
+        </div>
+      `;
+      quizArea.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          if (quizState.answered) return;
+          quizState.answered = true;
+          const isCorrect = opt.dataset.correct === 'true';
+          opt.classList.add(isCorrect ? 'correct' : 'wrong');
+          if (isCorrect) quizState.score++;
+          quizScoreEl.textContent = quizState.score;
+          setTimeout(() => {
+            quizState.index++;
+            if (quizState.index >= quizState.currentQuestions.length) {
+              quizWinEl.textContent = quizState.score === QUIZ_GAME_SIZE ? '🎉 Perfect score! You know your care!' : `Quiz complete! You got ${quizState.score}/${QUIZ_GAME_SIZE}.`;
+              quizWinEl.classList.add('visible');
+              if (quizShareBtn) quizShareBtn.style.display = 'inline-block';
+            } else {
+              quizState.answered = false;
+              renderQuizQuestion();
+            }
+          }, 800);
+        });
+      });
+    }
+
+    document.getElementById('quiz-reset').addEventListener('click', initQuiz);
+
+    async function createQuizShareImage(score, total) {
+      const W = 600, H = 500;
+      const cvs = document.createElement('canvas');
+      cvs.width = W; cvs.height = H;
+      const ctx = cvs.getContext('2d');
+      ctx.fillStyle = 'linear-gradient(135deg, #5B8FB9 0%, #7DB8A8 100%)';
+      const g = ctx.createLinearGradient(0, 0, W, H);
+      g.addColorStop(0, '#5B8FB9');
+      g.addColorStop(1, '#7DB8A8');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(255,255,255,0.15)';
+      ctx.fillRect(0, 0, W, 80);
+
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 28px Quicksand, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Bea\'s Care Quiz', W/2, 48);
+      ctx.font = 'bold 48px Quicksand, sans-serif';
+      ctx.fillText(`${score}/${total}`, W/2, 120);
+
+      const photoSrc = (selectedPhotoIndices.length > 0 ? capturedPhotos[selectedPhotoIndices[0]] : null) || (capturedPhotos.length > 0 ? capturedPhotos[capturedPhotos.length - 1] : null);
+      const photoW = 220, photoH = 220, photoY = 160, photoX = (W - photoW) / 2;
+
+      if (photoSrc) {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = photoSrc;
+        });
+        ctx.beginPath();
+        ctx.arc(photoX + photoW/2, photoY + photoH/2, photoW/2, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.save();
+        ctx.clip();
+        ctx.drawImage(img, photoX, photoY, photoW, photoH);
+        ctx.restore();
+        ctx.beginPath();
+        ctx.arc(photoX + photoW/2, photoY + photoH/2, photoW/2, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+      } else {
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.beginPath();
+        ctx.arc(photoX + photoW/2, photoY + photoH/2, photoW/2 - 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#fff';
+        ctx.font = '16px Quicksand, sans-serif';
+        ctx.fillText('📷 Add a photo in Photo Booth!', W/2, photoY + photoH/2 + 6);
+      }
+
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.font = '18px Quicksand, sans-serif';
+      ctx.fillText('Care ♥ Chill ♥ Capture', W/2, H - 24);
+      return cvs.toDataURL('image/png');
+    }
+
+    if (quizShareBtn) quizShareBtn.addEventListener('click', async () => {
+      const score = quizState.score;
+      const total = QUIZ_GAME_SIZE;
+      try {
+        const dataUrl = await createQuizShareImage(score, total);
+        const blob = await (await fetch(dataUrl)).blob();
+        const file = new File([blob], 'care-quiz-score.png', { type: 'image/png' });
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: `Care Quiz: ${score}/${total}`,
+            text: `I got ${score}/${total} on Bea's Care Quiz!`,
+            files: [file]
+          });
+        } else {
+          const a = document.createElement('a');
+          a.href = dataUrl;
+          a.download = 'care-quiz-score.png';
+          a.click();
+        }
+      } catch (e) {
+        if (e.name !== 'AbortError') {
+          const dataUrl = await createQuizShareImage(score, total);
+          const a = document.createElement('a');
+          a.href = dataUrl;
+          a.download = 'care-quiz-score.png';
+          a.click();
+        }
+      }
+    });
+
+    initQuiz();
+
+    // Word Scramble - nursing/care words
+    const SCRAMBLE_WORDS = [
+      { word: 'STETHOSCOPE', hint: 'Listening to heart and lungs' },
+      { word: 'THERMOMETER', hint: 'Measures body temperature' },
+      { word: 'HYPERTENSION', hint: 'High blood pressure' },
+      { word: 'MEDICATION', hint: 'Drug or treatment' },
+      { word: 'RESPIRATORY', hint: 'Related to breathing' },
+      { word: 'DOCUMENTATION', hint: 'Recording patient information' },
+      { word: 'VACCINATION', hint: 'Immunization shot' },
+      { word: 'PHLEBOTOMY', hint: 'Drawing blood' },
+      { word: 'PRESCRIPTION', hint: 'Doctor\'s medication order' },
+      { word: 'DIAGNOSIS', hint: 'Identifying a condition' },
+      { word: 'STERILIZATION', hint: 'Making germ-free' },
+      { word: 'IMMUNIZATION', hint: 'Building immunity' },
+      { word: 'HYPOTENSION', hint: 'Low blood pressure' },
+      { word: 'CIRCULATION', hint: 'Blood flow through body' },
+      { word: 'DELEGATION', hint: 'Assigning tasks to others' },
+      { word: 'AUSCULTATION', hint: 'Listening to body sounds' },
+      { word: 'PALPATION', hint: 'Examining by touch' },
+      { word: 'CONFIDENTIAL', hint: 'Private, not to be shared' },
+      { word: 'RESUSCITATION', hint: 'Reviving from unconsciousness' },
+      { word: 'PERCUSSION', hint: 'Tapping to assess density' },
+      { word: 'OXIMETRY', hint: 'Measuring blood oxygen' },
+      { word: 'INTRAVENOUS', hint: 'Administered into a vein' },
+      { word: 'SUBCUTANEOUS', hint: 'Under the skin injection' },
+      { word: 'INSULIN', hint: 'Blood sugar regulation hormone' },
+      { word: 'ANESTHESIA', hint: 'Loss of sensation' },
+      { word: 'CARDIAC', hint: 'Related to the heart' },
+      { word: 'PNEUMONIA', hint: 'Lung infection' },
+      { word: 'HEMATOMA', hint: 'Bruise or blood clot' },
+      { word: 'HEMATURIA', hint: 'Blood in urine' },
+      { word: 'NEUROLOGY', hint: 'Study of nervous system' },
+      { word: 'ORTHOPEDIC', hint: 'Bones and joints' },
+      { word: 'GASTROINTESTINAL', hint: 'Digestive system' },
+      { word: 'URINARY', hint: 'Related to urine and kidneys' },
+      { word: 'HEMATOLOGY', hint: 'Study of blood' },
+      { word: 'ONCOLOGY', hint: 'Cancer care specialty' },
+      { word: 'PEDIATRICS', hint: 'Care of children' },
+      { word: 'GERIATRICS', hint: 'Care of older adults' },
+      { word: 'OBSTETRICS', hint: 'Pregnancy and childbirth' },
+      { word: 'REHABILITATION', hint: 'Recovery and therapy' },
+      { word: 'NEBULIZER', hint: 'Breathing treatment device' },
+      { word: 'DEFIBRILLATOR', hint: 'Heart rhythm restoration' },
+      { word: 'CATHETER', hint: 'Tube for drainage' },
+      { word: 'SPHYGMOMANOMETER', hint: 'Blood pressure cuff' },
+      { word: 'GLUCOMETER', hint: 'Blood glucose monitor' },
+      { word: 'HEPARIN', hint: 'Blood thinner medication' },
+      { word: 'ANTIBIOTIC', hint: 'Fights bacterial infection' },
+      { word: 'ANTISEPTIC', hint: 'Prevents infection' },
+      { word: 'PROPHYLAXIS', hint: 'Preventive treatment' },
+      { word: 'CONTRAINDICATION', hint: 'Reason to avoid treatment' }
+    ];
+    const SCRAMBLE_NO_REPEAT = 15;
+    let scrambleState = { word: '', shuffled: [], chosen: [], score: 0, recentWords: [] };
+
+    function getScrambleEls() {
+      const panel = document.getElementById('game-scramble');
+      if (!panel) return null;
+      return {
+        display: panel.querySelector('#scramble-display'),
+        chosen: panel.querySelector('#scramble-chosen'),
+        buttons: panel.querySelector('#scramble-buttons'),
+        hint: panel.querySelector('#scramble-hint'),
+        winEl: panel.querySelector('#scramble-win'),
+        scoreEl: panel.querySelector('#scramble-score')
+      };
+    }
+
+    function shuffleArr(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function initScramble() {
+      const recent = scrambleState.recentWords || [];
+      const available = SCRAMBLE_WORDS.filter(x => !recent.includes(x.word));
+      const pool = available.length > 0 ? available : SCRAMBLE_WORDS;
+      const w = pool[Math.floor(Math.random() * pool.length)];
+      const newRecent = [...recent, w.word];
+      if (newRecent.length > SCRAMBLE_NO_REPEAT) newRecent.shift();
+      scrambleState = { word: w.word.trim(), shuffled: shuffleArr(w.word.trim().split('')), chosen: [], score: scrambleState.score, recentWords: newRecent, hint: w.hint };
+      renderScramble();
+    }
+
+    function renderScramble() {
+      const els = getScrambleEls();
+      if (!els || !els.display || !els.buttons || !els.chosen) return;
+      els.display.textContent = scrambleState.chosen.join('') || '_';
+      if (els.hint) els.hint.textContent = 'Hint: ' + (scrambleState.hint || SCRAMBLE_WORDS.find(x => x.word === scrambleState.word)?.hint || '');
+      if (els.winEl) els.winEl.classList.remove('visible');
+      if (els.scoreEl) els.scoreEl.textContent = scrambleState.score;
+      els.chosen.innerHTML = '';
+      els.buttons.innerHTML = '';
+      scrambleState.chosen.forEach((letter, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'scramble-btn';
+        b.textContent = letter;
+        b.dataset.i = String(i);
+        b.addEventListener('click', (e) => {
+          e.preventDefault();
+          const idx = parseInt(b.dataset.i, 10);
+          const l = scrambleState.chosen.splice(idx, 1)[0];
+          scrambleState.shuffled.push(l);
+          scrambleState.shuffled.sort(() => Math.random() - 0.5);
+          renderScramble();
+        });
+        els.chosen.appendChild(b);
+      });
+      scrambleState.shuffled.forEach((letter, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'scramble-btn';
+        b.textContent = letter;
+        b.addEventListener('click', (e) => {
+          e.preventDefault();
+          scrambleState.shuffled.splice(i, 1);
+          scrambleState.chosen.push(letter);
+          const answer = scrambleState.chosen.join('');
+          if (answer === scrambleState.word) {
+            scrambleState.score++;
+            const e2 = getScrambleEls();
+            if (e2 && e2.scoreEl) e2.scoreEl.textContent = scrambleState.score;
+            if (e2 && e2.winEl) e2.winEl.classList.add('visible');
+            setTimeout(() => initScramble(), 1000);
+          } else {
+            renderScramble();
+          }
+        });
+        els.buttons.appendChild(b);
+      });
+    }
+
+    const scrambleSkipBtn = document.getElementById('scramble-skip');
+    const scrambleResetBtn = document.getElementById('scramble-reset');
+    if (scrambleSkipBtn) scrambleSkipBtn.addEventListener('click', initScramble);
+    if (scrambleResetBtn) scrambleResetBtn.addEventListener('click', () => {
+      scrambleState.score = 0;
+      scrambleState.recentWords = [];
+      const e = getScrambleEls();
+      if (e && e.scoreEl) e.scoreEl.textContent = '0';
+      initScramble();
+    });
+    setTimeout(() => initScramble(), 0);
 
     loadDraft();
     updateLoveLetter();
