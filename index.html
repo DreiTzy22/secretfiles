@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DigiBooth v1.5</title>
+  <title>DigiNursing v2</title>
   <link rel="icon" type="image/png" href="capybara/cute-capibara-character-different-poses.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -717,6 +717,43 @@
       .receipt-actions, .modal-box .btn { display: none !important; }
       .receipt-output { border: 1px solid #333; }
     }
+
+    /* Mini Test */
+    .minitest-section {
+      background: linear-gradient(145deg, var(--white), var(--nursing-soft));
+      border-radius: 24px;
+      padding: 1.75rem 2rem;
+      box-shadow: 0 8px 32px var(--shadow), 0 0 0 1px rgba(100, 181, 246, 0.3);
+      border: 2px solid var(--nursing-blue);
+    }
+    .minitest-section h2 { font-family: 'Quicksand', sans-serif; font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--nursing-blue); font-weight: 700; }
+    .minitest-config h3 { font-size: 1rem; margin: 1rem 0 0.5rem; color: var(--capybara-brown); }
+    .minitest-topics { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.5rem; }
+    .minitest-topics label { font-weight: 600; cursor: pointer; }
+    .minitest-types { display: flex; flex-direction: column; gap: 0.5rem; max-width: 320px; }
+    .minitest-type-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .minitest-type-row input { width: 70px; padding: 0.4rem; border: 2px solid var(--nursing-light); border-radius: 8px; }
+    .minitest-total { font-weight: 700; color: var(--nursing-teal); margin-top: 0.5rem; }
+    .minitest-error { color: var(--nursing-red); font-size: 0.9rem; }
+    .minitest-exam-wrap { margin-top: 1.5rem; }
+    .minitest-progress { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.95rem; }
+    .minitest-nav { display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; }
+    .minitest-question { padding: 1rem; background: var(--pink-light); border-radius: 12px; margin-bottom: 1rem; border: 1px solid rgba(255,133,179,0.3); }
+    .minitest-question .q-type { font-size: 0.75rem; font-weight: 700; color: var(--nursing-teal); margin-bottom: 0.25rem; }
+    .minitest-question .q-text { font-weight: 600; margin-bottom: 0.75rem; }
+    .minitest-sata-opt { display: flex; align-items: flex-start; gap: 0.5rem; margin: 0.5rem 0; cursor: pointer; }
+    .minitest-sata-opt input { margin-top: 0.25rem; }
+    .minitest-fib-input { width: 100%; max-width: 300px; padding: 0.5rem; border: 2px solid var(--nursing-light); border-radius: 8px; margin-top: 0.5rem; }
+    .minitest-id-input { width: 100%; max-width: 400px; padding: 0.5rem; border: 2px solid var(--nursing-light); border-radius: 8px; margin-top: 0.5rem; }
+    .minitest-results { margin-top: 1.5rem; padding: 1.5rem; background: linear-gradient(135deg, var(--pink-light), var(--nursing-soft)); border-radius: 16px; }
+    .minitest-review { margin-top: 1.5rem; max-height: 400px; overflow-y: auto; padding-right: 0.5rem; }
+    .minitest-review-item { padding: 0.75rem 1rem; margin-bottom: 0.75rem; border-radius: 12px; border-left: 4px solid; font-size: 0.9rem; }
+    .minitest-review-item.correct { background: #E8F5E9; border-color: #4CAF50; }
+    .minitest-review-item.wrong { background: #FFEBEE; border-color: #E57373; }
+    .minitest-review-item .review-q { font-weight: 600; margin-bottom: 0.25rem; color: var(--capybara-brown); }
+    .minitest-review-item .review-ans { font-size: 0.85rem; margin-top: 0.25rem; }
+    .minitest-review-item .review-correct { color: #2E7D32; font-weight: 600; }
+    .minitest-review-item .review-yours { color: #C62828; }
 
     .minigame-section > p {
       font-size: 0.9rem;
@@ -1551,7 +1588,7 @@
 <body>
   <div class="header-with-capybara">
     <img src="capybara/cute-capibara-character-different-poses.png" alt="" class="header-capybara left" aria-hidden="true">
-    <h1>Bea's Photo Booth</h1>
+    <h1>Bea's Academic Sanctuary</h1>
     <img src="capybara/cute-capibara-character-different-poses.png" alt="" class="header-capybara" aria-hidden="true">
   </div>
   <p class="tagline">Care <span>♥</span> Chill <span>♥</span> Capture</p>
@@ -1559,7 +1596,9 @@
   <div class="mode-selector">
     <button type="button" class="mode-btn active" data-mode="photobooth">📷 Photo Booth</button>
     <button type="button" class="mode-btn" data-mode="minigames">🩺 Mini Games</button>
+    <button type="button" class="mode-btn" data-mode="minitest">📝 Mini Test</button>
     <button type="button" class="mode-btn" data-mode="budget">💰 Budget Tracker</button>
+    
   </div>
 
   <div class="about-btn-wrap">
@@ -1816,6 +1855,69 @@
     </div>
     <!-- End Budget Tracker content -->
 
+    <!-- Mini Test mode content -->
+    <div id="minitest-content" class="mode-content">
+      <section class="minitest-section">
+        <h2>📝 Mini Test (50-Item Exam)</h2>
+        <p style="font-size: 0.9rem; color: var(--capybara-brown); margin-bottom: 1rem;">Create a custom 50-item nursing exam. Select topics and question types.</p>
+
+        <div id="minitest-config" class="minitest-config">
+          <h3>Topics (select 1 or more)</h3>
+          <div class="minitest-topics">
+            <label><input type="checkbox" name="minitest-topic" value="Fundamentals"> Fundamentals</label>
+            <label><input type="checkbox" name="minitest-topic" value="Med-Surg"> Med-Surg</label>
+            <label><input type="checkbox" name="minitest-topic" value="Psych"> Psych</label>
+            <label><input type="checkbox" name="minitest-topic" value="Pharmacology"> Pharmacology</label>
+          </div>
+
+          <h3>Question Types (total must equal 50)</h3>
+          <div class="minitest-types">
+            <div class="minitest-type-row">
+              <label>Multiple Choice</label>
+              <input type="number" id="mt-mc" min="0" max="50" value="20" placeholder="0">
+            </div>
+            <div class="minitest-type-row">
+              <label>Identification</label>
+              <input type="number" id="mt-id" min="0" max="50" value="10" placeholder="0">
+            </div>
+            <div class="minitest-type-row">
+              <label>True or False</label>
+              <input type="number" id="mt-tf" min="0" max="50" value="10" placeholder="0">
+            </div>
+            <div class="minitest-type-row">
+              <label>Fill in the Blanks</label>
+              <input type="number" id="mt-fib" min="0" max="50" value="10" placeholder="0">
+            </div>
+            <div class="minitest-type-row">
+              <label>SATA (Select All That Apply)</label>
+              <input type="number" id="mt-sata" min="0" max="50" value="0" placeholder="0">
+            </div>
+          </div>
+          <p class="minitest-total" id="minitest-total">Total: 50 items</p>
+          <p class="minitest-error hidden" id="minitest-error">Total must equal 50. Please adjust the counts.</p>
+
+          <button type="button" class="btn btn-primary" id="minitest-start">Start Exam</button>
+        </div>
+
+        <div id="minitest-exam-wrap" class="minitest-exam-wrap hidden">
+          <div class="minitest-progress">
+            <span>Question <strong id="mt-current">1</strong> of <strong id="mt-total">50</strong></span>
+            <span>Score: <strong id="mt-score">0</strong>/<strong id="mt-answered">0</strong></span>
+          </div>
+          <div id="minitest-question-area"></div>
+          <div class="minitest-nav">
+            <button type="button" class="btn btn-outline" id="mt-prev">← Previous</button>
+            <button type="button" class="btn btn-primary" id="mt-next">Next →</button>
+            <button type="button" class="btn btn-secondary" id="mt-submit" style="display:none;">Submit Exam</button>
+          </div>
+        </div>
+
+        <div id="minitest-results" class="minitest-results hidden"></div>
+      </section>
+    </div>
+    <!-- End Mini Test content -->
+  </div>
+
   <!-- Receipt modal -->
   <div class="modal-overlay hidden" id="receipt-modal">
     <div class="modal-box receipt-modal-box">
@@ -1826,7 +1928,6 @@
         <button type="button" class="btn btn-outline" id="receipt-close">Close</button>
       </div>
     </div>
-  </div>
   </div>
 
   <div id="dev-presence-badge">👥 Online: --</div>
@@ -1923,6 +2024,7 @@
     const photoboothContent = document.getElementById('photobooth-content');
     const minigameContent = document.getElementById('minigame-content');
     const budgetContent = document.getElementById('budget-content');
+    const minitestContent = document.getElementById('minitest-content');
     document.querySelectorAll('.mode-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
@@ -1931,6 +2033,7 @@
         photoboothContent.classList.toggle('visible', mode === 'photobooth');
         minigameContent.classList.toggle('visible', mode === 'minigames');
         budgetContent.classList.toggle('visible', mode === 'budget');
+        if (minitestContent) minitestContent.classList.toggle('visible', mode === 'minitest');
       });
     });
 
@@ -2111,6 +2214,778 @@
     });
 
     updateBudgetUI();
+
+    // ========== Mini Test (50-Item Exam) ==========
+    const MT_ID = [ // Identification: { q, a, subj }
+      { q: 'Acronym for Do Not Resuscitate', a: 'DNR', subj: 'Fundamentals' },
+      { q: 'The five rights of medication administration include right patient, drug, dose, route, and ____', a: 'time', subj: 'Fundamentals' },
+      { q: 'Normal adult resting heart rate range in beats per minute', a: '60-100', subj: 'Fundamentals' },
+      { q: 'Position where patient lies on back with knees bent', a: 'dorsal recumbent', subj: 'Fundamentals' },
+      { q: '_____ means nothing by mouth', a: 'NPO', subj: 'Fundamentals' },
+      { q: 'Communication framework: Situation, Background, Assessment, _____', a: 'Recommendation', subj: 'Fundamentals' },
+      { q: 'Fire response: Rescue, Alarm, Contain, _____', a: 'Extinguish', subj: 'Fundamentals' },
+      { q: 'Low oxygen in tissues', a: 'hypoxia', subj: 'Fundamentals' },
+      { q: 'Heart rate over 100 bpm', a: 'tachycardia', subj: 'Fundamentals' },
+      { q: 'Difficulty breathing', a: 'dyspnea', subj: 'Fundamentals' },
+      { q: 'Inflammation of the peritoneum', a: 'peritonitis', subj: 'Med-Surg' },
+      { q: 'Blood clot in deep vein', a: 'DVT', subj: 'Med-Surg' },
+      { q: 'Heparin is reversed with _____ sulfate', a: 'protamine', subj: 'Med-Surg' },
+      { q: 'Warfarin is reversed with Vitamin _____', a: 'K', subj: 'Med-Surg' },
+      { q: 'Defense mechanism of attributing own feelings to others', a: 'projection', subj: 'Psych' },
+      { q: 'Involuntary movements from long-term antipsychotics', a: 'tardive dyskinesia', subj: 'Psych' },
+      { q: 'ACE inhibitors may cause dry _____', a: 'cough', subj: 'Pharmacology' },
+      { q: 'Opioid overdose is reversed with _____', a: 'naloxone', subj: 'Pharmacology' },
+      { q: 'Activated partial thromboplastin time monitors _____', a: 'heparin', subj: 'Pharmacology' },
+      { q: 'Beta-blockers should be avoided in _____', a: 'asthma', subj: 'Pharmacology' },
+      { q: 'Patient seeing people as all good or all bad', a: 'splitting', subj: 'Psych' },
+      { q: 'Acute confusion that fluctuates', a: 'delirium', subj: 'Psych' },
+      { q: 'Signs of PE: sudden dyspnea, chest pain, _____', a: 'tachycardia', subj: 'Med-Surg' },
+      { q: 'Cushing\'s triad indicates elevated _____', a: 'ICP', subj: 'Med-Surg' },
+      { q: 'Acronym for as needed', a: 'PRN', subj: 'Fundamentals' },
+      { q: 'Abbreviation for twice daily', a: 'BID', subj: 'Fundamentals' },
+      { q: 'Abbreviation for four times daily', a: 'QID', subj: 'Fundamentals' },
+      { q: 'Position where head is lower than feet', a: 'Trendelenburg', subj: 'Fundamentals' },
+      { q: 'Skin breakdown from pressure', a: 'pressure ulcer', subj: 'Fundamentals' },
+      { q: 'Transfer of pathogens by touching', a: 'contact transmission', subj: 'Fundamentals' },
+      { q: 'Patient\'s right to make own decisions', a: 'autonomy', subj: 'Fundamentals' },
+      { q: 'Doing no harm to the patient', a: 'nonmaleficence', subj: 'Fundamentals' },
+      { q: 'Acting for the benefit of the patient', a: 'beneficence', subj: 'Fundamentals' },
+      { q: 'Fair distribution of resources', a: 'justice', subj: 'Fundamentals' },
+      { q: 'Low blood pressure upon standing', a: 'orthostatic hypotension', subj: 'Fundamentals' },
+      { q: 'Yellowing of skin from bilirubin', a: 'jaundice', subj: 'Med-Surg' },
+      { q: 'Blood in the urine', a: 'hematuria', subj: 'Med-Surg' },
+      { q: 'Black tarry stools', a: 'melena', subj: 'Med-Surg' },
+      { q: 'Difficulty swallowing', a: 'dysphagia', subj: 'Med-Surg' },
+      { q: 'Vomiting blood', a: 'hematemesis', subj: 'Med-Surg' },
+      { q: 'Excess fluid in lungs', a: 'pulmonary edema', subj: 'Med-Surg' },
+      { q: 'Collapsed lung', a: 'pneumothorax', subj: 'Med-Surg' },
+      { q: 'Inflammation of the pancreas', a: 'pancreatitis', subj: 'Med-Surg' },
+      { q: 'Kidney failure requiring dialysis', a: 'ESRD', subj: 'Med-Surg' },
+      { q: 'Chronic obstructive pulmonary disease acronym', a: 'COPD', subj: 'Med-Surg' },
+      { q: 'High blood sugar emergency', a: 'DKA', subj: 'Med-Surg' },
+      { q: 'Low blood sugar', a: 'hypoglycemia', subj: 'Med-Surg' },
+      { q: 'Heart attack', a: 'MI', subj: 'Med-Surg' },
+      { q: 'Stroke caused by clot', a: 'ischemic stroke', subj: 'Med-Surg' },
+      { q: 'Monitor for warfarin therapy', a: 'INR', subj: 'Pharmacology' },
+      { q: 'Class of drugs ending in -pril', a: 'ACE inhibitor', subj: 'Pharmacology' },
+      { q: 'Class of drugs ending in -olol', a: 'beta-blocker', subj: 'Pharmacology' },
+      { q: 'Antidote for magnesium sulfate toxicity', a: 'calcium gluconate', subj: 'Pharmacology' },
+      { q: 'Red man syndrome is associated with _____', a: 'vancomycin', subj: 'Pharmacology' },
+      { q: 'Antibiotic that causes photosensitivity', a: 'tetracycline', subj: 'Pharmacology' },
+      { q: 'Ototoxic antibiotic class', a: 'aminoglycoside', subj: 'Pharmacology' },
+      { q: 'Drug requiring INR monitoring', a: 'warfarin', subj: 'Pharmacology' },
+      { q: 'SSRI stands for selective _____ reuptake inhibitor', a: 'serotonin', subj: 'Pharmacology' },
+      { q: 'Benzodiazepine reversal agent', a: 'flumazenil', subj: 'Pharmacology' },
+      { q: 'Defense mechanism of returning to earlier stage', a: 'regression', subj: 'Psych' },
+      { q: 'Defense mechanism of channeling impulses into socially acceptable activity', a: 'sublimation', subj: 'Psych' },
+      { q: 'Unconsciously blocking unacceptable thoughts', a: 'repression', subj: 'Psych' },
+      { q: 'Refusing to accept reality', a: 'denial', subj: 'Psych' },
+      { q: 'Justifying behavior with logical reasons', a: 'rationalization', subj: 'Psych' },
+      { q: 'Mania with psychosis', a: 'bipolar I', subj: 'Psych' },
+      { q: 'Fear of being in open spaces', a: 'agoraphobia', subj: 'Psych' },
+      { q: 'Intrusive thoughts and repetitive behaviors', a: 'OCD', subj: 'Psych' },
+      { q: 'Flashbacks after traumatic event', a: 'PTSD', subj: 'Psych' },
+      { q: 'Inappropriate attachment to caregiver in BPD', a: 'splitting', subj: 'Psych' },
+      { q: 'RACE stands for Rescue, Alarm, Contain, _____', a: 'Extinguish', subj: 'Fundamentals' },
+      { q: 'Normal diastolic BP range in mmHg', a: '60-80', subj: 'Fundamentals' },
+      { q: 'Fever-reducing medication class', a: 'antipyretic', subj: 'Pharmacology' },
+      { q: 'NSAID stands for non-_____ anti-inflammatory drug', a: 'steroidal', subj: 'Pharmacology' },
+      { q: 'Insulin given at mealtime', a: 'rapid-acting', subj: 'Pharmacology' },
+      { q: 'Long-acting basal insulin', a: 'glargine', subj: 'Pharmacology' },
+      { q: 'Sign of digoxin toxicity: seeing _____ halos', a: 'yellow', subj: 'Pharmacology' },
+      { q: 'Anticholinergic side effect: _____ mouth', a: 'dry', subj: 'Pharmacology' },
+      { q: 'Statins lower _____', a: 'cholesterol', subj: 'Pharmacology' },
+      { q: 'PPI stands for proton _____ inhibitor', a: 'pump', subj: 'Pharmacology' },
+      { q: 'Anti-seizure medication that requires blood level', a: 'phenytoin', subj: 'Pharmacology' },
+      { q: 'Anticoagulant that is an Xa inhibitor', a: 'rivaroxaban', subj: 'Pharmacology' },
+      { q: 'ACE inhibitor that may cause _____ retention', a: 'potassium', subj: 'Pharmacology' },
+      { q: 'Calcium channel blocker suffix', a: '-dipine', subj: 'Pharmacology' },
+      { q: 'Loop diuretic ending in -ide', a: 'furosemide', subj: 'Pharmacology' },
+      { q: 'Thiazide diuretics cause _____ loss', a: 'potassium', subj: 'Pharmacology' },
+      { q: 'Bone marrow suppression is a side effect of _____', a: 'chemotherapy', subj: 'Pharmacology' },
+      { q: 'Acid-base imbalance in DKA', a: 'metabolic acidosis', subj: 'Med-Surg' },
+      { q: 'Test for kidney function', a: 'creatinine', subj: 'Med-Surg' },
+      { q: 'Liver enzyme often elevated in liver disease', a: 'ALT', subj: 'Med-Surg' },
+      { q: 'WBC count above normal', a: 'leukocytosis', subj: 'Med-Surg' },
+      { q: 'Low hemoglobin', a: 'anemia', subj: 'Med-Surg' },
+      { q: 'Excess potassium in blood', a: 'hyperkalemia', subj: 'Med-Surg' },
+      { q: 'Low sodium in blood', a: 'hyponatremia', subj: 'Med-Surg' },
+      { q: 'Excess fluid in abdomen', a: 'ascites', subj: 'Med-Surg' },
+      { q: 'Swelling from fluid retention', a: 'edema', subj: 'Med-Surg' },
+      { q: 'Surgical connection between vessels', a: 'anastomosis', subj: 'Med-Surg' },
+      { q: 'Surgical removal of appendix', a: 'appendectomy', subj: 'Med-Surg' },
+      { q: 'Surgical removal of gallbladder', a: 'cholecystectomy', subj: 'Med-Surg' },
+      { q: 'Tube inserted through nose to stomach', a: 'NG tube', subj: 'Med-Surg' },
+      { q: 'Catheter in the bladder', a: 'Foley', subj: 'Med-Surg' },
+      { q: 'Central line site care uses _____ solution', a: 'chlorhexidine', subj: 'Fundamentals' },
+      { q: 'Pressure ulcer stage with full thickness loss', a: 'Stage 3', subj: 'Fundamentals' },
+      { q: 'SBAR stands for Situation, Background, Assessment, _____', a: 'Recommendation', subj: 'Fundamentals' },
+      { q: 'Maslow\'s highest level of need', a: 'self-actualization', subj: 'Fundamentals' },
+      { q: 'Teaching method using return demonstration', a: 'psychomotor', subj: 'Fundamentals' },
+      { q: 'Legal document for end-of-life wishes', a: 'advance directive', subj: 'Fundamentals' },
+      { q: 'HIPAA protects patient _____', a: 'privacy', subj: 'Fundamentals' },
+      { q: 'Incident report is _____ fact', a: 'factual', subj: 'Fundamentals' },
+      { q: 'Delegation: RN cannot delegate _____', a: 'assessment', subj: 'Fundamentals' },
+      { q: 'Position for shock to improve venous return', a: 'Trendelenburg', subj: 'Fundamentals' },
+      { q: 'Side-lying position with legs bent', a: 'Sims', subj: 'Fundamentals' },
+      { q: 'Erikson stage: trust vs _____', a: 'mistrust', subj: 'Psych' },
+      { q: 'Kubler-Ross stage: bargaining comes after _____', a: 'anger', subj: 'Psych' },
+      { q: 'Therapeutic technique of restating patient words', a: 'reflection', subj: 'Psych' },
+      { q: 'Non-therapeutic: giving _____', a: 'advice', subj: 'Psych' },
+      { q: 'ECT stands for _____ convulsive therapy', a: 'electro', subj: 'Psych' },
+      { q: 'Tardive _____ from antipsychotics', a: 'dyskinesia', subj: 'Psych' },
+      { q: 'Antipsychotic that requires blood glucose monitoring', a: 'clozapine', subj: 'Psych' },
+      { q: 'Mood stabilizer with narrow therapeutic range', a: 'lithium', subj: 'Psych' },
+      { q: 'Black box warning for SSRIs in young adults', a: 'suicide', subj: 'Psych' },
+      { q: 'Benzodiazepine withdrawal can cause _____', a: 'seizures', subj: 'Psych' },
+    ];
+    const MT_TF = [ // True or False: { q, a: true|false, subj }
+      { q: 'Handwashing is the single most effective way to prevent infection spread.', a: true, subj: 'Fundamentals' },
+      { q: 'Standard precautions apply only to patients with known infections.', a: false, subj: 'Fundamentals' },
+      { q: 'Informed consent requires the patient to understand risks, benefits, and alternatives.', a: true, subj: 'Fundamentals' },
+      { q: 'You may share patient information with anyone on the care team.', a: false, subj: 'Fundamentals' },
+      { q: 'Normal SpO2 is 95-100%.', a: true, subj: 'Fundamentals' },
+      { q: 'Restraints do not require a physician order.', a: false, subj: 'Fundamentals' },
+      { q: 'CPR should be started immediately when a patient codes.', a: true, subj: 'Fundamentals' },
+      { q: 'DNR means Do Not Recover.', a: false, subj: 'Fundamentals' },
+      { q: 'Wound care is cleaned from clean to dirty.', a: true, subj: 'Fundamentals' },
+      { q: 'Trendelenburg position has the head higher than the feet.', a: false, subj: 'Fundamentals' },
+      { q: 'Post-op ileus is characterized by absent bowel sounds.', a: true, subj: 'Med-Surg' },
+      { q: 'COPD patients should receive high-flow oxygen (6L+).', a: false, subj: 'Med-Surg' },
+      { q: 'Heparin is monitored with aPTT.', a: true, subj: 'Pharmacology' },
+      { q: 'Beta-blockers are safe in uncontrolled asthma.', a: false, subj: 'Pharmacology' },
+      { q: 'Therapeutic communication uses open-ended questions.', a: true, subj: 'Psych' },
+      { q: 'Lithium requires therapeutic level monitoring.', a: true, subj: 'Psych' },
+      { q: 'Metformin should be held before contrast procedures.', a: true, subj: 'Pharmacology' },
+      { q: 'Vancomycin requires trough level monitoring.', a: true, subj: 'Pharmacology' },
+      { q: 'Post-op atelectasis is prevented by incentive spirometry.', a: true, subj: 'Med-Surg' },
+      { q: 'Heparin is reversed with Vitamin K.', a: false, subj: 'Med-Surg' },
+      { q: 'NPO means nothing by mouth.', a: true, subj: 'Fundamentals' },
+      { q: 'You can delegate nursing assessment to unlicensed personnel.', a: false, subj: 'Fundamentals' },
+      { q: 'Hand hygiene should be performed before and after patient contact.', a: true, subj: 'Fundamentals' },
+      { q: 'Restraints require a written order that must be renewed every 24 hours.', a: true, subj: 'Fundamentals' },
+      { q: 'A nurse may share patient info with family without consent.', a: false, subj: 'Fundamentals' },
+      { q: 'Wound healing occurs from the inside out.', a: true, subj: 'Fundamentals' },
+      { q: 'Fowler\'s position has the head of bed at 90 degrees.', a: true, subj: 'Fundamentals' },
+      { q: 'Blood pressure should be taken on the arm with an IV.', a: false, subj: 'Fundamentals' },
+      { q: 'Telemetry monitors heart rhythm continuously.', a: true, subj: 'Fundamentals' },
+      { q: 'A fall risk assessment is done only on admission.', a: false, subj: 'Fundamentals' },
+      { q: 'Nurses can legally refuse assignments that exceed competency.', a: true, subj: 'Fundamentals' },
+      { q: 'Documentation should include opinions and assumptions.', a: false, subj: 'Fundamentals' },
+      { q: 'Pressure relief includes turning every 2 hours.', a: true, subj: 'Fundamentals' },
+      { q: 'Signs on the door can replace handwashing.', a: false, subj: 'Fundamentals' },
+      { q: 'Delegation follows the five rights: task, circumstance, person, direction, supervision.', a: true, subj: 'Fundamentals' },
+      { q: 'A DNR order means do not treat the patient at all.', a: false, subj: 'Fundamentals' },
+      { q: 'SBAR improves communication between providers.', a: true, subj: 'Fundamentals' },
+      { q: 'HIPAA allows sharing PHI for treatment without consent.', a: true, subj: 'Fundamentals' },
+      { q: 'Patients with COPD should receive low-flow oxygen.', a: true, subj: 'Med-Surg' },
+      { q: 'DKA presents with low blood glucose.', a: false, subj: 'Med-Surg' },
+      { q: 'CHF patients should limit fluid intake.', a: true, subj: 'Med-Surg' },
+      { q: 'Heparin is given orally.', a: false, subj: 'Med-Surg' },
+      { q: 'Bowel sounds are auscultated in all four quadrants.', a: true, subj: 'Med-Surg' },
+      { q: 'A patient with appendicitis should receive a hot compress.', a: false, subj: 'Med-Surg' },
+      { q: 'Post-op nausea can be treated with antiemetics.', a: true, subj: 'Med-Surg' },
+      { q: 'Chest tubes should be clamped during transport.', a: false, subj: 'Med-Surg' },
+      { q: 'Hypoglycemia is treated with fast-acting glucose.', a: true, subj: 'Med-Surg' },
+      { q: 'Hyperkalemia causes peaked T waves on ECG.', a: true, subj: 'Med-Surg' },
+      { q: 'A patient with an NG tube should always be NPO.', a: false, subj: 'Med-Surg' },
+      { q: 'Deep vein thrombosis can lead to pulmonary embolism.', a: true, subj: 'Med-Surg' },
+      { q: 'Flail chest moves inward on inspiration.', a: true, subj: 'Med-Surg' },
+      { q: 'Peritonitis presents with board-like abdomen.', a: true, subj: 'Med-Surg' },
+      { q: 'Hemorrhagic stroke is treated with tPA.', a: false, subj: 'Med-Surg' },
+      { q: 'Asthma is reversible airway obstruction.', a: true, subj: 'Med-Surg' },
+      { q: 'Type 1 diabetes is always managed with insulin.', a: true, subj: 'Med-Surg' },
+      { q: 'Acute kidney injury is always permanent.', a: false, subj: 'Med-Surg' },
+      { q: 'Cushing\'s triad indicates brain herniation.', a: true, subj: 'Med-Surg' },
+      { q: 'Borborygmi are abnormal bowel sounds.', a: false, subj: 'Med-Surg' },
+      { q: 'Therapeutic communication avoids giving advice.', a: true, subj: 'Psych' },
+      { q: 'Transference is when the patient projects feelings onto the nurse.', a: true, subj: 'Psych' },
+      { q: 'A suicidal patient should never be left alone.', a: true, subj: 'Psych' },
+      { q: 'Lithium has no drug interactions.', a: false, subj: 'Psych' },
+      { q: 'SSRIs work immediately.', a: false, subj: 'Psych' },
+      { q: 'ECT can cause short-term memory loss.', a: true, subj: 'Psych' },
+      { q: 'Benzodiazepines are first-line for long-term anxiety.', a: false, subj: 'Psych' },
+      { q: 'Schizophrenia involves hallucinations and delusions.', a: true, subj: 'Psych' },
+      { q: 'MAOIs require tyramine restriction.', a: true, subj: 'Psych' },
+      { q: 'Antipsychotics can cause weight gain.', a: true, subj: 'Psych' },
+      { q: 'Mild depression always requires medication.', a: false, subj: 'Psych' },
+      { q: 'Milieu therapy uses the environment for healing.', a: true, subj: 'Psych' },
+      { q: 'Setting limits is therapeutic for BPD.', a: true, subj: 'Psych' },
+      { q: 'Delirium and dementia are the same condition.', a: false, subj: 'Psych' },
+      { q: 'Avolition is lack of motivation in schizophrenia.', a: true, subj: 'Psych' },
+      { q: 'Beta-blockers are contraindicated in asthma.', a: true, subj: 'Pharmacology' },
+      { q: 'Aspirin is safe in children with viral illness.', a: false, subj: 'Pharmacology' },
+      { q: 'Warfarin interacts with many foods and drugs.', a: true, subj: 'Pharmacology' },
+      { q: 'Vancomycin infusions should be given slowly.', a: true, subj: 'Pharmacology' },
+      { q: 'Metformin causes hypoglycemia when used alone.', a: false, subj: 'Pharmacology' },
+      { q: 'ACE inhibitors can cause angioedema.', a: true, subj: 'Pharmacology' },
+      { q: 'Digoxin increases heart contractility.', a: true, subj: 'Pharmacology' },
+      { q: 'NSAIDs are safe in gastric ulcer patients.', a: false, subj: 'Pharmacology' },
+      { q: 'Insulin can be given orally.', a: false, subj: 'Pharmacology' },
+      { q: 'Opioids cause constipation.', a: true, subj: 'Pharmacology' },
+      { q: 'Fluid bolus is first for anaphylaxis.', a: false, subj: 'Pharmacology' },
+      { q: 'Epinephrine is first-line for anaphylaxis.', a: true, subj: 'Pharmacology' },
+      { q: 'Aminoglycosides are nephrotoxic.', a: true, subj: 'Pharmacology' },
+      { q: 'Calcium channel blockers lower blood pressure.', a: true, subj: 'Pharmacology' },
+      { q: 'Statins can cause myopathy.', a: true, subj: 'Pharmacology' },
+      { q: 'Furosemide is a potassium-sparing diuretic.', a: false, subj: 'Pharmacology' },
+      { q: 'PPIs should be taken with food.', a: false, subj: 'Pharmacology' },
+      { q: 'Phenytoin has a narrow therapeutic index.', a: true, subj: 'Pharmacology' },
+      { q: 'Antacids can decrease absorption of other drugs.', a: true, subj: 'Pharmacology' },
+      { q: 'Glucagon raises blood glucose.', a: true, subj: 'Pharmacology' },
+      { q: 'Chest pain radiating to jaw suggests cardiac origin.', a: true, subj: 'Med-Surg' },
+      { q: 'Urinary retention is a sign of adequate hydration.', a: false, subj: 'Med-Surg' },
+      { q: 'Semi-Fowler position aids breathing.', a: true, subj: 'Fundamentals' },
+      { q: 'Advance directives are only for elderly patients.', a: false, subj: 'Fundamentals' },
+      { q: 'Flumazenil reverses benzodiazepine overdose.', a: true, subj: 'Pharmacology' },
+      { q: 'Psychosis always requires antipsychotics.', a: false, subj: 'Psych' },
+      { q: 'Nitroglycerin should be kept in light-resistant container.', a: true, subj: 'Pharmacology' },
+    ];
+    const MT_FIB = [ // Fill in the blank: { q (with ___ for blank), a, subj }
+      { q: 'Normal systolic BP is ______ mmHg.', a: '90-120', subj: 'Fundamentals' },
+      { q: 'Reposition bedbound patients every ______ hours.', a: '2', subj: 'Fundamentals' },
+      { q: 'Normal respiratory rate for adult is ______ breaths per minute.', a: '12-20', subj: 'Fundamentals' },
+      { q: 'Normal fasting blood glucose is ______ mg/dL.', a: '70-100', subj: 'Fundamentals' },
+      { q: 'Normal body temperature in Celsius is ______ °C.', a: '36.5-37.5', subj: 'Fundamentals' },
+      { q: 'Bradycardia is heart rate under ______ bpm.', a: '60', subj: 'Fundamentals' },
+      { q: 'PASS for fire extinguisher: Pull, Aim, ______, Sweep.', a: 'Squeeze', subj: 'Fundamentals' },
+      { q: 'Lithium requires ______ level monitoring.', a: 'therapeutic', subj: 'Psych' },
+      { q: 'Digoxin toxicity may cause ______ changes.', a: 'vision', subj: 'Pharmacology' },
+      { q: 'DKA presents with metabolic ______.', a: 'acidosis', subj: 'Med-Surg' },
+      { q: 'Heparin is monitored with ______.', a: 'aPTT', subj: 'Pharmacology' },
+      { q: 'Naloxone reverses ______ overdose.', a: 'opioid', subj: 'Pharmacology' },
+      { q: 'MAOIs require ______-free diet.', a: 'tyramine', subj: 'Psych' },
+      { q: 'Contracting for safety relates to ______ risk.', a: 'suicide', subj: 'Psych' },
+      { q: 'Normal diastolic BP is ______ mmHg.', a: '60-80', subj: 'Fundamentals' },
+      { q: 'RACE: Rescue, Alarm, Contain, ______.', a: 'Extinguish', subj: 'Fundamentals' },
+      { q: 'Pressure ulcers are prevented by turning every ______ hours.', a: '2', subj: 'Fundamentals' },
+      { q: 'HIPAA protects patient ______.', a: 'privacy', subj: 'Fundamentals' },
+      { q: 'SBAR: Situation, Background, Assessment, ______.', a: 'Recommendation', subj: 'Fundamentals' },
+      { q: 'Informed ______ requires patient understanding.', a: 'consent', subj: 'Fundamentals' },
+      { q: 'Restraint orders must be renewed every ______ hours.', a: '24', subj: 'Fundamentals' },
+      { q: 'Delegation cannot include nursing ______.', a: 'assessment', subj: 'Fundamentals' },
+      { q: 'Tachycardia is heart rate over ______ bpm.', a: '100', subj: 'Fundamentals' },
+      { q: 'Normal SpO2 is ______%.', a: '95-100', subj: 'Fundamentals' },
+      { q: 'Wound care: clean from ______ to dirty.', a: 'clean', subj: 'Fundamentals' },
+      { q: 'Fowler\'s position has head of bed elevated ______ degrees.', a: '45-90', subj: 'Fundamentals' },
+      { q: 'Maslow\'s base need is ______.', a: 'physiological', subj: 'Fundamentals' },
+      { q: 'DKA blood glucose is typically over ______ mg/dL.', a: '250', subj: 'Med-Surg' },
+      { q: 'Hypoglycemia is blood glucose under ______ mg/dL.', a: '70', subj: 'Med-Surg' },
+      { q: 'Hyperkalemia is potassium over ______ mEq/L.', a: '5.0', subj: 'Med-Surg' },
+      { q: 'INR therapeutic range for warfarin is ______.', a: '2-3', subj: 'Med-Surg' },
+      { q: 'aPTT monitors ______ therapy.', a: 'heparin', subj: 'Med-Surg' },
+      { q: 'COPD patients receive ______-flow oxygen.', a: 'low', subj: 'Med-Surg' },
+      { q: 'CHF patients should limit ______ intake.', a: 'sodium', subj: 'Med-Surg' },
+      { q: 'Post-op incentive spirometry prevents ______.', a: 'atelectasis', subj: 'Med-Surg' },
+      { q: 'DVT prevention includes early ______.', a: 'ambulation', subj: 'Med-Surg' },
+      { q: 'Peritonitis presents with ______-like abdomen.', a: 'board', subj: 'Med-Surg' },
+      { q: 'Pulmonary embolism presents with sudden ______.', a: 'dyspnea', subj: 'Med-Surg' },
+      { q: 'Cushing\'s triad indicates elevated ______.', a: 'ICP', subj: 'Med-Surg' },
+      { q: 'Creatinine reflects ______ function.', a: 'kidney', subj: 'Med-Surg' },
+      { q: 'Hemoglobin carries ______.', a: 'oxygen', subj: 'Med-Surg' },
+      { q: 'Ascites is fluid in the ______.', a: 'abdomen', subj: 'Med-Surg' },
+      { q: 'Lithium therapeutic level is ______ mEq/L.', a: '0.8-1.2', subj: 'Psych' },
+      { q: 'SSRIs take ______ weeks for full effect.', a: '2-4', subj: 'Psych' },
+      { q: 'EPS from antipsychotics: dystonia, akathisia, ______.', a: 'parkinsonism', subj: 'Psych' },
+      { q: 'Therapeutic communication uses ______-ended questions.', a: 'open', subj: 'Psych' },
+      { q: 'Contracting for ______ reduces suicide risk.', a: 'safety', subj: 'Psych' },
+      { q: 'MAOIs require ______-restricted diet.', a: 'tyramine', subj: 'Psych' },
+      { q: 'ECT can cause ______-term memory loss.', a: 'short', subj: 'Psych' },
+      { q: 'Benzodiazepines cause ______ withdrawal.', a: 'rebound', subj: 'Psych' },
+      { q: 'Delirium ______ throughout the day.', a: 'fluctuates', subj: 'Psych' },
+      { q: 'Defense mechanism: attributing feelings to others is ______.', a: 'projection', subj: 'Psych' },
+      { q: 'Heparin is reversed with ______ sulfate.', a: 'protamine', subj: 'Pharmacology' },
+      { q: 'Warfarin is reversed with Vitamin ______.', a: 'K', subj: 'Pharmacology' },
+      { q: 'Opioid overdose is reversed with ______.', a: 'naloxone', subj: 'Pharmacology' },
+      { q: 'Digoxin toxicity causes ______ vision changes.', a: 'yellow', subj: 'Pharmacology' },
+      { q: 'ACE inhibitors may cause dry ______.', a: 'cough', subj: 'Pharmacology' },
+      { q: 'Beta-blockers end in ______.', a: '-olol', subj: 'Pharmacology' },
+      { q: 'ACE inhibitors end in ______.', a: '-pril', subj: 'Pharmacology' },
+      { q: 'Calcium channel blockers end in ______.', a: '-dipine', subj: 'Pharmacology' },
+      { q: 'PPI stands for proton ______ inhibitor.', a: 'pump', subj: 'Pharmacology' },
+      { q: 'Vancomycin requires ______ level monitoring.', a: 'trough', subj: 'Pharmacology' },
+      { q: 'Metformin should be held before ______ procedures.', a: 'contrast', subj: 'Pharmacology' },
+      { q: 'Red man syndrome is from rapid ______ infusion.', a: 'vancomycin', subj: 'Pharmacology' },
+      { q: 'Statins lower ______.', a: 'cholesterol', subj: 'Pharmacology' },
+      { q: 'Loop diuretic: ______.', a: 'furosemide', subj: 'Pharmacology' },
+      { q: 'Magnesium sulfate toxicity is reversed with ______ gluconate.', a: 'calcium', subj: 'Pharmacology' },
+      { q: 'Phenytoin requires ______ level monitoring.', a: 'therapeutic', subj: 'Pharmacology' },
+      { q: 'Insulin is given ______ (route).', a: 'subcutaneously', subj: 'Pharmacology' },
+      { q: 'Aminoglycosides can cause ______ toxicity.', a: 'ototoxicity', subj: 'Pharmacology' },
+      { q: 'NSAIDs can cause ______ ulcer.', a: 'gastric', subj: 'Pharmacology' },
+      { q: 'Anticholinergics cause ______ mouth.', a: 'dry', subj: 'Pharmacology' },
+      { q: 'Tetracycline causes ______ sensitivity.', a: 'photosensitivity', subj: 'Pharmacology' },
+      { q: 'Fluid replacement in DKA uses ______ saline.', a: 'normal', subj: 'Med-Surg' },
+      { q: 'Kussmaul respirations indicate ______ acidosis.', a: 'metabolic', subj: 'Med-Surg' },
+      { q: 'Trousseau sign indicates ______.', a: 'hypocalcemia', subj: 'Med-Surg' },
+      { q: 'Chvostek sign indicates ______.', a: 'hypocalcemia', subj: 'Med-Surg' },
+      { q: 'Orthostatic hypotension is a drop in BP when ______.', a: 'standing', subj: 'Fundamentals' },
+      { q: 'PASS: Pull, Aim, Squeeze, ______.', a: 'Sweep', subj: 'Fundamentals' },
+      { q: 'The five rights: patient, drug, dose, route, and ______.', a: 'time', subj: 'Fundamentals' },
+      { q: 'Malpractice is professional ______.', a: 'negligence', subj: 'Fundamentals' },
+      { q: 'Incident reports are not part of the ______ record.', a: 'medical', subj: 'Fundamentals' },
+      { q: 'Erikson: infant stage is trust vs ______.', a: 'mistrust', subj: 'Psych' },
+      { q: 'Kubler-Ross stages: denial, anger, bargaining, ______, acceptance.', a: 'depression', subj: 'Psych' },
+      { q: 'Tardive ______ from long-term antipsychotics.', a: 'dyskinesia', subj: 'Psych' },
+      { q: 'Clozapine requires ______ monitoring.', a: 'WBC', subj: 'Psych' },
+      { q: 'Black box: SSRIs may increase ______ in young adults.', a: 'suicide', subj: 'Psych' },
+      { q: 'Xa inhibitors include ______.', a: 'rivaroxaban', subj: 'Pharmacology' },
+      { q: 'First-line for anaphylaxis: ______.', a: 'epinephrine', subj: 'Pharmacology' },
+      { q: 'Benzodiazepine reversal: ______.', a: 'flumazenil', subj: 'Pharmacology' },
+      { q: 'Antidote for acetaminophen: ______.', a: 'acetylcysteine', subj: 'Pharmacology' },
+      { q: 'Glucagon treats severe ______.', a: 'hypoglycemia', subj: 'Pharmacology' },
+      { q: 'Nitroglycerin is stored in ______-resistant container.', a: 'light', subj: 'Pharmacology' },
+      { q: 'Hyperglycemia in DKA is over ______ mg/dL.', a: '250', subj: 'Med-Surg' },
+      { q: 'tPA is given within ______ hours of stroke onset.', a: '4.5', subj: 'Med-Surg' },
+      { q: 'CPR compression depth is ______ inches.', a: '2', subj: 'Fundamentals' },
+      { q: 'CPR compression rate is ______ per minute.', a: '100-120', subj: 'Fundamentals' },
+      { q: 'AED stands for automated external ______.', a: 'defibrillator', subj: 'Fundamentals' },
+      { q: 'Oliguria is urine output less than ______ mL/day.', a: '400', subj: 'Med-Surg' },
+      { q: 'Braden scale assesses ______ ulcer risk.', a: 'pressure', subj: 'Fundamentals' },
+    ];
+    const MT_SATA = [ // SATA: { q, opts: [{text, correct}], subj }
+      { q: 'Which are part of standard precautions? (Select all that apply)', opts: [{t:'Hand hygiene',c:true},{t:'Gloves',c:true},{t:'Mask when splashes likely',c:true},{t:'Gown when soiling likely',c:true},{t:'N95 respirator always',c:false}], subj: 'Fundamentals' },
+      { q: 'The five rights of medication include: (Select all that apply)', opts: [{t:'Right patient',c:true},{t:'Right drug',c:true},{t:'Right dose',c:true},{t:'Right route',c:true},{t:'Right room',c:false}], subj: 'Fundamentals' },
+      { q: 'Signs of hypoglycemia include: (Select all that apply)', opts: [{t:'Sweating',c:true},{t:'Tremor',c:true},{t:'Confusion',c:true},{t:'Kussmaul respirations',c:false},{t:'Fruity breath',c:false}], subj: 'Med-Surg' },
+      { q: 'DVT prevention includes: (Select all that apply)', opts: [{t:'Early ambulation',c:true},{t:'SCDs',c:true},{t:'Anticoagulants',c:true},{t:'Prolonged bed rest',c:false},{t:'Tight leg wraps',c:false}], subj: 'Med-Surg' },
+      { q: 'Therapeutic communication techniques: (Select all that apply)', opts: [{t:'Open-ended questions',c:true},{t:'Reflection',c:true},{t:'Silence',c:true},{t:'Giving advice',c:false},{t:'Minimizing feelings',c:false}], subj: 'Psych' },
+      { q: 'EPS from antipsychotics include: (Select all that apply)', opts: [{t:'Dystonia',c:true},{t:'Akathisia',c:true},{t:'Parkinsonism',c:true},{t:'Weight gain only',c:false}], subj: 'Psych' },
+      { q: 'ACE inhibitor side effects: (Select all that apply)', opts: [{t:'Dry cough',c:true},{t:'Angioedema',c:true},{t:'Hyperkalemia',c:true},{t:'Hypokalemia',c:false}], subj: 'Pharmacology' },
+      { q: 'Opioid monitoring includes: (Select all that apply)', opts: [{t:'Respiratory rate',c:true},{t:'Constipation',c:true},{t:'Dependence risk',c:true},{t:'Hypertension',c:false}], subj: 'Pharmacology' },
+      { q: 'Documentation should be: (Select all that apply)', opts: [{t:'Accurate',c:true},{t:'Timely',c:true},{t:'Factual',c:true},{t:'Vague',c:false},{t:'Oral only',c:false}], subj: 'Fundamentals' },
+      { q: 'Fall prevention includes: (Select all that apply)', opts: [{t:'Call bell',c:true},{t:'Non-slip footwear',c:true},{t:'Clutter-free environment',c:true},{t:'Restraints only',c:false}], subj: 'Fundamentals' },
+      { q: 'CHF patient teaching: (Select all that apply)', opts: [{t:'Weigh daily',c:true},{t:'Limit sodium',c:true},{t:'Report edema',c:true},{t:'Drink unlimited fluids',c:false}], subj: 'Med-Surg' },
+      { q: 'Signs of respiratory distress: (Select all that apply)', opts: [{t:'Nasal flaring',c:true},{t:'Retractions',c:true},{t:'Cyanosis',c:true},{t:'Bradycardia',c:false}], subj: 'Med-Surg' },
+      { q: 'DKA manifestations: (Select all that apply)', opts: [{t:'Kussmaul respirations',c:true},{t:'Fruity breath',c:true},{t:'Dehydration',c:true},{t:'Hypoglycemia',c:false}], subj: 'Med-Surg' },
+      { q: 'Post-op atelectasis prevention: (Select all that apply)', opts: [{t:'Incentive spirometry',c:true},{t:'Early ambulation',c:true},{t:'Coughing',c:true},{t:'Bed rest only',c:false}], subj: 'Med-Surg' },
+      { q: 'Stroke warning signs: (Select all that apply)', opts: [{t:'Facial drooping',c:true},{t:'Arm weakness',c:true},{t:'Speech difficulty',c:true},{t:'Clear vision',c:false}], subj: 'Med-Surg' },
+      { q: 'MI symptoms: (Select all that apply)', opts: [{t:'Chest pain',c:true},{t:'Dyspnea',c:true},{t:'Diaphoresis',c:true},{t:'Hypertension only',c:false}], subj: 'Med-Surg' },
+      { q: 'Pulmonary embolism signs: (Select all that apply)', opts: [{t:'Sudden dyspnea',c:true},{t:'Pleuritic chest pain',c:true},{t:'Tachycardia',c:true},{t:'Bradycardia',c:false}], subj: 'Med-Surg' },
+      { q: 'Renal failure manifestations: (Select all that apply)', opts: [{t:'Fluid overload',c:true},{t:'Elevated BUN',c:true},{t:'Electrolyte imbalance',c:true},{t:'Polyuria',c:false}], subj: 'Med-Surg' },
+      { q: 'Liver failure signs: (Select all that apply)', opts: [{t:'Jaundice',c:true},{t:'Ascites',c:true},{t:'Encephalopathy',c:true},{t:'Hypotension only',c:false}], subj: 'Med-Surg' },
+      { q: 'Sepsis criteria: (Select all that apply)', opts: [{t:'Fever',c:true},{t:'Tachycardia',c:true},{t:'Altered mental status',c:true},{t:'Bradycardia',c:false}], subj: 'Med-Surg' },
+      { q: 'Pressure ulcer risk factors: (Select all that apply)', opts: [{t:'Immobility',c:true},{t:'Incontinence',c:true},{t:'Poor nutrition',c:true},{t:'Young age',c:false}], subj: 'Fundamentals' },
+      { q: 'Infection control measures: (Select all that apply)', opts: [{t:'Hand hygiene',c:true},{t:'PPE',c:true},{t:'Isolation when needed',c:true},{t:'Reuse gloves',c:false}], subj: 'Fundamentals' },
+      { q: 'Safe medication administration: (Select all that apply)', opts: [{t:'Verify patient ID',c:true},{t:'Check allergies',c:true},{t:'Double-check dose',c:true},{t:'Rush administration',c:false}], subj: 'Fundamentals' },
+      { q: 'Delegation principles: (Select all that apply)', opts: [{t:'Right task',c:true},{t:'Right person',c:true},{t:'Right supervision',c:true},{t:'Delegate assessment',c:false}], subj: 'Fundamentals' },
+      { q: 'Priorities in emergency: (Select all that apply)', opts: [{t:'Airway',c:true},{t:'Breathing',c:true},{t:'Circulation',c:true},{t:'Documentation first',c:false}], subj: 'Fundamentals' },
+      { q: 'Patient rights include: (Select all that apply)', opts: [{t:'Informed consent',c:true},{t:'Privacy',c:true},{t:'Refuse treatment',c:true},{t:'Demand specific meds',c:false}], subj: 'Fundamentals' },
+      { q: 'Fall prevention strategies: (Select all that apply)', opts: [{t:'Call light within reach',c:true},{t:'Non-slip footwear',c:true},{t:'Low bed',c:true},{t:'Restraints first',c:false}], subj: 'Fundamentals' },
+      { q: 'Discharge teaching includes: (Select all that apply)', opts: [{t:'Medications',c:true},{t:'Warning signs',c:true},{t:'Follow-up care',c:true},{t:'Hospital gossip',c:false}], subj: 'Fundamentals' },
+      { q: 'SBAR components: (Select all that apply)', opts: [{t:'Situation',c:true},{t:'Background',c:true},{t:'Assessment',c:true},{t:'Opinion',c:false}], subj: 'Fundamentals' },
+      { q: 'Schizophrenia positive symptoms: (Select all that apply)', opts: [{t:'Hallucinations',c:true},{t:'Delusions',c:true},{t:'Disorganized speech',c:true},{t:'Flat affect',c:false}], subj: 'Psych' },
+      { q: 'Mania manifestations: (Select all that apply)', opts: [{t:'Grandiosity',c:true},{t:'Decreased sleep',c:true},{t:'Racing thoughts',c:true},{t:'Lethargy',c:false}], subj: 'Psych' },
+      { q: 'Depression symptoms: (Select all that apply)', opts: [{t:'Anhedonia',c:true},{t:'Sleep changes',c:true},{t:'Fatigue',c:true},{t:'Hypermotivation',c:false}], subj: 'Psych' },
+      { q: 'Anxiety interventions: (Select all that apply)', opts: [{t:'Calm presence',c:true},{t:'Deep breathing',c:true},{t:'Grounding',c:true},{t:'Avoid patient',c:false}], subj: 'Psych' },
+      { q: 'Suicide risk factors: (Select all that apply)', opts: [{t:'Previous attempt',c:true},{t:'Hopelessness',c:true},{t:'Plan',c:true},{t:'Good support only',c:false}], subj: 'Psych' },
+      { q: 'Benzodiazepine concerns: (Select all that apply)', opts: [{t:'Dependence',c:true},{t:'Withdrawal',c:true},{t:'Sedation',c:true},{t:'Hypertension',c:false}], subj: 'Psych' },
+      { q: 'Lithium teaching: (Select all that apply)', opts: [{t:'Maintain fluid intake',c:true},{t:'Avoid dehydration',c:true},{t:'Therapeutic levels',c:true},{t:'No monitoring needed',c:false}], subj: 'Psych' },
+      { q: 'SSRI discontinuation: (Select all that apply)', opts: [{t:'Taper gradually',c:true},{t:'Don\'t stop abruptly',c:true},{t:'Monitor for relapse',c:true},{t:'Stop cold turkey',c:false}], subj: 'Psych' },
+      { q: 'Antipsychotic side effects: (Select all that apply)', opts: [{t:'Weight gain',c:true},{t:'EPS',c:true},{t:'Metabolic syndrome',c:true},{t:'Hypertension only',c:false}], subj: 'Psych' },
+      { q: 'ACE inhibitor monitoring: (Select all that apply)', opts: [{t:'Potassium',c:true},{t:'Creatinine',c:true},{t:'Blood pressure',c:true},{t:'Glucose only',c:false}], subj: 'Pharmacology' },
+      { q: 'Warfarin interactions: (Select all that apply)', opts: [{t:'Vitamin K foods',c:true},{t:'NSAIDs',c:true},{t:'Many antibiotics',c:true},{t:'No interactions',c:false}], subj: 'Pharmacology' },
+      { q: 'Insulin administration: (Select all that apply)', opts: [{t:'Rotate injection sites',c:true},{t:'Check expiration',c:true},{t:'Store properly',c:true},{t:'Give IV push',c:false}], subj: 'Pharmacology' },
+      { q: 'Opioid nursing care: (Select all that apply)', opts: [{t:'Monitor respirations',c:true},{t:'Assess pain',c:true},{t:'Prevent constipation',c:true},{t:'Give with alcohol',c:false}], subj: 'Pharmacology' },
+      { q: 'Digoxin teaching: (Select all that apply)', opts: [{t:'Take pulse',c:true},{t:'Report vision changes',c:true},{t:'Don\'t skip doses',c:true},{t:'Double if missed',c:false}], subj: 'Pharmacology' },
+      { q: 'Metformin precautions: (Select all that apply)', opts: [{t:'Hold for contrast',c:true},{t:'Risk of lactic acidosis',c:true},{t:'Take with food',c:true},{t:'No precautions',c:false}], subj: 'Pharmacology' },
+      { q: 'Vancomycin monitoring: (Select all that apply)', opts: [{t:'Trough levels',c:true},{t:'Infusion rate',c:true},{t:'Renal function',c:true},{t:'Peak only',c:false}], subj: 'Pharmacology' },
+      { q: 'Beta-blocker precautions: (Select all that apply)', opts: [{t:'Avoid in asthma',c:true},{t:'Taper when stopping',c:true},{t:'Monitor heart rate',c:true},{t:'Give in bronchospasm',c:false}], subj: 'Pharmacology' },
+      { q: 'Diuretic teaching: (Select all that apply)', opts: [{t:'Take in morning',c:true},{t:'Report weakness',c:true},{t:'Potassium-rich foods',c:true},{t:'Limit fluids always',c:false}], subj: 'Pharmacology' },
+      { q: 'Corticosteroid teaching: (Select all that apply)', opts: [{t:'Don\'t stop abruptly',c:true},{t:'Take with food',c:true},{t:'Infection risk',c:true},{t:'Increase dose if sick',c:false}], subj: 'Pharmacology' },
+      { q: 'Antibiotic stewardship: (Select all that apply)', opts: [{t:'Complete full course',c:true},{t:'Use narrow spectrum when possible',c:true},{t:'Culture before treat',c:true},{t:'Use for viruses',c:false}], subj: 'Pharmacology' },
+      { q: 'Heparin monitoring: (Select all that apply)', opts: [{t:'aPTT',c:true},{t:'Platelets',c:true},{t:'Signs of bleeding',c:true},{t:'INR',c:false}], subj: 'Pharmacology' },
+      { q: 'Hypoglycemia treatment: (Select all that apply)', opts: [{t:'15-20g glucose',c:true},{t:'Recheck in 15 min',c:true},{t:'Complex carb after',c:true},{t:'Give insulin',c:false}], subj: 'Med-Surg' },
+      { q: 'Hyperkalemia treatment: (Select all that apply)', opts: [{t:'Kayexalate',c:true},{t:'Calcium gluconate',c:true},{t:'Insulin and dextrose',c:true},{t:'Potassium supplement',c:false}], subj: 'Med-Surg' },
+      { q: 'CHF exacerbation signs: (Select all that apply)', opts: [{t:'Weight gain',c:true},{t:'Edema',c:true},{t:'Dyspnea',c:true},{t:'Polyuria',c:false}], subj: 'Med-Surg' },
+      { q: 'Chest tube care: (Select all that apply)', opts: [{t:'Keep below chest',c:true},{t:'Check for bubbling',c:true},{t:'Strap connections',c:true},{t:'Clamp for transport',c:false}], subj: 'Med-Surg' },
+      { q: 'NG tube care: (Select all that apply)', opts: [{t:'Verify placement',c:true},{t:'Elevate head',c:true},{t:'Oral care',c:true},{t:'Flush with air',c:false}], subj: 'Med-Surg' },
+      { q: 'Pre-op teaching: (Select all that apply)', opts: [{t:'NPO instructions',c:true},{t:'Deep breathing',c:true},{t:'Early ambulation',c:true},{t:'Eat before surgery',c:false}], subj: 'Med-Surg' },
+      { q: 'Delirium interventions: (Select all that apply)', opts: [{t:'Orient frequently',c:true},{t:'Familiar objects',c:true},{t:'Adequate lighting',c:true},{t:'Restraints first',c:false}], subj: 'Psych' },
+      { q: 'BPD interventions: (Select all that apply)', opts: [{t:'Set limits',c:true},{t:'Validate feelings',c:true},{t:'Consistent staff',c:true},{t:'Confront splitting',c:false}], subj: 'Psych' },
+      { q: 'PTSD symptoms: (Select all that apply)', opts: [{t:'Flashbacks',c:true},{t:'Avoidance',c:true},{t:'Hyperarousal',c:true},{t:'No memory of event',c:false}], subj: 'Psych' },
+      { q: 'Non-therapeutic techniques: (Select all that apply)', opts: [{t:'Giving advice',c:true},{t:'False reassurance',c:true},{t:'Changing subject',c:true},{t:'Active listening',c:false}], subj: 'Psych' },
+      { q: 'Restraint alternatives: (Select all that apply)', opts: [{t:'Diversional activities',c:true},{t:'Frequent rounding',c:true},{t:'Family presence',c:true},{t:'Medicate without consent',c:false}], subj: 'Fundamentals' },
+      { q: 'Documentation principles: (Select all that apply)', opts: [{t:'Factual',c:true},{t:'Timely',c:true},{t:'Legible',c:true},{t:'Include opinions',c:false}], subj: 'Fundamentals' },
+      { q: 'Blood transfusion reaction signs: (Select all that apply)', opts: [{t:'Fever',c:true},{t:'Chills',c:true},{t:'Back pain',c:true},{t:'Improved energy',c:false}], subj: 'Med-Surg' },
+      { q: 'Contrast reaction prevention: (Select all that apply)', opts: [{t:'Assess allergies',c:true},{t:'Hydration',c:true},{t:'Hold metformin',c:true},{t:'No precautions',c:false}], subj: 'Pharmacology' },
+      { q: 'Anaphylaxis treatment: (Select all that apply)', opts: [{t:'Epinephrine',c:true},{t:'Maintain airway',c:true},{t:'IV fluids',c:true},{t:'Antibiotic first',c:false}], subj: 'Pharmacology' },
+      { q: 'Isolation precaution types: (Select all that apply)', opts: [{t:'Contact',c:true},{t:'Droplet',c:true},{t:'Airborne',c:true},{t:'Social',c:false}], subj: 'Fundamentals' },
+      { q: 'Vital sign components: (Select all that apply)', opts: [{t:'Temperature',c:true},{t:'Pulse',c:true},{t:'Blood pressure',c:true},{t:'Weight',c:false}], subj: 'Fundamentals' },
+      { q: 'IV site assessment: (Select all that apply)', opts: [{t:'Redness',c:true},{t:'Swelling',c:true},{t:'Pain',c:true},{t:'Patient preference',c:false}], subj: 'Fundamentals' },
+      { q: 'Pain assessment: (Select all that apply)', opts: [{t:'Location',c:true},{t:'Intensity',c:true},{t:'Quality',c:true},{t:'Doctor\'s opinion',c:false}], subj: 'Fundamentals' },
+      { q: 'Code blue response: (Select all that apply)', opts: [{t:'Start CPR',c:true},{t:'Call for help',c:true},{t:'Get defibrillator',c:true},{t:'Wait for doctor',c:false}], subj: 'Fundamentals' },
+      { q: 'Pressure ulcer stages: (Select all that apply)', opts: [{t:'Stage 1',c:true},{t:'Stage 2',c:true},{t:'Stage 3',c:true},{t:'Stage 10',c:false}], subj: 'Fundamentals' },
+      { q: 'Tube feeding complications: (Select all that apply)', opts: [{t:'Aspiration',c:true},{t:'Diarrhea',c:true},{t:'Tube dislodgement',c:true},{t:'Improved taste',c:false}], subj: 'Med-Surg' },
+      { q: 'Ostomy care: (Select all that apply)', opts: [{t:'Skin protection',c:true},{t:'Monitor output',c:true},{t:'Pouch emptying',c:true},{t:'Ignore output',c:false}], subj: 'Med-Surg' },
+      { q: 'Dialysis patient care: (Select all that apply)', opts: [{t:'Fluid restrictions',c:true},{t:'Diet modifications',c:true},{t:'Access site care',c:true},{t:'Unlimited potassium',c:false}], subj: 'Med-Surg' },
+      { q: 'Asthma triggers: (Select all that apply)', opts: [{t:'Pollen',c:true},{t:'Exercise',c:true},{t:'Cold air',c:true},{t:'Rest',c:false}], subj: 'Med-Surg' },
+      { q: 'GI bleed signs: (Select all that apply)', opts: [{t:'Hematemesis',c:true},{t:'Melena',c:true},{t:'Hypotension',c:true},{t:'Polyuria',c:false}], subj: 'Med-Surg' },
+      { q: 'Pancreatitis management: (Select all that apply)', opts: [{t:'NPO',c:true},{t:'IV fluids',c:true},{t:'Pain control',c:true},{t:'High fat diet',c:false}], subj: 'Med-Surg' },
+      { q: 'Shock manifestations: (Select all that apply)', opts: [{t:'Tachycardia',c:true},{t:'Hypotension',c:true},{t:'Cool clammy skin',c:true},{t:'Bounding pulse',c:false}], subj: 'Med-Surg' },
+      { q: 'Alcohol withdrawal symptoms: (Select all that apply)', opts: [{t:'Tremors',c:true},{t:'Hallucinations',c:true},{t:'Seizures',c:true},{t:'Hypertension only',c:false}], subj: 'Psych' },
+      { q: 'Eating disorder signs: (Select all that apply)', opts: [{t:'Weight changes',c:true},{t:'Binge-purge',c:true},{t:'Body image distortion',c:true},{t:'Normal eating only',c:false}], subj: 'Psych' },
+      { q: 'Crisis intervention: (Select all that apply)', opts: [{t:'Assess safety',c:true},{t:'Listen',c:true},{t:'Identify support',c:true},{t:'Minimize feelings',c:false}], subj: 'Psych' },
+      { q: 'Milieu therapy elements: (Select all that apply)', opts: [{t:'Safe environment',c:true},{t:'Structure',c:true},{t:'Therapeutic activities',c:true},{t:'Isolation',c:false}], subj: 'Psych' },
+      { q: 'Antidepressant types: (Select all that apply)', opts: [{t:'SSRI',c:true},{t:'SNRI',c:true},{t:'MAOI',c:true},{t:'Opioid',c:false}], subj: 'Pharmacology' },
+      { q: 'Drug absorption factors: (Select all that apply)', opts: [{t:'Route',c:true},{t:'Food',c:true},{t:'Blood flow',c:true},{t:'Patient mood',c:false}], subj: 'Pharmacology' },
+      { q: 'Renal drug considerations: (Select all that apply)', opts: [{t:'Dose adjustment',c:true},{t:'Nephrotoxic drugs',c:true},{t:'Creatinine clearance',c:true},{t:'Ignore kidney function',c:false}], subj: 'Pharmacology' },
+      { q: 'Antihypertensive classes: (Select all that apply)', opts: [{t:'ACE inhibitors',c:true},{t:'Beta-blockers',c:true},{t:'Calcium channel blockers',c:true},{t:'Opioids',c:false}], subj: 'Pharmacology' },
+      { q: 'Chemotherapy precautions: (Select all that apply)', opts: [{t:'Personal protective equipment',c:true},{t:'Safe handling',c:true},{t:'Spill protocol',c:true},{t:'No precautions',c:false}], subj: 'Pharmacology' },
+      { q: 'Anticoagulant patient teaching: (Select all that apply)', opts: [{t:'Signs of bleeding',c:true},{t:'Avoid trauma',c:true},{t:'Medication compliance',c:true},{t:'Double dose if missed',c:false}], subj: 'Pharmacology' },
+      { q: 'Elderly drug considerations: (Select all that apply)', opts: [{t:'Reduced metabolism',c:true},{t:'Polypharmacy risk',c:true},{t:'Start low go slow',c:true},{t:'Higher doses always',c:false}], subj: 'Pharmacology' },
+      { q: 'Pediatric drug considerations: (Select all that apply)', opts: [{t:'Weight-based dosing',c:true},{t:'Liquid formulations',c:true},{t:'Taste preference',c:true},{t:'Adult doses',c:false}], subj: 'Pharmacology' },
+      { q: 'Contrast dye reactions: (Select all that apply)', opts: [{t:'Hives',c:true},{t:'Anaphylaxis',c:true},{t:'Nephrotoxicity',c:true},{t:'Improved vision',c:false}], subj: 'Pharmacology' },
+      { q: 'CPR steps: (Select all that apply)', opts: [{t:'Compressions',c:true},{t:'Airway',c:true},{t:'Breathing',c:true},{t:'Documentation first',c:false}], subj: 'Fundamentals' },
+      { q: 'Foley catheter care: (Select all that apply)', opts: [{t:'Keep bag below bladder',c:true},{t:'Perineal care',c:true},{t:'Monitor output',c:true},{t:'Tug to ensure placement',c:false}], subj: 'Med-Surg' },
+      { q: 'Seizure precautions: (Select all that apply)', opts: [{t:'Padded side rails',c:true},{t:'Suction at bedside',c:true},{t:'Oxygen available',c:true},{t:'Restrain during seizure',c:false}], subj: 'Med-Surg' },
+      { q: 'Bipolar disorder treatment: (Select all that apply)', opts: [{t:'Mood stabilizers',c:true},{t:'Lithium',c:true},{t:'Therapy',c:true},{t:'Stimulants only',c:false}], subj: 'Psych' },
+      { q: 'Insulin injection sites: (Select all that apply)', opts: [{t:'Abdomen',c:true},{t:'Thigh',c:true},{t:'Upper arm',c:true},{t:'Same spot always',c:false}], subj: 'Pharmacology' },
+      { q: 'Medication reconciliation includes: (Select all that apply)', opts: [{t:'Current medications',c:true},{t:'Allergies',c:true},{t:'Dose and frequency',c:true},{t:'Cost only',c:false}], subj: 'Fundamentals' },
+      { q: 'Oxygen safety: (Select all that apply)', opts: [{t:'No smoking',c:true},{t:'Keep away from flames',c:true},{t:'Secure tubing',c:true},{t:'Use petroleum-based products',c:false}], subj: 'Fundamentals' },
+      { q: 'Post-op complications: (Select all that apply)', opts: [{t:'Infection',c:true},{t:'Bleeding',c:true},{t:'DVT',c:true},{t:'Improved appetite only',c:false}], subj: 'Med-Surg' },
+      { q: 'Naloxone administration: (Select all that apply)', opts: [{t:'Repeat if needed',c:true},{t:'Monitor respirations',c:true},{t:'IV or IM',c:true},{t:'Give slowly over 10 min',c:false}], subj: 'Pharmacology' },
+      { q: 'Transmission-based precautions: (Select all that apply)', opts: [{t:'Contact',c:true},{t:'Droplet',c:true},{t:'Airborne',c:true},{t:'Social',c:false}], subj: 'Fundamentals' },
+      { q: 'Hand hygiene indications: (Select all that apply)', opts: [{t:'Before patient contact',c:true},{t:'After body fluid exposure',c:true},{t:'After removing gloves',c:true},{t:'Only at shift start',c:false}], subj: 'Fundamentals' },
+      { q: 'Restraint documentation: (Select all that apply)', opts: [{t:'Behavior justifying use',c:true},{t:'Alternatives tried',c:true},{t:'Skin checks',c:true},{t:'Family approval only',c:false}], subj: 'Fundamentals' },
+      { q: 'Ethical principles in nursing: (Select all that apply)', opts: [{t:'Autonomy',c:true},{t:'Beneficence',c:true},{t:'Nonmaleficence',c:true},{t:'Convenience',c:false}], subj: 'Fundamentals' },
+      { q: 'Informed consent requirements: (Select all that apply)', opts: [{t:'Capacity to understand',c:true},{t:'Explanation of procedure',c:true},{t:'Risks and benefits',c:true},{t:'Family signature only',c:false}], subj: 'Fundamentals' },
+      { q: 'Nursing process steps: (Select all that apply)', opts: [{t:'Assessment',c:true},{t:'Diagnosis',c:true},{t:'Planning',c:true},{t:'Guessing',c:false}], subj: 'Fundamentals' },
+      { q: 'Patient teaching domains: (Select all that apply)', opts: [{t:'Cognitive',c:true},{t:'Affective',c:true},{t:'Psychomotor',c:true},{t:'Financial only',c:false}], subj: 'Fundamentals' },
+      { q: 'Shift report elements: (Select all that apply)', opts: [{t:'Current status',c:true},{t:'Changes overnight',c:true},{t:'Pending tasks',c:true},{t:'Gossip',c:false}], subj: 'Fundamentals' },
+      { q: 'Surgical site infection prevention: (Select all that apply)', opts: [{t:'Pre-op bathing',c:true},{t:'Prophylactic antibiotics',c:true},{t:'Aseptic technique',c:true},{t:'Skip handwashing',c:false}], subj: 'Fundamentals' },
+      { q: 'Central line bundle elements: (Select all that apply)', opts: [{t:'Hand hygiene',c:true},{t:'Maximal barrier',c:true},{t:'Chlorhexidine prep',c:true},{t:'Minimal gloves',c:false}], subj: 'Fundamentals' },
+      { q: 'Fall risk assessment tools: (Select all that apply)', opts: [{t:'Morse Scale',c:true},{t:'Hendrich II',c:true},{t:'STRATIFY',c:true},{t:'No tool needed',c:false}], subj: 'Fundamentals' },
+      { q: 'Pain assessment components: (Select all that apply)', opts: [{t:'Location',c:true},{t:'Quality',c:true},{t:'Onset and duration',c:true},{t:'Family guess',c:false}], subj: 'Fundamentals' },
+      { q: 'IV infiltration signs: (Select all that apply)', opts: [{t:'Swelling',c:true},{t:'Coolness',c:true},{t:'Pain',c:true},{t:'Improved flow',c:false}], subj: 'Fundamentals' },
+      { q: 'Blood transfusion checks: (Select all that apply)', opts: [{t:'Two identifiers',c:true},{t:'Blood type match',c:true},{t:'Expiration',c:true},{t:'Nurse preference',c:false}], subj: 'Fundamentals' },
+      { q: 'Pre-op checklist: (Select all that apply)', opts: [{t:'Consent signed',c:true},{t:'NPO status',c:true},{t:'Allergies noted',c:true},{t:'Lunch order',c:false}], subj: 'Fundamentals' },
+      { q: 'Post-op nursing priorities: (Select all that apply)', opts: [{t:'Airway',c:true},{t:'Vital signs',c:true},{t:'Pain management',c:true},{t:'Discharge papers',c:false}], subj: 'Med-Surg' },
+      { q: 'Heart failure classifications: (Select all that apply)', opts: [{t:'NYHA Class I-IV',c:true},{t:'Systolic vs diastolic',c:true},{t:'Left vs right sided',c:true},{t:'Color coded',c:false}], subj: 'Med-Surg' },
+      { q: 'Acute coronary syndrome symptoms: (Select all that apply)', opts: [{t:'Chest pressure',c:true},{t:'Shortness of breath',c:true},{t:'Nausea',c:true},{t:'Rash',c:false}], subj: 'Med-Surg' },
+      { q: 'Hypertension complications: (Select all that apply)', opts: [{t:'Stroke',c:true},{t:'CHF',c:true},{t:'Renal failure',c:true},{t:'Improved vision',c:false}], subj: 'Med-Surg' },
+      { q: 'Diabetes long-term complications: (Select all that apply)', opts: [{t:'Retinopathy',c:true},{t:'Nephropathy',c:true},{t:'Neuropathy',c:true},{t:'Improved immunity',c:false}], subj: 'Med-Surg' },
+      { q: 'Chronic kidney disease stages: (Select all that apply)', opts: [{t:'Based on GFR',c:true},{t:'Stage 1-5',c:true},{t:'Progressive',c:true},{t:'Always reversible',c:false}], subj: 'Med-Surg' },
+      { q: 'COPD management: (Select all that apply)', opts: [{t:'Smoking cessation',c:true},{t:'Pulmonary rehab',c:true},{t:'Bronchodilators',c:true},{t:'High-flow oxygen',c:false}], subj: 'Med-Surg' },
+      { q: 'Asthma action plan includes: (Select all that apply)', opts: [{t:'Green zone',c:true},{t:'Yellow zone',c:true},{t:'Red zone',c:true},{t:'Purple zone',c:false}], subj: 'Med-Surg' },
+      { q: 'Pneumonia risk factors: (Select all that apply)', opts: [{t:'Smoking',c:true},{t:'Age',c:true},{t:'Immunocompromised',c:true},{t:'Exercise',c:false}], subj: 'Med-Surg' },
+      { q: 'Peptic ulcer causes: (Select all that apply)', opts: [{t:'H. pylori',c:true},{t:'NSAIDs',c:true},{t:'Stress',c:true},{t:'Vitamin C',c:false}], subj: 'Med-Surg' },
+      { q: 'Inflammatory bowel disease types: (Select all that apply)', opts: [{t:'Crohn\'s',c:true},{t:'Ulcerative colitis',c:true},{t:'Diverticulitis',c:true},{t:'GERD',c:false}], subj: 'Med-Surg' },
+      { q: 'Hepatitis transmission: (Select all that apply)', opts: [{t:'Blood',c:true},{t:'Body fluids',c:true},{t:'Contaminated food',c:true},{t:'Airborne',c:false}], subj: 'Med-Surg' },
+      { q: 'Cirrhosis complications: (Select all that apply)', opts: [{t:'Ascites',c:true},{t:'Esophageal varices',c:true},{t:'Hepatic encephalopathy',c:true},{t:'Polyuria',c:false}], subj: 'Med-Surg' },
+      { q: 'Acute pancreatitis causes: (Select all that apply)', opts: [{t:'Gallstones',c:true},{t:'Alcohol',c:true},{t:'Hypertriglyceridemia',c:true},{t:'Exercise',c:false}], subj: 'Med-Surg' },
+      { q: 'Bowel obstruction signs: (Select all that apply)', opts: [{t:'Abdominal distension',c:true},{t:'Hyperactive then absent bowel sounds',c:true},{t:'Nausea',c:true},{t:'Diarrhea only',c:false}], subj: 'Med-Surg' },
+      { q: 'Appendicitis signs: (Select all that apply)', opts: [{t:'RLQ pain',c:true},{t:'McBurney\'s point tenderness',c:true},{t:'Rebound tenderness',c:true},{t:'LLQ pain',c:false}], subj: 'Med-Surg' },
+      { q: 'Cholecystitis manifestations: (Select all that apply)', opts: [{t:'RUQ pain',c:true},{t:'Murphy\'s sign',c:true},{t:'Fat intolerance',c:true},{t:'Polyuria',c:false}], subj: 'Med-Surg' },
+      { q: 'Peripheral vascular disease signs: (Select all that apply)', opts: [{t:'Claudication',c:true},{t:'Cool extremities',c:true},{t:'Decreased pulses',c:true},{t:'Bounding pulses',c:false}], subj: 'Med-Surg' },
+      { q: 'Deep vein thrombosis symptoms: (Select all that apply)', opts: [{t:'Calf pain',c:true},{t:'Swelling',c:true},{t:'Warmth',c:true},{t:'Bilateral equally',c:false}], subj: 'Med-Surg' },
+      { q: 'Rhabdomyolysis causes: (Select all that apply)', opts: [{t:'Crush injury',c:true},{t:'Statin use',c:true},{t:'Exertion',c:true},{t:'Rest',c:false}], subj: 'Med-Surg' },
+      { q: 'Acute respiratory failure causes: (Select all that apply)', opts: [{t:'Pneumonia',c:true},{t:'COPD exacerbation',c:true},{t:'ARDS',c:true},{t:'Dehydration only',c:false}], subj: 'Med-Surg' },
+      { q: 'ARDS characteristics: (Select all that apply)', opts: [{t:'Refractory hypoxemia',c:true},{t:'Bilateral infiltrates',c:true},{t:'Noncardiogenic edema',c:true},{t:'Easy to treat',c:false}], subj: 'Med-Surg' },
+      { q: 'Anemia causes: (Select all that apply)', opts: [{t:'Iron deficiency',c:true},{t:'B12 deficiency',c:true},{t:'Chronic disease',c:true},{t:'Hypervolemia',c:false}], subj: 'Med-Surg' },
+      { q: 'Schizophrenia negative symptoms: (Select all that apply)', opts: [{t:'Flat affect',c:true},{t:'Avolition',c:true},{t:'Alogia',c:true},{t:'Hallucinations',c:false}], subj: 'Psych' },
+      { q: 'Major depressive disorder criteria: (Select all that apply)', opts: [{t:'Depressed mood',c:true},{t:'Anhedonia',c:true},{t:'Duration 2+ weeks',c:true},{t:'One day only',c:false}], subj: 'Psych' },
+      { q: 'Generalized anxiety disorder features: (Select all that apply)', opts: [{t:'Excessive worry',c:true},{t:'Restlessness',c:true},{t:'Duration 6+ months',c:true},{t:'Single episode',c:false}], subj: 'Psych' },
+      { q: 'Panic disorder features: (Select all that apply)', opts: [{t:'Recurrent panic attacks',c:true},{t:'Worry about future attacks',c:true},{t:'Avoidance behavior',c:true},{t:'No physical symptoms',c:false}], subj: 'Psych' },
+      { q: 'OCD components: (Select all that apply)', opts: [{t:'Obsessions',c:true},{t:'Compulsions',c:true},{t:'Time-consuming',c:true},{t:'Pleasurable',c:false}], subj: 'Psych' },
+      { q: 'PTSD criteria: (Select all that apply)', opts: [{t:'Exposure to trauma',c:true},{t:'Intrusive symptoms',c:true},{t:'Avoidance',c:true},{t:'Duration 1 day',c:false}], subj: 'Psych' },
+      { q: 'Personality disorder clusters: (Select all that apply)', opts: [{t:'Cluster A',c:true},{t:'Cluster B',c:true},{t:'Cluster C',c:true},{t:'Cluster D',c:false}], subj: 'Psych' },
+      { q: 'Substance withdrawal nursing care: (Select all that apply)', opts: [{t:'CIWA protocol for alcohol',c:true},{t:'Seizure precautions',c:true},{t:'Vital signs',c:true},{t:'Encourage use',c:false}], subj: 'Psych' },
+      { q: 'Antipsychotic monitoring: (Select all that apply)', opts: [{t:'Weight',c:true},{t:'Blood glucose',c:true},{t:'EPS',c:true},{t:'Hair growth',c:false}], subj: 'Psych' },
+      { q: 'Lithium toxicity signs: (Select all that apply)', opts: [{t:'Coarse tremor',c:true},{t:'Confusion',c:true},{t:'Ataxia',c:true},{t:'Hypertension',c:false}], subj: 'Psych' },
+      { q: 'SSRI discontinuation syndrome: (Select all that apply)', opts: [{t:'Dizziness',c:true},{t:'Electric shock sensations',c:true},{t:'Flu-like symptoms',c:true},{t:'Improved mood',c:false}], subj: 'Psych' },
+      { q: 'Serotonin syndrome signs: (Select all that apply)', opts: [{t:'Agitation',c:true},{t:'Hyperthermia',c:true},{t:'Muscle rigidity',c:true},{t:'Hypothermia',c:false}], subj: 'Psych' },
+      { q: 'Neuroleptic malignant syndrome: (Select all that apply)', opts: [{t:'Muscle rigidity',c:true},{t:'Fever',c:true},{t:'Altered consciousness',c:true},{t:'Hypotension',c:false}], subj: 'Psych' },
+      { q: 'De-escalation techniques: (Select all that apply)', opts: [{t:'Calm tone',c:true},{t:'Personal space',c:true},{t:'Listen',c:true},{t:'Confront aggressively',c:false}], subj: 'Psych' },
+      { q: 'Self-harm assessment: (Select all that apply)', opts: [{t:'Intent',c:true},{t:'Plan',c:true},{t:'Means',c:true},{t:'Ignore it',c:false}], subj: 'Psych' },
+      { q: 'Antibiotic classes: (Select all that apply)', opts: [{t:'Penicillins',c:true},{t:'Cephalosporins',c:true},{t:'Fluoroquinolones',c:true},{t:'Antivirals for bacteria',c:false}], subj: 'Pharmacology' },
+      { q: 'Penicillin allergy cross-reactivity: (Select all that apply)', opts: [{t:'Cephalosporins',c:true},{t:'Carbapenems',c:true},{t:'Assess severity',c:true},{t:'Always safe',c:false}], subj: 'Pharmacology' },
+      { q: 'Aminoglycoside monitoring: (Select all that apply)', opts: [{t:'Peak and trough',c:true},{t:'Renal function',c:true},{t:'Hearing',c:true},{t:'Vision only',c:false}], subj: 'Pharmacology' },
+      { q: 'Fluoroquinolone precautions: (Select all that apply)', opts: [{t:'Tendon rupture risk',c:true},{t:'QT prolongation',c:true},{t:'Photosensitivity',c:true},{t:'No precautions',c:false}], subj: 'Pharmacology' },
+      { q: 'Metronidazole interactions: (Select all that apply)', opts: [{t:'Avoid alcohol',c:true},{t:'Disulfiram reaction',c:true},{t:'Warfarin',c:true},{t:'No interactions',c:false}], subj: 'Pharmacology' },
+      { q: 'Antifungal monitoring: (Select all that apply)', opts: [{t:'Liver function',c:true},{t:'Drug interactions',c:true},{t:'QT prolongation',c:true},{t:'No monitoring',c:false}], subj: 'Pharmacology' },
+      { q: 'Antiviral considerations: (Select all that apply)', opts: [{t:'Renal dosing',c:true},{t:'Drug interactions',c:true},{t:'Timing of doses',c:true},{t:'Cure all viruses',c:false}], subj: 'Pharmacology' },
+      { q: 'Corticosteroid tapering: (Select all that apply)', opts: [{t:'Gradual reduction',c:true},{t:'Prevent adrenal insufficiency',c:true},{t:'Monitor for relapse',c:true},{t:'Stop abruptly',c:false}], subj: 'Pharmacology' },
+      { q: 'Antiplatelet agents: (Select all that apply)', opts: [{t:'Aspirin',c:true},{t:'Clopidogrel',c:true},{t:'Ticagrelor',c:true},{t:'Warfarin',c:false}], subj: 'Pharmacology' },
+      { q: 'Direct oral anticoagulants: (Select all that apply)', opts: [{t:'Rivaroxaban',c:true},{t:'Apixaban',c:true},{t:'Dabigatran',c:true},{t:'Heparin',c:false}], subj: 'Pharmacology' },
+      { q: 'Heparin-induced thrombocytopenia: (Select all that apply)', opts: [{t:'Monitor platelet count',c:true},{t:'Stop heparin',c:true},{t:'Alternative anticoagulant',c:true},{t:'Continue heparin',c:false}], subj: 'Pharmacology' },
+      { q: 'Nitroglycerin teaching: (Select all that apply)', opts: [{t:'Sit when taking',c:true},{t:'Store properly',c:true},{t:'Replace regularly',c:true},{t:'Take with Viagra',c:false}], subj: 'Pharmacology' },
+      { q: 'Calcium channel blocker types: (Select all that apply)', opts: [{t:'Dihydropyridines',c:true},{t:'Non-dihydropyridines',c:true},{t:'Different effects',c:true},{t:'All identical',c:false}], subj: 'Pharmacology' },
+      { q: 'Potassium-sparing diuretics: (Select all that apply)', opts: [{t:'Spironolactone',c:true},{t:'Amiloride',c:true},{t:'Risk of hyperkalemia',c:true},{t:'Cause hypokalemia',c:false}], subj: 'Pharmacology' },
+      { q: 'Thiazide diuretic considerations: (Select all that apply)', opts: [{t:'Hypokalemia risk',c:true},{t:'Hyperglycemia',c:true},{t:'Photosensitivity',c:true},{t:'Hyperkalemia',c:false}], subj: 'Pharmacology' },
+      { q: 'Proton pump inhibitor timing: (Select all that apply)', opts: [{t:'Before breakfast',c:true},{t:'On empty stomach',c:true},{t:'30 min before meal',c:true},{t:'With all meals',c:false}], subj: 'Pharmacology' },
+      { q: 'H2 blocker uses: (Select all that apply)', opts: [{t:'GERD',c:true},{t:'Ulcers',c:true},{t:'Stress ulcer prophylaxis',c:true},{t:'Hypertension',c:false}], subj: 'Pharmacology' },
+      { q: 'Antiemetic classes: (Select all that apply)', opts: [{t:'5-HT3 antagonists',c:true},{t:'Dopamine antagonists',c:true},{t:'Anticholinergics',c:true},{t:'Opioids',c:false}], subj: 'Pharmacology' },
+      { q: 'Laxative types: (Select all that apply)', opts: [{t:'Bulk-forming',c:true},{t:'Stimulant',c:true},{t:'Osmotic',c:true},{t:'Antidiarrheal',c:false}], subj: 'Pharmacology' },
+      { q: 'Insulin types by onset: (Select all that apply)', opts: [{t:'Rapid-acting',c:true},{t:'Short-acting',c:true},{t:'Long-acting',c:true},{t:'Medium only',c:false}], subj: 'Pharmacology' },
+      { q: 'Sulfonylurea risks: (Select all that apply)', opts: [{t:'Hypoglycemia',c:true},{t:'Weight gain',c:true},{t:'Cardiac caution',c:true},{t:'Hyperglycemia only',c:false}], subj: 'Pharmacology' },
+      { q: 'GLP-1 agonist benefits: (Select all that apply)', opts: [{t:'Weight loss',c:true},{t:'Cardiovascular protection',c:true},{t:'Once weekly options',c:true},{t:'Weight gain',c:false}], subj: 'Pharmacology' },
+      { q: 'SGLT2 inhibitor effects: (Select all that apply)', opts: [{t:'Glucosuria',c:true},{t:'Cardiorenal benefits',c:true},{t:'UTI risk',c:true},{t:'Retention',c:false}], subj: 'Pharmacology' },
+      { q: 'Bisphosphonate administration: (Select all that apply)', opts: [{t:'Upright 30 min',c:true},{t:'With water',c:true},{t:'Empty stomach',c:true},{t:'With food',c:false}], subj: 'Pharmacology' },
+      { q: 'Levothyroxine administration: (Select all that apply)', opts: [{t:'Empty stomach',c:true},{t:'Same time daily',c:true},{t:'Avoid calcium',c:true},{t:'With meals',c:false}], subj: 'Pharmacology' },
+      { q: 'Immunosuppressant monitoring: (Select all that apply)', opts: [{t:'Drug levels',c:true},{t:'Infection signs',c:true},{t:'Renal function',c:true},{t:'No monitoring',c:false}], subj: 'Pharmacology' },
+      { q: 'Chemotherapy extravasation: (Select all that apply)', opts: [{t:'Stop infusion',c:true},{t:'Aspirate',c:true},{t:'Notify provider',c:true},{t:'Continue infusion',c:false}], subj: 'Pharmacology' },
+      { q: 'Biologic drug considerations: (Select all that apply)', opts: [{t:'Infusion reactions',c:true},{t:'Infection risk',c:true},{t:'Immunosuppression',c:true},{t:'No side effects',c:false}], subj: 'Pharmacology' },
+      { q: 'Drug-food interactions: (Select all that apply)', opts: [{t:'Grapefruit',c:true},{t:'Tyramine',c:true},{t:'Vitamin K',c:true},{t:'All foods safe',c:false}], subj: 'Pharmacology' },
+      { q: 'Polypharmacy risks: (Select all that apply)', opts: [{t:'Drug interactions',c:true},{t:'Adherence issues',c:true},{t:'Adverse effects',c:true},{t:'Better outcomes',c:false}], subj: 'Pharmacology' },
+      { q: 'Medication adherence barriers: (Select all that apply)', opts: [{t:'Cost',c:true},{t:'Complex regimen',c:true},{t:'Side effects',c:true},{t:'Too easy',c:false}], subj: 'Pharmacology' },
+      { q: 'Safe medication storage: (Select all that apply)', opts: [{t:'Light protection',c:true},{t:'Temperature',c:true},{t:'Out of reach',c:true},{t:'Anywhere',c:false}], subj: 'Fundamentals' },
+      { q: 'High-alert medications: (Select all that apply)', opts: [{t:'Insulin',c:true},{t:'Heparin',c:true},{t:'Opioids',c:true},{t:'Antacids',c:false}], subj: 'Pharmacology' },
+      { q: 'Look-alike sound-alike drugs: (Select all that apply)', opts: [{t:'Confirm before giving',c:true},{t:'Tall man lettering',c:true},{t:'Double-check',c:true},{t:'Assume correct',c:false}], subj: 'Fundamentals' },
+      { q: 'Drugs requiring therapeutic level monitoring: (Select all that apply)', opts: [{t:'Digoxin',c:true},{t:'Lithium',c:true},{t:'Phenytoin',c:true},{t:'Aspirin',c:false}], subj: 'Pharmacology' },
+      { q: 'Anticoagulant reversal agents: (Select all that apply)', opts: [{t:'Vitamin K for warfarin',c:true},{t:'Protamine for heparin',c:true},{t:'Idarucizumab for dabigatran',c:true},{t:'Naloxone for heparin',c:false}], subj: 'Pharmacology' },
+      { q: 'Black box warnings to monitor: (Select all that apply)', opts: [{t:'SSRI suicide risk in young adults',c:true},{t:'Clozapine agranulocytosis',c:true},{t:'Metformin lactic acidosis',c:true},{t:'Acetaminophen overdose',c:false}], subj: 'Pharmacology' },
+      { q: 'Drugs that require baseline liver function: (Select all that apply)', opts: [{t:'Statins',c:true},{t:'Acetaminophen',c:true},{t:'Isoniazid',c:true},{t:'Sugar tablets',c:false}], subj: 'Pharmacology' },
+      { q: 'QT prolongation risk drugs: (Select all that apply)', opts: [{t:'Fluoroquinolones',c:true},{t:'Macrolides',c:true},{t:'Antipsychotics',c:true},{t:'PPIs',c:false}], subj: 'Pharmacology' },
+      { q: 'Nephrotoxic drugs: (Select all that apply)', opts: [{t:'Aminoglycosides',c:true},{t:'NSAIDs',c:true},{t:'Contrast dye',c:true},{t:'Vitamin C',c:false}], subj: 'Pharmacology' },
+      { q: 'Ototoxic medications: (Select all that apply)', opts: [{t:'Aminoglycosides',c:true},{t:'Loop diuretics',c:true},{t:'Aspirin high dose',c:true},{t:'Metformin',c:false}], subj: 'Pharmacology' },
+      { q: 'Antihypertensive drug classes: (Select all that apply)', opts: [{t:'ACE inhibitors',c:true},{t:'ARBs',c:true},{t:'Calcium channel blockers',c:true},{t:'Antibiotics',c:false}], subj: 'Pharmacology' },
+      { q: 'Antiplatelet therapy uses: (Select all that apply)', opts: [{t:'Post-MI',c:true},{t:'Post-stent',c:true},{t:'Stroke prevention',c:true},{t:'Hypertension only',c:false}], subj: 'Pharmacology' },
+      { q: 'Warfarin drug interactions: (Select all that apply)', opts: [{t:'NSAIDs',c:true},{t:'Antibiotics',c:true},{t:'Vitamin K-rich foods',c:true},{t:'No interactions',c:false}], subj: 'Pharmacology' },
+      { q: 'Insulin administration considerations: (Select all that apply)', opts: [{t:'Rotate sites',c:true},{t:'Check expiration',c:true},{t:'Meal timing',c:true},{t:'Give IM',c:false}], subj: 'Pharmacology' },
+      { q: 'Opioid equianalgesic dosing: (Select all that apply)', opts: [{t:'Convert when switching',c:true},{t:'Consider incomplete cross-tolerance',c:true},{t:'Reduce dose for elderly',c:true},{t:'Double dose when switching',c:false}], subj: 'Pharmacology' },
+      { q: 'Benzodiazepine use concerns: (Select all that apply)', opts: [{t:'Dependence risk',c:true},{t:'Fall risk in elderly',c:true},{t:'Respiratory depression with opioids',c:true},{t:'No concerns',c:false}], subj: 'Pharmacology' },
+      { q: 'SSRI drug interactions: (Select all that apply)', opts: [{t:'MAOIs contraindicated',c:true},{t:'Serotonin syndrome risk',c:true},{t:'Bleeding with anticoagulants',c:true},{t:'Safe with all drugs',c:false}], subj: 'Pharmacology' },
+      { q: 'Proton pump inhibitor interactions: (Select all that apply)', opts: [{t:'Decrease clopidogrel effect',c:true},{t:'Reduce absorption of some drugs',c:true},{t:'Take before meals',c:true},{t:'No interactions',c:false}], subj: 'Pharmacology' },
+      { q: 'Corticosteroid tapering reasons: (Select all that apply)', opts: [{t:'Prevent adrenal insufficiency',c:true},{t:'Avoid rebound inflammation',c:true},{t:'Minimize withdrawal',c:true},{t:'No need to taper',c:false}], subj: 'Pharmacology' },
+      { q: 'Chemotherapy extravasation management: (Select all that apply)', opts: [{t:'Stop infusion',c:true},{t:'Aspirate if possible',c:true},{t:'Notify provider',c:true},{t:'Continue infusion',c:false}], subj: 'Pharmacology' },
+      { q: 'Drugs that affect potassium: (Select all that apply)', opts: [{t:'ACE inhibitors increase K',c:true},{t:'Loop diuretics decrease K',c:true},{t:'Spironolactone increases K',c:true},{t:'Metformin affects K',c:false}], subj: 'Pharmacology' },
+      { q: 'Reye syndrome risk drugs: (Select all that apply)', opts: [{t:'Aspirin in children with viral illness',c:true},{t:'Avoid in varicella',c:true},{t:'Avoid in flu',c:true},{t:'Acetaminophen',c:false}], subj: 'Pharmacology' },
+      { q: 'Phenytoin considerations: (Select all that apply)', opts: [{t:'Narrow therapeutic range',c:true},{t:'Gingival hyperplasia',c:true},{t:'Monitor free level',c:true},{t:'No monitoring needed',c:false}], subj: 'Pharmacology' },
+      { q: 'Digoxin drug interactions: (Select all that apply)', opts: [{t:'Amiodarone increases levels',c:true},{t:'Diuretics cause hypokalemia',c:true},{t:'Quinidine increases levels',c:true},{t:'No interactions',c:false}], subj: 'Pharmacology' },
+      { q: 'Metformin contraindications: (Select all that apply)', opts: [{t:'Severe renal impairment',c:true},{t:'Contrast procedures',c:true},{t:'Metabolic acidosis',c:true},{t:'Mild hyperglycemia',c:false}], subj: 'Pharmacology' },
+      { q: 'Lipid-lowering agents: (Select all that apply)', opts: [{t:'Statins',c:true},{t:'Ezetimibe',c:true},{t:'PCSK9 inhibitors',c:true},{t:'Insulin',c:false}], subj: 'Pharmacology' },
+      { q: 'Drugs requiring empty stomach: (Select all that apply)', opts: [{t:'Levothyroxine',c:true},{t:'Bisphosphonates',c:true},{t:'Tetracycline',c:true},{t:'Metformin XR',c:false}], subj: 'Pharmacology' },
+      { q: 'Medications causing photosensitivity: (Select all that apply)', opts: [{t:'Tetracycline',c:true},{t:'Sulfonamides',c:true},{t:'NSAIDs',c:true},{t:'Metformin',c:false}], subj: 'Pharmacology' },
+    ];
+
+    function shuffleArr(arr) { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+    function normalizeAnswer(s) { return (s||'').toLowerCase().trim().replace(/\s+/g,' ').replace(/[-–]/g,'-'); }
+    function matchAnswer(given, correct) {
+      const g = normalizeAnswer(given); const c = normalizeAnswer(correct);
+      if (g === c) return true;
+      const cParts = c.split('/').map(x=>x.trim()); return cParts.some(p => normalizeAnswer(p) === g);
+    }
+
+    const mtConfig = document.getElementById('minitest-config');
+    const mtExamWrap = document.getElementById('minitest-exam-wrap');
+    const mtResults = document.getElementById('minitest-results');
+    const mtQuestionArea = document.getElementById('minitest-question-area');
+    const mtTotalSpan = document.getElementById('minitest-total');
+    const mtError = document.getElementById('minitest-error');
+    let mtState = null;
+
+    function updateMTTotal() {
+      const total = [document.getElementById('mt-mc'),document.getElementById('mt-id'),document.getElementById('mt-tf'),document.getElementById('mt-fib'),document.getElementById('mt-sata')]
+        .reduce((s,el)=> s + (parseInt(el?.value)||0), 0);
+      if (mtTotalSpan) mtTotalSpan.textContent = 'Total: ' + total + ' items';
+      if (mtError) mtError.classList.toggle('hidden', total === 50);
+    }
+    ['mt-mc','mt-id','mt-tf','mt-fib','mt-sata'].forEach(id => document.getElementById(id)?.addEventListener('input', updateMTTotal));
+
+    document.getElementById('minitest-start')?.addEventListener('click', () => {
+      const topics = [...document.querySelectorAll('input[name="minitest-topic"]:checked')].map(c=>c.value);
+      if (topics.length === 0) { mtError.textContent = 'Please select at least 1 topic.'; mtError.classList.remove('hidden'); return; }
+      const mc = parseInt(document.getElementById('mt-mc')?.value) || 0;
+      const id = parseInt(document.getElementById('mt-id')?.value) || 0;
+      const tf = parseInt(document.getElementById('mt-tf')?.value) || 0;
+      const fib = parseInt(document.getElementById('mt-fib')?.value) || 0;
+      const sata = parseInt(document.getElementById('mt-sata')?.value) || 0;
+      const total = mc + id + tf + fib + sata;
+      if (total !== 50) { mtError.textContent = 'Total must equal 50. Please adjust the counts.'; mtError.classList.remove('hidden'); return; }
+      mtError.classList.add('hidden');
+
+      const mcPool = QUIZ_QUESTIONS.filter(q=> topics.includes(q.subj||'Fundamentals')).map(q=>({type:'mc',q:q.q,opts:q.opts,a:q.a,subj:q.subj}));
+      const idPool = MT_ID.filter(q=>topics.includes(q.subj));
+      const tfPool = MT_TF.filter(q=>topics.includes(q.subj));
+      const fibPool = MT_FIB.filter(q=>topics.includes(q.subj));
+      const sataPool = MT_SATA.filter(q=>topics.includes(q.subj));
+
+      const pick = (pool, n) => shuffleArr([...pool]).slice(0, Math.min(n, pool.length));
+      const mcQs = pick(mcPool, mc);
+      const idQs = pick(idPool, id).map(q=>({...q,type:'id'}));
+      const tfQs = pick(tfPool, tf).map(q=>({...q,type:'tf'}));
+      const fibQs = pick(fibPool, fib).map(q=>({...q,type:'fib'}));
+      const sataQs = pick(sataPool, sata).map(q=>({...q,type:'sata'}));
+
+      let all = shuffleArr([...mcQs, ...idQs, ...tfQs, ...fibQs, ...sataQs]);
+      if (all.length < 50) { mtError.textContent = 'Not enough questions in selected topics. Try more topics or reduce counts.'; mtError.classList.remove('hidden'); return; }
+      all = all.slice(0, 50);
+
+      mtState = { questions: all, index: 0, answers: [], score: 0, graded: false };
+      mtConfig.classList.add('hidden');
+      mtExamWrap.classList.remove('hidden');
+      mtResults.classList.add('hidden');
+      renderMTQuestion();
+      document.getElementById('mt-total').textContent = '50';
+      document.getElementById('mt-prev').style.display = '';
+      document.getElementById('mt-next').style.display = '';
+      document.getElementById('mt-submit').style.display = 'none';
+    });
+
+    function renderMTQuestion() {
+      if (!mtState) return;
+      const q = mtState.questions[mtState.index];
+      const n = mtState.index + 1;
+      const total = mtState.questions.length;
+      document.getElementById('mt-current').textContent = n;
+      document.getElementById('mt-total').textContent = total;
+      document.getElementById('mt-prev').disabled = n <= 1;
+      document.getElementById('mt-next').disabled = false;
+      document.getElementById('mt-next').textContent = n >= total ? 'Submit Exam' : 'Next →';
+
+      if (q.type === 'mc') {
+        const shuf = shuffleArr(q.opts.map((o,i)=>({t:o,c:i===q.a}))); 
+        mtQuestionArea.innerHTML = `
+          <div class="minitest-question"><span class="q-type">Multiple Choice</span><div class="q-text">${n}. ${q.q}</div>
+          ${shuf.map(o=>`<div class="minitest-sata-opt"><input type="radio" name="mt-ans" value="${o.c}" data-correct="${o.c}"><span>${o.t}</span></div>`).join('')}
+          </div>`;
+      } else if (q.type === 'id') {
+        mtQuestionArea.innerHTML = `
+          <div class="minitest-question"><span class="q-type">Identification</span><div class="q-text">${n}. ${q.q}</div>
+          <input type="text" class="minitest-id-input" id="mt-id-ans" placeholder="Your answer"></div>`;
+      } else if (q.type === 'tf') {
+        mtQuestionArea.innerHTML = `
+          <div class="minitest-question"><span class="q-type">True or False</span><div class="q-text">${n}. ${q.q}</div>
+          <div class="minitest-sata-opt"><input type="radio" name="mt-ans" value="true"><span>True</span></div>
+          <div class="minitest-sata-opt"><input type="radio" name="mt-ans" value="false"><span>False</span></div>
+          </div>`;
+      } else if (q.type === 'fib') {
+        mtQuestionArea.innerHTML = `
+          <div class="minitest-question"><span class="q-type">Fill in the Blanks</span><div class="q-text">${n}. ${q.q}</div>
+          <input type="text" class="minitest-fib-input" id="mt-fib-ans" placeholder="Your answer"></div>`;
+      } else if (q.type === 'sata') {
+        const shuf = shuffleArr(q.opts.map(o=>({...o})));
+        mtQuestionArea.innerHTML = `
+          <div class="minitest-question"><span class="q-type">SATA - Select All That Apply</span><div class="q-text">${n}. ${q.q}</div>
+          ${shuf.map((o,i)=>`<div class="minitest-sata-opt"><input type="checkbox" class="mt-sata-cb" data-correct="${o.c}" data-idx="${i}"><span>${o.t}</span></div>`).join('')}
+          </div>`;
+      }
+    }
+
+    function getMTAnswer() {
+      const q = mtState.questions[mtState.index];
+      if (q.type === 'mc') {
+        const r = document.querySelector('input[name="mt-ans"]:checked');
+        return r ? r.dataset.correct === 'true' : null;
+      }
+      if (q.type === 'id') return document.getElementById('mt-id-ans')?.value;
+      if (q.type === 'tf') {
+        const r = document.querySelector('input[name="mt-ans"]:checked');
+        return r ? r.value === 'true' : null;
+      }
+      if (q.type === 'fib') return document.getElementById('mt-fib-ans')?.value;
+      if (q.type === 'sata') {
+        const cbs = document.querySelectorAll('.mt-sata-cb');
+        return [...cbs].map(cb=>{
+          const span = cb.closest('.minitest-sata-opt')?.querySelector('span');
+          return { text: span?.textContent?.trim() || '', checked: cb.checked, correct: cb.dataset.correct==='true' };
+        });
+      }
+      return null;
+    }
+
+    function saveMTAnswer() {
+      if (mtState.answers[mtState.index] !== undefined) return;
+      mtState.answers[mtState.index] = getMTAnswer();
+    }
+
+    document.getElementById('mt-prev')?.addEventListener('click', () => {
+      saveMTAnswer();
+      mtState.index--;
+      renderMTQuestion();
+      const prevAns = mtState.answers[mtState.index];
+      if (prevAns !== undefined && mtState.questions[mtState.index]) {
+        const q = mtState.questions[mtState.index];
+        if (q.type === 'mc' && typeof prevAns === 'boolean') document.querySelector(`input[data-correct="${prevAns}"]`)?.click();
+        if (q.type === 'tf' && typeof prevAns === 'boolean') document.querySelector(`input[name="mt-ans"][value="${prevAns}"]`)?.click();
+        if (q.type === 'id' && prevAns) { const inp = document.getElementById('mt-id-ans'); if (inp) inp.value = prevAns; }
+        if (q.type === 'fib' && prevAns) { const inp = document.getElementById('mt-fib-ans'); if (inp) inp.value = prevAns; }
+        if (q.type === 'sata' && Array.isArray(prevAns)) document.querySelectorAll('.mt-sata-cb').forEach((cb,i)=>{ if (prevAns[i]) cb.checked = prevAns[i].checked; });
+      }
+    });
+
+    document.getElementById('mt-next')?.addEventListener('click', () => {
+      saveMTAnswer();
+      if (mtState.index >= mtState.questions.length - 1) submitMTExam();
+      else { mtState.index++; renderMTQuestion(); }
+    });
+
+    function submitMTExam() {
+      saveMTAnswer();
+      let score = 0;
+      const totalQ = mtState.questions.length;
+      mtState.questions.forEach((q, i) => {
+        const ans = mtState.answers[i];
+        if (q.type === 'mc') score += ans === true ? 1 : 0;
+        else if (q.type === 'id') score += matchAnswer(ans, q.a) ? 1 : 0;
+        else if (q.type === 'tf') score += ans === q.a ? 1 : 0;
+        else if (q.type === 'fib') score += matchAnswer(ans, q.a) ? 1 : 0;
+        else if (q.type === 'sata' && Array.isArray(ans)) {
+          let correct = true;
+          ans.forEach(a => { if (a.checked !== a.correct) correct = false; });
+          score += correct ? 1 : 0;
+        }
+      });
+      mtState.score = score;
+      mtState.graded = true;
+      mtConfig.classList.remove('hidden');
+      mtExamWrap.classList.add('hidden');
+      mtResults.classList.remove('hidden');
+      const pct = Math.round((score/totalQ)*100);
+
+      function formatReviewItem(q, i, ans) {
+        let right = false, yourStr = '', correctStr = '';
+        if (ans === undefined) ans = null;
+        if (q.type === 'mc') {
+          right = ans === true;
+          const correctOpt = q.opts[q.a];
+          yourStr = ans === true ? correctOpt : (ans === false ? 'Incorrect' : '(not answered)');
+          correctStr = correctOpt;
+        } else if (q.type === 'id') {
+          right = matchAnswer(ans, q.a);
+          yourStr = ans || '(not answered)';
+          correctStr = q.a;
+        } else if (q.type === 'tf') {
+          right = ans === q.a;
+          yourStr = ans === true ? 'True' : (ans === false ? 'False' : '(not answered)');
+          correctStr = q.a ? 'True' : 'False';
+        } else if (q.type === 'fib') {
+          right = matchAnswer(ans, q.a);
+          yourStr = ans || '(not answered)';
+          correctStr = q.a;
+        } else if (q.type === 'sata' && Array.isArray(ans)) {
+          let correct = true;
+          ans.forEach(a => { if (a.checked !== a.correct) correct = false; });
+          right = correct;
+          const selected = ans.filter(a=>a.checked).map(a=>a.text).join(', ');
+          const correctOpts = q.opts.filter(o=>o.c).map(o=>o.t).join(', ');
+          yourStr = selected || '(none selected)';
+          correctStr = correctOpts;
+        }
+        const cls = right ? 'correct' : 'wrong';
+        const icon = right ? '✓' : '✗';
+        return `<div class="minitest-review-item ${cls}">
+          <div class="review-q">${i+1}. ${q.q} <span>${icon}</span></div>
+          <div class="review-ans"><span class="review-yours">Your answer: ${escapeHtml(yourStr)}</span></div>
+          <div class="review-ans"><span class="review-correct">Correct: ${escapeHtml(correctStr)}</span></div>
+        </div>`;
+      }
+      function escapeHtml(s) { return (s+'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+      const reviewHtml = mtState.questions.map((q,i)=>formatReviewItem(q,i,mtState.answers[i])).join('');
+      mtResults.innerHTML = `
+        <h3>Exam Complete!</h3>
+        <p><strong>Score: ${score}/${totalQ}</strong> (${pct}%)</p>
+        <p>${pct >= 75 ? '🎉 Passing!' : 'Keep studying!'}</p>
+        <h4 style="margin-top:1rem;">Answer Review</h4>
+        <div class="minitest-review">${reviewHtml}</div>
+        <button type="button" class="btn btn-primary" id="mt-retry" style="margin-top:1rem;">Take Another Exam</button>
+      `;
+      document.getElementById('mt-retry')?.addEventListener('click', () => {
+        mtResults.classList.add('hidden');
+        mtError.classList.add('hidden');
+      });
+    }
 
     // Flower picker - click to add flower (same flower can be added multiple times)
     const flowerPickerGrid = document.getElementById('flower-picker-grid');
@@ -2915,89 +3790,89 @@
     document.getElementById('minigame-reset').addEventListener('click', initMinigame);
     initMinigame();
 
-    // Care Quiz - 100 questions, 10 random per game
+    // Care Quiz - 100 questions, 10 random per game (hard choices)
     const QUIZ_QUESTIONS = [
-      { q: 'What should you do first when a patient says they feel dizzy?', opts: ['Have them sit or lie down', 'Check blood pressure immediately', 'Administer anti-dizziness medication', 'Order lab work'], a: 0, subj: 'Fundamentals' },
-      { q: 'The best way to prevent infection spread is:', opts: ['Handwashing', 'Wearing a mask only', 'Using hand sanitizer only', 'Wearing gloves only'], a: 0, subj: 'Fundamentals' },
-      { q: 'When should you reposition a bedbound patient?', opts: ['Every 2 hours', 'Every 4 hours', 'Every 6 hours', 'Once per shift'], a: 0, subj: 'Fundamentals' },
-      { q: 'A normal adult resting heart rate is about:', opts: ['60–100 beats per minute', '50–70 bpm', '80–120 bpm', '100–130 bpm'], a: 0, subj: 'Fundamentals' },
-      { q: 'Comfort and empathy are part of:', opts: ['Patient-centered care', 'Evidence-based practice only', 'Diagnostic accuracy', 'Efficiency metrics'], a: 0, subj: 'Fundamentals' },
-      { q: 'Before any procedure, you must obtain:', opts: ['Informed consent', 'A doctor\'s note', 'Family approval only', 'Insurance clearance'], a: 0, subj: 'Fundamentals' },
-      { q: 'Patient information should be:', opts: ['Kept confidential', 'Shared with family freely', 'Posted in common areas', 'Discussed in elevators'], a: 0, subj: 'Fundamentals' },
-      { q: 'Normal adult body temperature in Celsius is:', opts: ['36.5–37.5°C', '35.5–36.5°C', '37.5–38.5°C', '38–39°C'], a: 0, subj: 'Fundamentals' },
-      { q: 'When a patient refuses treatment, you should:', opts: ['Document and respect their decision', 'Force the treatment', 'Ignore the refusal', 'Call security'], a: 0, subj: 'Fundamentals' },
-      { q: 'Hand hygiene should be performed:', opts: ['Before and after patient contact', 'Only after contact', 'Only when hands look dirty', 'Once per shift'], a: 0, subj: 'Fundamentals' },
-      { q: 'Normal systolic blood pressure range is:', opts: ['90–120 mmHg', '80–100 mmHg', '120–140 mmHg', '100–130 mmHg'], a: 0, subj: 'Fundamentals' },
-      { q: 'You witness a colleague make a medication error. You should:', opts: ['Report it immediately', 'Ignore it', 'Fix it quietly', 'Tell the patient only'], a: 0, subj: 'Fundamentals' },
-      { q: 'The five rights of medication administration include:', opts: ['Right patient, drug, dose, route, time', 'Right room, bed, chart, doctor', 'Right time, place, person, thing', 'Right doctor, nurse, pharmacy, family'], a: 0, subj: 'Fundamentals' },
-      { q: 'When lifting a patient, you should:', opts: ['Use proper body mechanics', 'Bend at the waist', 'Lift with arms only', 'Quick jerk upward'], a: 0, subj: 'Fundamentals' },
-      { q: 'A DNR order means:', opts: ['Do Not Resuscitate', 'Document No Restraints', 'Daily Nursing Review', 'Discharge Not Ready'], a: 0, subj: 'Fundamentals' },
-      { q: 'Signs of a pressure ulcer in early stage include:', opts: ['Non-blanchable redness', 'Deep wound', 'Bone visible', 'No visible change'], a: 0, subj: 'Fundamentals' },
-      { q: 'Before administering medication, you verify the patient by:', opts: ['Name and date of birth', 'Room number only', 'Bed position', 'Appearance'], a: 0, subj: 'Fundamentals' },
-      { q: 'Hypoxia refers to:', opts: ['Low oxygen in tissues', 'High blood pressure', 'Low blood sugar', 'High fever'], a: 0, subj: 'Fundamentals' },
-      { q: 'Ethically, you must advocate for the patient when:', opts: ['Their needs are not being met', 'The doctor disagrees', 'Family complains', 'Never'], a: 0, subj: 'Fundamentals' },
-      { q: 'Standard precautions apply to:', opts: ['All patients', 'Only known infectious patients', 'Only ICU patients', 'Only when requested'], a: 0, subj: 'Fundamentals' },
-      { q: 'Normal respiratory rate for an adult is:', opts: ['12–20 breaths per minute', '8–12 bpm', '20–28 bpm', '25–35 bpm'], a: 0, subj: 'Fundamentals' },
-      { q: 'You discover a patient has fallen. First action:', opts: ['Assess for injury, call for help', 'Move them immediately', 'Document only', 'Leave to get supplies'], a: 0, subj: 'Fundamentals' },
-      { q: 'Informed consent requires that the patient:', opts: ['Understands risks, benefits, and alternatives', 'Simply signs a form', 'Has family present', 'Is sedated'], a: 0, subj: 'Fundamentals' },
-      { q: 'Fowler\'s position is:', opts: ['Semi-sitting, head elevated', 'Lying flat on back', 'On stomach', 'Side-lying'], a: 0, subj: 'Fundamentals' },
-      { q: 'You may share patient info with:', opts: ['Care team with need to know', 'Anyone who asks', 'Social media', 'Other patients'], a: 0, subj: 'Fundamentals' },
-      { q: 'When delegating tasks to unlicensed staff, you:', opts: ['Remain accountable for the task', 'Transfer all responsibility', 'Assume they know how', 'Never delegate'], a: 0, subj: 'Fundamentals' },
-      { q: 'Normal oxygen saturation (SpO2) is:', opts: ['95–100%', '90–94%', '88–92%', '85–90%'], a: 0, subj: 'Fundamentals' },
-      { q: 'Aseptic technique is used to:', opts: ['Prevent infection', 'Speed up procedures', 'Save supplies', 'Please supervisors'], a: 0, subj: 'Fundamentals' },
-      { q: 'A patient asks you to keep a secret about abuse. You should:', opts: ['Report per mandatory reporting laws', 'Keep the secret', 'Tell only your supervisor', 'Ask the patient\'s permission'], a: 0, subj: 'Fundamentals' },
-      { q: 'Before wound care, you clean:', opts: ['From clean to dirty', 'From dirty to clean', 'In circles', 'Only the center'], a: 0, subj: 'Fundamentals' },
-      { q: 'Restraints require:', opts: ['Medical order and frequent reassessment', 'No order needed', 'Family consent only', 'One-time application'], a: 0, subj: 'Fundamentals' },
-      { q: 'Hypertension is:', opts: ['High blood pressure', 'Low blood pressure', 'Normal BP', 'Irregular pulse'], a: 0, subj: 'Fundamentals' },
-      { q: 'You must report a nurse suspected of impairment to:', opts: ['Board of Nursing or supervisor', 'The nurse directly only', 'Other staff', 'No one'], a: 0, subj: 'Fundamentals' },
-      { q: 'Trendelenburg position is used for:', opts: ['Shock (head lower than feet)', 'Respiratory distress', 'Eating', 'Sleeping'], a: 0, subj: 'Fundamentals' },
-      { q: 'Documentation should be:', opts: ['Accurate, timely, and factual', 'Brief and vague', 'Written at shift end only', 'Oral only'], a: 0, subj: 'Fundamentals' },
-      { q: 'When a patient is confused, you should:', opts: ['Reorient gently, ensure safety', 'Restrain immediately', 'Ignore them', 'Argue with them'], a: 0, subj: 'Fundamentals' },
-      { q: 'Normal blood glucose range (fasting) is:', opts: ['70–100 mg/dL', '60–70 mg/dL', '100–126 mg/dL', '126–140 mg/dL'], a: 0, subj: 'Fundamentals' },
-      { q: 'You receive an order you believe is harmful. You should:', opts: ['Clarify with prescriber, refuse if unsafe', 'Document concerns and proceed', 'Ask a colleague to double-check only', 'Follow chain of command without refusing'], a: 0, subj: 'Fundamentals' },
-      { q: 'Isolation precautions protect:', opts: ['Patients and staff', 'Only staff', 'Only visitors', 'No one'], a: 0, subj: 'Fundamentals' },
-      { q: 'PRN means:', opts: ['As needed', 'Every hour', 'Immediately', 'Never'], a: 0, subj: 'Fundamentals' },
-      { q: 'Cultural competence in nursing means:', opts: ['Respecting diverse beliefs and practices', 'Treating everyone the same', 'Ignoring differences', 'Only serving one culture'], a: 0, subj: 'Fundamentals' },
-      { q: 'Before blood draw, you confirm:', opts: ['Patient ID and tube labels', 'Room number only', 'Time of day', 'Doctor\'s name'], a: 0, subj: 'Fundamentals' },
-      { q: 'A patient has a living will. You must:', opts: ['Honor their documented wishes', 'Override with family wishes', 'Ignore it', 'Only follow if family agrees'], a: 0, subj: 'Fundamentals' },
-      { q: 'Supine position is:', opts: ['Lying on back', 'Lying on stomach', 'Side-lying', 'Sitting'], a: 0, subj: 'Fundamentals' },
-      { q: 'Verbal orders should be:', opts: ['Written and signed by prescriber promptly', 'Followed without documentation', 'Ignored', 'Only taken from family'], a: 0, subj: 'Fundamentals' },
-      { q: 'Tachycardia is:', opts: ['Heart rate over 100 bpm', 'Heart rate under 60 bpm', 'Normal heart rate', 'Irregular rhythm'], a: 0, subj: 'Fundamentals' },
-      { q: 'You must respect patient autonomy, meaning:', opts: ['Their right to make own decisions', 'Making decisions for them', 'Family makes all decisions', 'Doctor decides everything'], a: 0, subj: 'Fundamentals' },
-      { q: 'When transferring a patient, you ensure:', opts: ['Safe body mechanics and patient stability', 'Speed over safety', 'Patient walks alone', 'No assistive devices'], a: 0, subj: 'Fundamentals' },
-      { q: 'NPO means:', opts: ['Nothing by mouth', 'New patient only', 'No precautions', 'Normal post-op'], a: 0, subj: 'Fundamentals' },
-      { q: 'A breach of confidentiality occurs if you:', opts: ['Share info without authorization', 'Document in chart', 'Report abuse', 'Discuss in private report'], a: 0, subj: 'Fundamentals' },
-      { q: 'Prone position is:', opts: ['Lying on stomach', 'Lying on back', 'Side-lying', 'Semi-sitting'], a: 0, subj: 'Fundamentals' },
-      { q: 'Fall prevention includes:', opts: ['Call bell, non-slip footwear, clutter-free', 'Restraints only', 'Sedation', 'Ignoring risk'], a: 0, subj: 'Fundamentals' },
-      { q: 'Bradycardia is:', opts: ['Heart rate under 60 bpm', 'Heart rate over 100 bpm', 'Normal rate', 'Irregular rate'], a: 0, subj: 'Fundamentals' },
-      { q: 'Beneficence in nursing means:', opts: ['Acting for the patient\'s good', 'Minimizing care', 'Following orders only', 'Avoiding patients'], a: 0, subj: 'Fundamentals' },
-      { q: 'Before IV insertion, you:', opts: ['Verify site, cleanse, use aseptic technique', 'Insert quickly', 'Skip cleansing', 'Use same site repeatedly'], a: 0, subj: 'Fundamentals' },
-      { q: 'A patient\'s advance directive:', opts: ['Must be followed per their wishes', 'Can be ignored by family', 'Expires daily', 'Only applies in hospital'], a: 0, subj: 'Fundamentals' },
-      { q: 'Lateral position is:', opts: ['Side-lying', 'On back', 'On stomach', 'Sitting'], a: 0, subj: 'Fundamentals' },
-      { q: 'Incident reports are used to:', opts: ['Improve safety, not punish', 'Fire staff', 'Blame patients', 'Hide errors'], a: 0, subj: 'Fundamentals' },
-      { q: 'Hypotension is:', opts: ['Low blood pressure', 'High blood pressure', 'Normal BP', 'Irregular BP'], a: 0, subj: 'Fundamentals' },
-      { q: 'Nonmaleficence means:', opts: ['Do no harm', 'Do more always', 'Ignore risks', 'Defer to family'], a: 0, subj: 'Fundamentals' },
-      { q: 'When giving an injection, you use:', opts: ['Appropriate site, needle size, angle', 'Same site every time', 'Largest needle', 'No aspiration needed'], a: 0, subj: 'Fundamentals' },
-      { q: 'A competent patient refuses a life-saving treatment. You:', opts: ['Respect the refusal, document', 'Force the treatment', 'Restrain and treat', 'Call police'], a: 0, subj: 'Fundamentals' },
-      { q: 'Sims position is:', opts: ['Left side-lying, leg flexed', 'On back', 'Prone', 'Sitting'], a: 0, subj: 'Fundamentals' },
-      { q: 'Chain of command is used when:', opts: ['Resolving concerns or unsafe situations', 'Gossiping', 'Avoiding work', 'Bypassing everyone'], a: 0, subj: 'Fundamentals' },
-      { q: 'Febrile means:', opts: ['Having a fever', 'No fever', 'Low temperature', 'Normal temp'], a: 0, subj: 'Fundamentals' },
-      { q: 'Justice in healthcare means:', opts: ['Fair allocation of resources', 'Favoring some patients', 'Ignoring needs', 'Only treating paying patients'], a: 0, subj: 'Fundamentals' },
-      { q: 'Sterile field must remain:', opts: ['Above waist, within sight', 'On the floor', 'Touched by non-sterile items', 'Reused'], a: 0, subj: 'Fundamentals' },
-      { q: 'You suspect elder abuse. You must:', opts: ['Report per state law', 'Ask the family first', 'Ignore it', 'Document only'], a: 0, subj: 'Fundamentals' },
-      { q: 'Lithotomy position is used for:', opts: ['Pelvic exams, childbirth', 'Chest x-ray', 'Eating', 'Sleeping'], a: 0, subj: 'Fundamentals' },
-      { q: 'SBAR stands for:', opts: ['Situation, Background, Assessment, Recommendation', 'Safe, Brief, Accurate, Report', 'Sign, Background, Action, Result', 'Status, Before, After, Review'], a: 0, subj: 'Fundamentals' },
-      { q: 'Afebrile means:', opts: ['Without fever', 'With fever', 'High fever', 'Low temp'], a: 0, subj: 'Fundamentals' },
-      { q: 'Fidelity in nursing means:', opts: ['Keeping promises, being trustworthy', 'Lying to comfort', 'Breaking confidences', 'Avoiding commitment'], a: 0, subj: 'Fundamentals' },
-      { q: 'When a patient has an allergic reaction, first:', opts: ['Assess airway, call for help', 'Give food', 'Wait and see', 'Document only'], a: 0, subj: 'Fundamentals' },
-      { q: 'HIPAA protects:', opts: ['Patient health information', 'Hospital profits', 'Staff schedules', 'Visitor lists'], a: 0, subj: 'Fundamentals' },
-      { q: 'Dorsal recumbent position is:', opts: ['On back, knees bent', 'On stomach', 'Side-lying', 'Standing'], a: 0, subj: 'Fundamentals' },
-      { q: 'Double-checking high-alert medications means:', opts: ['Two nurses verify before administration', 'Patient verifies', 'One quick look', 'Skip if busy'], a: 0, subj: 'Fundamentals' },
-      { q: 'Dyspnea means:', opts: ['Difficulty breathing', 'Easy breathing', 'Slow breathing', 'No breathing'], a: 0, subj: 'Fundamentals' },
-      { q: 'Veracity means:', opts: ['Truthfulness', 'Deception', 'Secrecy', 'Omission'], a: 0, subj: 'Fundamentals' },
-      { q: 'When a patient codes, you:', opts: ['Start CPR, call for help, get defibrillator', 'Wait for doctor', 'Document first', 'Leave the room'], a: 0, subj: 'Fundamentals' },
-      { q: 'Protected health information (PHI) includes:', opts: ['Name, DOB, diagnoses, treatments', 'Only diagnoses', 'Only names', 'Nothing'], a: 0, subj: 'Fundamentals' },
-      { q: 'Knee-chest position is used for:', opts: ['Rectal exams, sigmoidoscopy', 'Chest x-ray', 'IV placement', 'Eating'], a: 0, subj: 'Fundamentals' },
+      { q: 'What should you do first when a patient says they feel dizzy?', opts: ['Have them sit or lie down', 'Check blood pressure immediately', 'Administer anti-dizziness medication', 'Assess blood glucose level'], a: 0, subj: 'Fundamentals' },
+      { q: 'The best way to prevent infection spread is:', opts: ['Handwashing', 'Chlorhexidine surgical scrub', 'Alcohol-based hand rub', 'Barrier precautions only'], a: 0, subj: 'Fundamentals' },
+      { q: 'When should you reposition a bedbound patient?', opts: ['Every 2 hours', 'Every 3 hours', 'Every 4 hours', 'Every 6 hours'], a: 0, subj: 'Fundamentals' },
+      { q: 'A normal adult resting heart rate is about:', opts: ['60–100 beats per minute', '50–70 bpm', '70–90 bpm', '80–120 bpm'], a: 0, subj: 'Fundamentals' },
+      { q: 'Comfort and empathy are part of:', opts: ['Patient-centered care', 'Holistic nursing model', 'Therapeutic relationship', 'Quality improvement'], a: 0, subj: 'Fundamentals' },
+      { q: 'Before any procedure, you must obtain:', opts: ['Informed consent', 'Written physician order', 'Family surrogate consent', 'Witnessed verbal consent'], a: 0, subj: 'Fundamentals' },
+      { q: 'Patient information should be:', opts: ['Kept confidential', 'Shared only with direct caregivers', 'Available to all unit staff', 'Disclosed per family request'], a: 0, subj: 'Fundamentals' },
+      { q: 'Normal adult body temperature in Celsius is:', opts: ['36.5–37.5°C', '35.5–36.5°C', '36.0–37.0°C', '37.0–38.0°C'], a: 0, subj: 'Fundamentals' },
+      { q: 'When a patient refuses treatment, you should:', opts: ['Document and respect their decision', 'Notify the physician and document', 'Request family to persuade', 'Explain consequences and document'], a: 0, subj: 'Fundamentals' },
+      { q: 'Hand hygiene should be performed:', opts: ['Before and after patient contact', 'After contact and before clean tasks', 'Before procedures only', 'After visible soiling only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Normal systolic blood pressure range is:', opts: ['90–120 mmHg', '100–130 mmHg', '80–110 mmHg', '110–140 mmHg'], a: 0, subj: 'Fundamentals' },
+      { q: 'You witness a colleague make a medication error. You should:', opts: ['Report it immediately', 'Discuss with colleague first, then report', 'Document in incident report only', 'Notify charge nurse confidentially'], a: 0, subj: 'Fundamentals' },
+      { q: 'The five rights of medication administration include:', opts: ['Right patient, drug, dose, route, time', 'Right patient, drug, dose, time, documentation', 'Right patient, drug, dose, reason, response', 'Right patient, indication, dose, route, time'], a: 0, subj: 'Fundamentals' },
+      { q: 'When lifting a patient, you should:', opts: ['Use proper body mechanics', 'Bend knees and keep back straight', 'Use wide stance and lift smoothly', 'Request mechanical lift when available'], a: 0, subj: 'Fundamentals' },
+      { q: 'A DNR order means:', opts: ['Do Not Resuscitate', 'Do Not Recover', 'Designated No Response', 'Deferred Nursing Recovery'], a: 0, subj: 'Fundamentals' },
+      { q: 'Signs of a pressure ulcer in early stage include:', opts: ['Non-blanchable redness', 'Partial-thickness skin loss', 'Full-thickness tissue loss', 'Blanching erythema'], a: 0, subj: 'Fundamentals' },
+      { q: 'Before administering medication, you verify the patient by:', opts: ['Name and date of birth', 'ID bracelet and room number', 'Name and medical record number', 'Bed number and armband'], a: 0, subj: 'Fundamentals' },
+      { q: 'Hypoxia refers to:', opts: ['Low oxygen in tissues', 'Low oxygen in blood', 'Inadequate ventilation', 'Reduced hemoglobin'], a: 0, subj: 'Fundamentals' },
+      { q: 'Ethically, you must advocate for the patient when:', opts: ['Their needs are not being met', 'Treatment conflicts with values', 'Family requests intervention', 'Provider disagrees with plan'], a: 0, subj: 'Fundamentals' },
+      { q: 'Standard precautions apply to:', opts: ['All patients', 'Patients with known pathogens', 'Patients on isolation', 'Immunocompromised patients'], a: 0, subj: 'Fundamentals' },
+      { q: 'Normal respiratory rate for an adult is:', opts: ['12–20 breaths per minute', '10–16 bpm', '16–24 bpm', '18–26 bpm'], a: 0, subj: 'Fundamentals' },
+      { q: 'You discover a patient has fallen. First action:', opts: ['Assess for injury, call for help', 'Stabilize cervical spine first', 'Move to bed immediately', 'Obtain fall risk assessment'], a: 0, subj: 'Fundamentals' },
+      { q: 'Informed consent requires that the patient:', opts: ['Understands risks, benefits, and alternatives', 'Has capacity and signs form', 'Receives verbal explanation', 'Has legal guardian present'], a: 0, subj: 'Fundamentals' },
+      { q: 'Fowler\'s position is:', opts: ['Semi-sitting, head elevated', 'Supine with head elevated 15°', 'High Fowler 90° sitting', 'Low Fowler 15–30°'], a: 0, subj: 'Fundamentals' },
+      { q: 'You may share patient info with:', opts: ['Care team with need to know', 'Consulting specialists on the case', 'Billing for payment purposes', 'Quality improvement team'], a: 0, subj: 'Fundamentals' },
+      { q: 'When delegating tasks to unlicensed staff, you:', opts: ['Remain accountable for the task', 'Transfer accountability to delegate', 'Supervise outcome only', 'Assume competency after training'], a: 0, subj: 'Fundamentals' },
+      { q: 'Normal oxygen saturation (SpO2) is:', opts: ['95–100%', '90–95%', '92–98%', '88–94%'], a: 0, subj: 'Fundamentals' },
+      { q: 'Aseptic technique is used to:', opts: ['Prevent infection', 'Reduce pathogen load', 'Maintain sterile field', 'Comply with policy'], a: 0, subj: 'Fundamentals' },
+      { q: 'A patient asks you to keep a secret about abuse. You should:', opts: ['Report per mandatory reporting laws', 'Report only if patient agrees', 'Document and inform supervisor', 'Maintain confidentiality per request'], a: 0, subj: 'Fundamentals' },
+      { q: 'Before wound care, you clean:', opts: ['From clean to dirty', 'Center outward in circles', 'Most contaminated area first', 'Per physician preference'], a: 0, subj: 'Fundamentals' },
+      { q: 'Restraints require:', opts: ['Medical order and frequent reassessment', 'Physician order and q2h assessment', 'Nursing judgment and documentation', 'Family consent and PRN order'], a: 0, subj: 'Fundamentals' },
+      { q: 'Hypertension is:', opts: ['High blood pressure', 'Elevated diastolic only', 'Systolic over 140 mmHg', 'Labile blood pressure'], a: 0, subj: 'Fundamentals' },
+      { q: 'You must report a nurse suspected of impairment to:', opts: ['Board of Nursing or supervisor', 'Risk management department', 'Peer review committee', 'Human resources only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Trendelenburg position is used for:', opts: ['Shock (head lower than feet)', 'Hypotension with poor perfusion', 'Spinal shock', 'Hemorrhagic shock'], a: 0, subj: 'Fundamentals' },
+      { q: 'Documentation should be:', opts: ['Accurate, timely, and factual', 'Concise and objective', 'Complete and legible', 'Chart by exception'], a: 0, subj: 'Fundamentals' },
+      { q: 'When a patient is confused, you should:', opts: ['Reorient gently, ensure safety', 'Use validation therapy', 'Provide familiar objects', 'Assess for reversible causes'], a: 0, subj: 'Fundamentals' },
+      { q: 'Normal blood glucose range (fasting) is:', opts: ['70–100 mg/dL', '80–110 mg/dL', '60–90 mg/dL', '90–120 mg/dL'], a: 0, subj: 'Fundamentals' },
+      { q: 'You receive an order you believe is harmful. You should:', opts: ['Clarify with prescriber, refuse if unsafe', 'Document concern and carry out order', 'Ask charge nurse to verify', 'Request pharmacy review'], a: 0, subj: 'Fundamentals' },
+      { q: 'Isolation precautions protect:', opts: ['Patients and staff', 'Immunocompromised patients', 'High-risk procedures', 'Contaminated equipment'], a: 0, subj: 'Fundamentals' },
+      { q: 'PRN means:', opts: ['As needed', 'At bedtime', 'Every 4 hours', 'When necessary'], a: 0, subj: 'Fundamentals' },
+      { q: 'Cultural competence in nursing means:', opts: ['Respecting diverse beliefs and practices', 'Providing interpreter services', 'Adapting care to patient values', 'Avoiding cultural assumptions'], a: 0, subj: 'Fundamentals' },
+      { q: 'Before blood draw, you confirm:', opts: ['Patient ID and tube labels', 'Two identifiers and requisition', 'Armband and order', 'Name and room number'], a: 0, subj: 'Fundamentals' },
+      { q: 'A patient has a living will. You must:', opts: ['Honor their documented wishes', 'Follow most recent advance directive', 'Consult ethics committee', 'Verify with next of kin'], a: 0, subj: 'Fundamentals' },
+      { q: 'Supine position is:', opts: ['Lying on back', 'Dorsal recumbent', 'Lithotomy without stirrups', 'Flat with legs extended'], a: 0, subj: 'Fundamentals' },
+      { q: 'Verbal orders should be:', opts: ['Written and signed by prescriber promptly', 'Read back to verify accuracy', 'Witnessed by second nurse', 'Documented in nursing notes'], a: 0, subj: 'Fundamentals' },
+      { q: 'Tachycardia is:', opts: ['Heart rate over 100 bpm', 'HR 90–100 at rest', 'Sinus rhythm over 80', 'Irregular rapid rhythm'], a: 0, subj: 'Fundamentals' },
+      { q: 'You must respect patient autonomy, meaning:', opts: ['Their right to make own decisions', 'Informed refusal must be honored', 'Capacity determines decision-making', 'Substituted judgment when incapacitated'], a: 0, subj: 'Fundamentals' },
+      { q: 'When transferring a patient, you ensure:', opts: ['Safe body mechanics and patient stability', 'Gait belt and assistive device', 'Clear path and adequate help', 'Patient wears non-slip footwear'], a: 0, subj: 'Fundamentals' },
+      { q: 'NPO means:', opts: ['Nothing by mouth', 'Nil per os', 'No oral intake', 'NPO before procedure'], a: 0, subj: 'Fundamentals' },
+      { q: 'A breach of confidentiality occurs if you:', opts: ['Share info without authorization', 'Discuss in hallway', 'Leave chart unattended', 'Email unencrypted PHI'], a: 0, subj: 'Fundamentals' },
+      { q: 'Prone position is:', opts: ['Lying on stomach', 'Ventral recumbent', 'Face-down positioning', 'Abdomen on surface'], a: 0, subj: 'Fundamentals' },
+      { q: 'Fall prevention includes:', opts: ['Call bell, non-slip footwear, clutter-free', 'Bed alarms and low beds', 'Orientation to room', 'Frequent rounding'], a: 0, subj: 'Fundamentals' },
+      { q: 'Bradycardia is:', opts: ['Heart rate under 60 bpm', 'HR 50–60 at rest', 'Sinus bradycardia', 'Slow irregular rhythm'], a: 0, subj: 'Fundamentals' },
+      { q: 'Beneficence in nursing means:', opts: ['Acting for the patient\'s good', 'Preventing harm', 'Promoting welfare', 'Balancing benefits and risks'], a: 0, subj: 'Fundamentals' },
+      { q: 'Before IV insertion, you:', opts: ['Verify site, cleanse, use aseptic technique', 'Select largest vein available', 'Apply tourniquet and palpate', 'Ensure IV fluid compatibility'], a: 0, subj: 'Fundamentals' },
+      { q: 'A patient\'s advance directive:', opts: ['Must be followed per their wishes', 'Requires physician verification', 'Can be overridden in emergency', 'Expires after 1 year'], a: 0, subj: 'Fundamentals' },
+      { q: 'Lateral position is:', opts: ['Side-lying', 'Left lateral recumbent', 'Right lateral recumbent', 'Sims variation'], a: 0, subj: 'Fundamentals' },
+      { q: 'Incident reports are used to:', opts: ['Improve safety, not punish', 'Root cause analysis', 'Quality improvement', 'Risk management review'], a: 0, subj: 'Fundamentals' },
+      { q: 'Hypotension is:', opts: ['Low blood pressure', 'Systolic under 90 mmHg', 'Orthostatic drop', 'Decreased perfusion'], a: 0, subj: 'Fundamentals' },
+      { q: 'Nonmaleficence means:', opts: ['Do no harm', 'Minimize risk', 'Prevent injury', 'Avoid negligence'], a: 0, subj: 'Fundamentals' },
+      { q: 'When giving an injection, you use:', opts: ['Appropriate site, needle size, angle', 'Z-track for IM', 'Subcutaneous 45–90°', 'Aspirate before injecting'], a: 0, subj: 'Fundamentals' },
+      { q: 'A competent patient refuses a life-saving treatment. You:', opts: ['Respect the refusal, document', 'Obtain psychiatric evaluation', 'Request ethics consultation', 'Document capacity assessment'], a: 0, subj: 'Fundamentals' },
+      { q: 'Sims position is:', opts: ['Left side-lying, leg flexed', 'Left lateral with top leg flexed', 'Semi-prone positioning', 'Modified lateral recumbent'], a: 0, subj: 'Fundamentals' },
+      { q: 'Chain of command is used when:', opts: ['Resolving concerns or unsafe situations', 'Escalating unresolved issues', 'Reporting up the hierarchy', 'Bypassing direct supervisor'], a: 0, subj: 'Fundamentals' },
+      { q: 'Febrile means:', opts: ['Having a fever', 'Temperature above 38°C', 'Pyrexia', 'Elevated core temp'], a: 0, subj: 'Fundamentals' },
+      { q: 'Justice in healthcare means:', opts: ['Fair allocation of resources', 'Equal access to care', 'Non-discrimination', 'Equitable treatment'], a: 0, subj: 'Fundamentals' },
+      { q: 'Sterile field must remain:', opts: ['Above waist, within sight', 'Dry and intact', 'Uncontaminated', '1-inch border sterile'], a: 0, subj: 'Fundamentals' },
+      { q: 'You suspect elder abuse. You must:', opts: ['Report per state law', 'Document findings first', 'Confront the abuser', 'Inform adult protective services'], a: 0, subj: 'Fundamentals' },
+      { q: 'Lithotomy position is used for:', opts: ['Pelvic exams, childbirth', 'Gynecological procedures', 'Urological exams', 'Rectal procedures'], a: 0, subj: 'Fundamentals' },
+      { q: 'SBAR stands for:', opts: ['Situation, Background, Assessment, Recommendation', 'Status, Brief, Action, Response', 'Summarize, Background, Act, Review', 'Safety, Best, Assessment, Record'], a: 0, subj: 'Fundamentals' },
+      { q: 'Afebrile means:', opts: ['Without fever', 'Normothermic', 'No hyperthermia', 'Temperature normal'], a: 0, subj: 'Fundamentals' },
+      { q: 'Fidelity in nursing means:', opts: ['Keeping promises, being trustworthy', 'Loyalty to patient', 'Maintaining confidentiality', 'Honoring commitments'], a: 0, subj: 'Fundamentals' },
+      { q: 'When a patient has an allergic reaction, first:', opts: ['Assess airway, call for help', 'Administer epinephrine', 'Stop the allergen', 'Obtain vital signs'], a: 0, subj: 'Fundamentals' },
+      { q: 'HIPAA protects:', opts: ['Patient health information', 'Medical records', 'Treatment plans', 'Diagnostic results'], a: 0, subj: 'Fundamentals' },
+      { q: 'Dorsal recumbent position is:', opts: ['On back, knees bent', 'Supine with flexed knees', 'Dorsal lithotomy', 'Recumbent with legs apart'], a: 0, subj: 'Fundamentals' },
+      { q: 'Double-checking high-alert medications means:', opts: ['Two nurses verify before administration', 'Independent double-check', 'Pharmacy verification', 'Barcode scan verification'], a: 0, subj: 'Fundamentals' },
+      { q: 'Dyspnea means:', opts: ['Difficulty breathing', 'Shortness of breath', 'Labored breathing', 'Respiratory distress'], a: 0, subj: 'Fundamentals' },
+      { q: 'Veracity means:', opts: ['Truthfulness', 'Honesty with patient', 'Accurate documentation', 'Informed disclosure'], a: 0, subj: 'Fundamentals' },
+      { q: 'When a patient codes, you:', opts: ['Start CPR, call for help, get defibrillator', 'Begin chest compressions', 'Activate emergency response', 'Retrieve crash cart'], a: 0, subj: 'Fundamentals' },
+      { q: 'Protected health information (PHI) includes:', opts: ['Name, DOB, diagnoses, treatments', 'Social Security number', 'Insurance information', 'All identifiers and health data'], a: 0, subj: 'Fundamentals' },
+      { q: 'Knee-chest position is used for:', opts: ['Rectal exams, sigmoidoscopy', 'Pelvic examination', 'Proctoscopy', 'Digital rectal exam'], a: 0, subj: 'Fundamentals' },
       { q: 'You make a medication error. You must:', opts: ['Report immediately, assess patient', 'Hide it', 'Blame pharmacy', 'Only tell the patient'], a: 0, subj: 'Fundamentals' },
       { q: 'Tachypnea means:', opts: ['Rapid breathing', 'Slow breathing', 'Normal breathing', 'No breathing'], a: 0, subj: 'Fundamentals' },
       { q: 'Patient advocacy includes:', opts: ['Speaking up for patient rights and needs', 'Agreeing with doctors always', 'Ignoring concerns', 'Deferring to family only'], a: 0, subj: 'Fundamentals' },
@@ -3040,11 +3915,11 @@
       { q: 'Pallor means:', opts: ['Paleness', 'Redness', 'Blue tint', 'Yellow tint'], a: 0, subj: 'Fundamentals' },
       { q: 'Moral courage is:', opts: ['Standing up for what is right despite risk', 'Avoiding conflict', 'Following orders blindly', 'Ignoring problems'], a: 0, subj: 'Fundamentals' },
       /* Med-Surg */
-      { q: 'Post-op ileus is characterized by:', opts: ['Absent bowel sounds, no flatus', 'Diarrhea', 'Normal digestion', 'Increased peristalsis'], a: 0, subj: 'Med-Surg' },
-      { q: 'Deep vein thrombosis (DVT) prevention includes:', opts: ['Early ambulation, SCDs, anticoagulants', 'Bed rest only', 'Tight leg wraps', 'No fluids'], a: 0, subj: 'Med-Surg' },
-      { q: 'Signs of pulmonary embolism include:', opts: ['Sudden dyspnea, chest pain, tachycardia', 'Bradycardia only', 'No symptoms', 'Rash'], a: 0, subj: 'Med-Surg' },
-      { q: 'CHF patients should be taught to:', opts: ['Weigh daily, limit sodium, report edema', 'Drink unlimited fluids', 'Increase sodium', 'Avoid all activity'], a: 0, subj: 'Med-Surg' },
-      { q: 'Acute MI (heart attack) classic symptom is:', opts: ['Crushing substernal chest pain', 'Leg pain', 'Headache', 'Rash'], a: 0, subj: 'Med-Surg' },
+      { q: 'Post-op ileus is characterized by:', opts: ['Absent bowel sounds, no flatus', 'Abdominal distension', 'Nausea and vomiting', 'Delayed gastric emptying'], a: 0, subj: 'Med-Surg' },
+      { q: 'Deep vein thrombosis (DVT) prevention includes:', opts: ['Early ambulation, SCDs, anticoagulants', 'Compression stockings', 'Leg exercises', 'Adequate hydration'], a: 0, subj: 'Med-Surg' },
+      { q: 'Signs of pulmonary embolism include:', opts: ['Sudden dyspnea, chest pain, tachycardia', 'Pleuritic chest pain', 'Hemoptysis', 'Sense of doom'], a: 0, subj: 'Med-Surg' },
+      { q: 'CHF patients should be taught to:', opts: ['Weigh daily, limit sodium, report edema', 'Restrict fluids to 2L', 'Monitor daily weights', 'Report shortness of breath'], a: 0, subj: 'Med-Surg' },
+      { q: 'Acute MI (heart attack) classic symptom is:', opts: ['Crushing substernal chest pain', 'Radiating to left arm', 'Jaw and back pain', 'Diaphoresis and nausea'], a: 0, subj: 'Med-Surg' },
       { q: 'Hypoglycemia symptoms include:', opts: ['Sweating, tremor, confusion, hunger', 'Polyuria and polydipsia', 'Kussmaul respirations', 'Fruity breath odor'], a: 0, subj: 'Med-Surg' },
       { q: 'Diabetic ketoacidosis (DKA) presents with:', opts: ['Hyperglycemia, ketones, metabolic acidosis', 'Hypoglycemia', 'Normal blood sugar', 'Alkalosis'], a: 0, subj: 'Med-Surg' },
       { q: 'COPD patients need:', opts: ['Low-flow oxygen, pursed-lip breathing', 'High-flow oxygen (6L+) always', 'Oxygen only when SpO2 below 90%', 'Continuous positive pressure only'], a: 0, subj: 'Med-Surg' },
@@ -3071,9 +3946,9 @@
       { q: 'Peritonitis signs include:', opts: ['Rigid abdomen, rebound tenderness, fever', 'Soft abdomen', 'No pain', 'Rash'], a: 0, subj: 'Med-Surg' },
       { q: 'Pancreatitis patients should:', opts: ['NPO, NG tube, pain control', 'Eat normally', 'High fat diet', 'No pain meds'], a: 0, subj: 'Med-Surg' },
       /* Psych */
-      { q: 'Therapeutic communication includes:', opts: ['Open-ended questions, reflection, silence', 'Giving advice', 'Changing subject', 'Minimizing feelings'], a: 0, subj: 'Psych' },
-      { q: 'A patient says "Nobody cares." Best response:', opts: ['"It sounds like you feel alone."', '"That\'s not true."', '"Cheer up."', '"I have to go."'], a: 0, subj: 'Psych' },
-      { q: 'Defense mechanism: projecting means:', opts: ['Attributing own feelings to others', 'Forgetting entirely', 'Making excuses', 'Acting opposite'], a: 0, subj: 'Psych' },
+      { q: 'Therapeutic communication includes:', opts: ['Open-ended questions, reflection, silence', 'Active listening', 'Empathetic responses', 'Clarifying and paraphrasing'], a: 0, subj: 'Psych' },
+      { q: 'A patient says "Nobody cares." Best response:', opts: ['"It sounds like you feel alone."', '"I care about you."', '"Can you tell me more?"', '"That must be difficult."'], a: 0, subj: 'Psych' },
+      { q: 'Defense mechanism: projecting means:', opts: ['Attributing own feelings to others', 'Displacing onto someone else', 'Rationalizing behavior', 'Denying reality'], a: 0, subj: 'Psych' },
       { q: 'Milieu therapy emphasizes:', opts: ['Structured, therapeutic environment', 'Isolation', 'Unlimited freedom', 'No structure'], a: 0, subj: 'Psych' },
       { q: 'PRN medications in psych are used for:', opts: ['Agitation, anxiety, insomnia as needed', 'Routine only', 'Never', 'With every meal'], a: 0, subj: 'Psych' },
       { q: 'Extrapyramidal side effects (EPS) of antipsychotics include:', opts: ['Dystonia, akathisia, parkinsonism', 'Weight gain only', 'Dry mouth only', 'No side effects'], a: 0, subj: 'Psych' },
@@ -3104,9 +3979,9 @@
       /* Additional Fundamentals */
       { q: 'Sharps should be disposed in:', opts: ['Puncture-resistant sharps container', 'Regular trash bag', 'Red bag only', 'Sink'], a: 0, subj: 'Fundamentals' },
       { q: 'A pulse oximeter measures:', opts: ['Oxygen saturation and pulse rate', 'Blood pressure only', 'Temperature only', 'Respiratory rate'], a: 0, subj: 'Fundamentals' },
-      { q: 'RACE in fire safety stands for:', opts: ['Rescue, Alarm, Contain, Extinguish', 'Run, Alert, Call, Exit', 'Remove, Activate, Control, Evacuate', 'Retreat, Announce, Clear, Extinguish'], a: 0, subj: 'Fundamentals' },
-      { q: 'PASS for fire extinguisher means:', opts: ['Pull, Aim, Squeeze, Sweep', 'Press, Activate, Spray, Stop', 'Point, Alert, Spray, Secure', 'Pull, Aim, Spray, Sweep'], a: 0, subj: 'Fundamentals' },
-      { q: 'Correct order for donning PPE is:', opts: ['Gown, mask, goggles, gloves', 'Gloves, gown, mask, goggles', 'Mask, gown, gloves, goggles', 'Goggles, gloves, gown, mask'], a: 0, subj: 'Fundamentals' },
+      { q: 'RACE in fire safety stands for:', opts: ['Rescue, Alarm, Contain, Extinguish', 'Rescue, Alert, Confine, Evacuate', 'Remove, Activate, Contain, Exit', 'Rescue, Announce, Control, Extinguish'], a: 0, subj: 'Fundamentals' },
+      { q: 'PASS for fire extinguisher means:', opts: ['Pull, Aim, Squeeze, Sweep', 'Pull pin, Aim, Squeeze, Sweep base', 'Point, Activate, Spray, Sweep', 'Press, Aim, Squeeze, Sweep'], a: 0, subj: 'Fundamentals' },
+      { q: 'Correct order for donning PPE is:', opts: ['Gown, mask, goggles, gloves', 'Gown, mask, face shield, gloves', 'Gown, respirator, goggles, gloves', 'Mask, gown, gloves, goggles'], a: 0, subj: 'Fundamentals' },
       { q: 'Correct doffing order for PPE is:', opts: ['Gloves, goggles, gown, mask', 'Gown, gloves, goggles, mask', 'Mask first, then rest', 'All at once'], a: 0, subj: 'Fundamentals' },
       { q: 'A standing order differs from a protocol in that:', opts: ['It is pre-approved for specific situations', 'It requires physician presence', 'It cannot be delegated', 'It expires daily'], a: 0, subj: 'Fundamentals' },
       { q: 'First step in nursing process is:', opts: ['Assessment', 'Diagnosis', 'Planning', 'Implementation'], a: 0, subj: 'Fundamentals' },
@@ -3130,8 +4005,8 @@
       { q: 'Akathisia from antipsychotics presents as:', opts: ['Motor restlessness, inability to sit still', 'Drowsiness', 'Rigidity', 'Tremor at rest'], a: 0, subj: 'Psych' },
       { q: 'Black box warning for antidepressants:', opts: ['Increased suicidal ideation in young adults', 'Weight gain', 'Sexual dysfunction', 'Withdrawal symptoms'], a: 0, subj: 'Psych' },
       /* Pharmacology */
-      { q: 'ACE inhibitors (e.g., lisinopril) may cause:', opts: ['Dry cough, angioedema, hyperkalemia', 'Hypokalemia', 'Hypotension only', 'No notable side effects'], a: 0, subj: 'Pharmacology' },
-      { q: 'Beta-blockers should be used cautiously in:', opts: ['Asthma, heart block, bradycardia', 'Hypertension only', 'Diabetes only', 'No contraindications'], a: 0, subj: 'Pharmacology' },
+      { q: 'ACE inhibitors (e.g., lisinopril) may cause:', opts: ['Dry cough, angioedema, hyperkalemia', 'Hypotension and dizziness', 'Renal impairment', 'Taste disturbance'], a: 0, subj: 'Pharmacology' },
+      { q: 'Beta-blockers should be used cautiously in:', opts: ['Asthma, heart block, bradycardia', 'COPD and diabetes', 'Heart failure', 'Thyroid disorders'], a: 0, subj: 'Pharmacology' },
       { q: 'Metformin should be held before:', opts: ['Contrast dye procedures (risk of lactic acidosis)', 'Surgery only', 'Meals', 'Exercise'], a: 0, subj: 'Pharmacology' },
       { q: 'Warfarin interacts with:', opts: ['Vitamin K-rich foods, many drugs, NSAIDs', 'Only alcohol', 'Only aspirin', 'Nothing significant'], a: 0, subj: 'Pharmacology' },
       { q: 'Aminoglycosides (e.g., gentamicin) can cause:', opts: ['Nephrotoxicity, ototoxicity', 'Hepatotoxicity only', 'No major toxicity', 'Bone marrow suppression'], a: 0, subj: 'Pharmacology' },
