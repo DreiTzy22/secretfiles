@@ -6,6 +6,7 @@
   <title>DigiNursing v2</title>
   <link rel="icon" type="image/png" href="capybara/cute-capibara-character-different-poses.png">
 
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
@@ -2105,8 +2106,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="flower_embed.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.min.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.7.0/firebase-app-compat.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.7.0/firebase-database-compat.min.js"></script>
 
   <script>
     const video = document.getElementById('video');
@@ -5595,13 +5597,11 @@
     });
 
     /* --- Hidden developer feature: live user count ---
-     * Trigger: triple-click the "Bea's Photo Booth" title
-     * Setup: Add your Firebase config below. Get it at console.firebase.google.com
-     * Create project → Realtime Database → Copy config. Set rules:
-     * { "rules": { "presence": { ".read": true, ".write": true } } }
+     * Trigger: triple-click the "Bea's Academic Sanctuary" title
+     * Config: Edit firebase-config.js with your Firebase project config
      */
     (function() {
-      const DEV_CONFIG = null; /* Replace with: { apiKey:"...", authDomain:"...", databaseURL:"...", projectId:"...", storageBucket:"...", messagingSenderId:"...", appId:"..." } */
+      const DEV_CONFIG = (typeof window !== 'undefined' && window.FIREBASE_CONFIG) || null;
       const badge = document.getElementById('dev-presence-badge');
       const h1 = document.querySelector('h1');
       let db = null, presenceRef = null, myUid = null;
@@ -5623,7 +5623,11 @@
       function initPresence() {
         if (db) return;
         try {
-          if (typeof firebase === 'undefined') { setBadge('Firebase not loaded'); return; }
+          if (typeof firebase === 'undefined') {
+            const hint = window.location.protocol === 'file:' ? 'Use a local server (e.g. Live Server)' : 'Check network/CDN';
+            setBadge('Firebase not loaded (' + hint + ')');
+            return;
+          }
           const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(DEV_CONFIG);
           db = firebase.database(app);
           myUid = 'u_' + Math.random().toString(36).slice(2) + '_' + Date.now();
