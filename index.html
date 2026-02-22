@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DigiBooth v1.0</title>
+  <title>DigiBooth v1.5</title>
   <link rel="icon" type="image/png" href="capybara/cute-capibara-character-different-poses.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -499,6 +499,225 @@
 
     .minigame-section h2::before { content: '🩺 '; }
 
+    /* Budget Tracker */
+    .budget-section {
+      background: linear-gradient(145deg, var(--white), rgba(77, 182, 172, 0.12));
+      border-radius: 24px;
+      padding: 1.75rem 2rem;
+      box-shadow: 0 8px 32px var(--shadow), 0 0 0 1px rgba(77, 182, 172, 0.3);
+      border: 2px solid var(--nursing-teal);
+    }
+
+    .budget-section h2 {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--nursing-teal);
+      font-weight: 700;
+    }
+
+    .budget-section h2::before { content: '💰 '; }
+
+    .budget-overview {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .budget-card {
+      flex: 1;
+      min-width: 140px;
+      padding: 1rem 1.25rem;
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .budget-card.total {
+      background: linear-gradient(145deg, var(--nursing-soft), var(--pink-light));
+      border: 2px solid var(--nursing-teal);
+    }
+
+    .budget-card.spent {
+      background: linear-gradient(145deg, #FFEBEE, #ffd6e0);
+      border: 2px solid var(--pink-accent);
+    }
+
+    .budget-card.remaining {
+      background: linear-gradient(145deg, #E8F5E9, #C8E6C9);
+      border: 2px solid var(--capybara-sage);
+    }
+
+    .budget-card-label {
+      font-size: 0.8rem;
+      color: var(--capybara-brown);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .budget-card-value {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .budget-card.total .budget-card-value { color: var(--nursing-teal); }
+    .budget-card.spent .budget-card-value { color: var(--pink-dark); }
+    .budget-card.remaining .budget-card-value { color: var(--capybara-sage); }
+
+    .budget-form {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+    }
+
+    .budget-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .budget-form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--capybara-brown);
+    }
+
+    .budget-form input, .budget-form select {
+      padding: 0.5rem 0.75rem;
+      border: 2px solid var(--nursing-light);
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .budget-form input:focus, .budget-form select:focus {
+      outline: none;
+      border-color: var(--nursing-teal);
+    }
+
+    .budget-expense-list {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .budget-expense-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: var(--pink-light);
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+      border: 1px solid rgba(255, 133, 179, 0.3);
+    }
+
+    .budget-expense-item .expense-info {
+      flex: 1;
+    }
+
+    .budget-expense-item .expense-desc {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .budget-expense-item .expense-meta {
+      font-size: 0.8rem;
+      color: var(--capybara-brown);
+    }
+
+    .budget-expense-item .expense-amount {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      color: var(--pink-dark);
+      margin-right: 0.75rem;
+    }
+
+    .budget-expense-item button.budget-delete {
+      padding: 0.35rem 0.6rem;
+      border: none;
+      background: var(--nursing-red);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .budget-expense-item button.budget-delete:hover {
+      opacity: 0.9;
+    }
+
+    .budget-empty {
+      text-align: center;
+      padding: 2rem;
+      color: var(--capybara-brown);
+      font-style: italic;
+    }
+
+    .receipt-modal-box {
+      max-width: 360px;
+    }
+
+    .receipt-output {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      background: #fff;
+      padding: 1.5rem;
+      border: 2px dashed var(--capybara-brown);
+      border-radius: 8px;
+      text-align: center;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .receipt-output .receipt-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.5rem;
+    }
+
+    .receipt-output .receipt-date {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .receipt-output .receipt-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 0.25rem 0;
+    }
+
+    .receipt-output .receipt-divider {
+      border-top: 1px dashed #999;
+      margin: 0.5rem 0;
+    }
+
+    .receipt-output .receipt-total {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .receipt-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    @media print {
+      .modal-overlay#receipt-modal { background: white; padding: 0; }
+      .receipt-actions, .modal-box .btn { display: none !important; }
+      .receipt-output { border: 1px solid #333; }
+    }
+
     .minigame-section > p {
       font-size: 0.9rem;
       color: var(--capybara-brown);
@@ -754,6 +973,23 @@
       color: #2E7D32;
       font-weight: 600;
     }
+
+    /* Hidden dev: live user count badge */
+    #dev-presence-badge {
+      display: none;
+      position: fixed;
+      bottom: 12px;
+      right: 12px;
+      padding: 6px 12px;
+      background: rgba(0,0,0,0.75);
+      color: #7fdbff;
+      font-family: monospace;
+      font-size: 12px;
+      border-radius: 8px;
+      z-index: 99999;
+      pointer-events: none;
+    }
+    #dev-presence-badge.visible { display: block; }
 
     /* Word Scramble */
     .scramble-display {
@@ -1323,6 +1559,7 @@
   <div class="mode-selector">
     <button type="button" class="mode-btn active" data-mode="photobooth">📷 Photo Booth</button>
     <button type="button" class="mode-btn" data-mode="minigames">🩺 Mini Games</button>
+    <button type="button" class="mode-btn" data-mode="budget">💰 Budget Tracker</button>
   </div>
 
   <div class="about-btn-wrap">
@@ -1516,10 +1753,88 @@
     </section>
     </div>
     <!-- End Mini Games content -->
+
+    <!-- Budget Tracker mode content -->
+    <div id="budget-content" class="mode-content">
+      <section class="budget-section">
+        <h2>Budget Tracker</h2>
+        <p style="font-size: 0.9rem; color: var(--capybara-brown); margin-bottom: 1rem;">Set your allowance and track expenses. Remaining = Allowance − Deductions.</p>
+
+        <div class="budget-overview">
+          <div class="budget-card total">
+            <div class="budget-card-label">Allowance</div>
+            <div class="budget-card-value" id="budget-total">₱0</div>
+          </div>
+          <div class="budget-card spent">
+            <div class="budget-card-label">Deductions</div>
+            <div class="budget-card-value" id="budget-spent">₱0</div>
+          </div>
+          <div class="budget-card remaining">
+            <div class="budget-card-label">Remaining</div>
+            <div class="budget-card-value" id="budget-remaining">₱0</div>
+          </div>
+        </div>
+
+        <div class="budget-form">
+          <div class="budget-form-group">
+            <label for="budget-amount">Set Allowance (₱)</label>
+            <input type="number" id="budget-amount" placeholder="e.g. 4500" min="0" step="100">
+          </div>
+          <button type="button" class="btn btn-primary" id="budget-set-btn">Set Allowance</button>
+        </div>
+
+        <div class="budget-form">
+          <div class="budget-form-group">
+            <label for="new-allowance">New Allowance (₱) + Remaining</label>
+            <input type="number" id="new-allowance" placeholder="e.g. 4500 (base for next period)" min="0" step="100">
+          </div>
+          <button type="button" class="btn btn-secondary" id="carryover-btn" title="Add remaining to new allowance, clear deductions">Add Remaining to Next Allowance</button>
+        </div>
+
+        <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--capybara-brown);">Add Deduction</h3>
+        <div class="budget-form">
+          <div class="budget-form-group">
+            <label for="expense-desc">Description</label>
+            <input type="text" id="expense-desc" placeholder="e.g. Groceries">
+          </div>
+          <div class="budget-form-group">
+            <label for="expense-amount">Amount (₱)</label>
+            <input type="number" id="expense-amount" placeholder="0" min="0" step="0.01">
+          </div>
+          <button type="button" class="btn btn-primary" id="expense-add-btn">Add Deduction</button>
+        </div>
+
+        <h3 style="font-size: 1rem; margin: 1rem 0 0.5rem; color: var(--capybara-brown);">Deduction History</h3>
+        <div class="budget-expense-list" id="budget-expense-list">
+          <div class="budget-empty" id="budget-empty">No deductions yet. Add your first deduction above!</div>
+        </div>
+
+        <div class="budget-receipt-actions" style="margin-top: 1.5rem;">
+          <button type="button" class="btn btn-primary" id="receipt-btn">🧾 Generate Receipt</button>
+        </div>
+      </section>
+    </div>
+    <!-- End Budget Tracker content -->
+
+  <!-- Receipt modal -->
+  <div class="modal-overlay hidden" id="receipt-modal">
+    <div class="modal-box receipt-modal-box">
+      <div id="receipt-output" class="receipt-output"></div>
+      <div class="receipt-actions">
+        <button type="button" class="btn btn-outline" id="receipt-print">Print</button>
+        <button type="button" class="btn btn-primary" id="receipt-download">Download Image</button>
+        <button type="button" class="btn btn-outline" id="receipt-close">Close</button>
+      </div>
+    </div>
   </div>
+  </div>
+
+  <div id="dev-presence-badge">👥 Online: --</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="flower_embed.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.min.js"></script>
 
   <script>
     const video = document.getElementById('video');
@@ -1604,18 +1919,198 @@
 
     const STORAGE_KEY = 'bea-photobooth-draft';
 
-    // Mode selector: Photo Booth / Mini Games (only one visible at a time)
+    // Mode selector: Photo Booth / Mini Games / Budget Tracker (only one visible at a time)
     const photoboothContent = document.getElementById('photobooth-content');
     const minigameContent = document.getElementById('minigame-content');
+    const budgetContent = document.getElementById('budget-content');
     document.querySelectorAll('.mode-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const isPhotobooth = btn.dataset.mode === 'photobooth';
-        photoboothContent.classList.toggle('visible', isPhotobooth);
-        minigameContent.classList.toggle('visible', !isPhotobooth);
+        const mode = btn.dataset.mode;
+        photoboothContent.classList.toggle('visible', mode === 'photobooth');
+        minigameContent.classList.toggle('visible', mode === 'minigames');
+        budgetContent.classList.toggle('visible', mode === 'budget');
       });
     });
+
+    // Budget Tracker (simple: allowance − deductions = remaining)
+    const BUDGET_STORAGE_KEY = 'bea-budget-tracker';
+    let budgetData = {
+      allowance: 4500, // default ₱300/day × 15 days
+      expenses: [] // { id, desc, amount, category }
+    };
+    try {
+      const saved = localStorage.getItem(BUDGET_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        budgetData.allowance = parsed.allowance ?? parsed.monthlyBudget ?? 4500;
+        budgetData.expenses = (parsed.expenses || []).filter(e => e && e.id);
+      }
+    } catch (e) {}
+
+    function saveBudget() {
+      try { localStorage.setItem(BUDGET_STORAGE_KEY, JSON.stringify(budgetData)); } catch (e) {}
+      updateBudgetUI();
+    }
+
+    function updateBudgetUI() {
+      const allowance = budgetData.allowance || 0;
+      const spent = budgetData.expenses.reduce((s, e) => s + (parseFloat(e.amount) || 0), 0);
+      const remaining = allowance - spent;
+
+      const totalEl = document.getElementById('budget-total');
+      const spentEl = document.getElementById('budget-spent');
+      const remainingEl = document.getElementById('budget-remaining');
+      const listEl = document.getElementById('budget-expense-list');
+      const emptyEl = document.getElementById('budget-empty');
+      if (!totalEl || !spentEl || !remainingEl) return;
+
+      totalEl.textContent = '₱' + allowance.toLocaleString('en-PH', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+      spentEl.textContent = '₱' + spent.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      remainingEl.textContent = '₱' + remaining.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      remainingEl.style.color = remaining < 0 ? 'var(--nursing-red)' : '';
+
+      const expenseItems = budgetData.expenses.slice().reverse();
+      if (emptyEl) emptyEl.style.display = expenseItems.length ? 'none' : 'block';
+      if (listEl) {
+        listEl.querySelectorAll('.budget-expense-item').forEach(el => el.remove());
+        expenseItems.forEach(exp => {
+          const div = document.createElement('div');
+          div.className = 'budget-expense-item';
+          div.innerHTML = `
+            <div class="expense-info">
+              <div class="expense-desc">${(exp.desc || 'Expense').replace(/</g, '&lt;')}</div>
+            </div>
+            <span class="expense-amount">₱${(parseFloat(exp.amount) || 0).toLocaleString('en-PH', { minimumFractionDigits: 2 })}</span>
+            <button type="button" class="budget-delete" data-id="${exp.id}" title="Delete">×</button>
+          `;
+          div.querySelector('.budget-delete').addEventListener('click', () => {
+            budgetData.expenses = budgetData.expenses.filter(e => e.id !== exp.id);
+            saveBudget();
+          });
+          listEl.appendChild(div);
+        });
+      }
+    }
+
+    document.getElementById('budget-set-btn')?.addEventListener('click', () => {
+      const inp = document.getElementById('budget-amount');
+      const val = parseFloat(inp?.value);
+      if (!isNaN(val) && val >= 0) {
+        budgetData.allowance = val;
+        saveBudget();
+        if (inp) inp.value = '';
+      }
+    });
+
+    document.getElementById('carryover-btn')?.addEventListener('click', () => {
+      const newInp = document.getElementById('new-allowance');
+      const newVal = parseFloat(newInp?.value);
+      if (isNaN(newVal) || newVal < 0) return;
+      const spent = budgetData.expenses.reduce((s, e) => s + (parseFloat(e.amount) || 0), 0);
+      const remaining = (budgetData.allowance || 0) - spent;
+      budgetData.allowance = newVal + remaining;
+      budgetData.expenses = [];
+      if (newInp) newInp.value = '';
+      saveBudget();
+    });
+
+    document.getElementById('new-allowance')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); document.getElementById('carryover-btn')?.click(); }
+    });
+
+    document.getElementById('budget-amount')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); document.getElementById('budget-set-btn')?.click(); }
+    });
+
+    const addExpense = () => {
+      const descInp = document.getElementById('expense-desc');
+      const amtInp = document.getElementById('expense-amount');
+      const desc = (descInp?.value || '').trim();
+      const amount = parseFloat(amtInp?.value);
+      if (!desc) return;
+      if (isNaN(amount) || amount < 0) return;
+
+      budgetData.expenses.push({
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2),
+        desc,
+        amount
+      });
+      saveBudget();
+      if (descInp) descInp.value = '';
+      if (amtInp) amtInp.value = '';
+    };
+
+    document.getElementById('expense-add-btn')?.addEventListener('click', addExpense);
+    ['expense-desc', 'expense-amount'].forEach(id => {
+      document.getElementById(id)?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); addExpense(); }
+      });
+    });
+
+    // Receipt
+    const receiptModal = document.getElementById('receipt-modal');
+    const receiptOutput = document.getElementById('receipt-output');
+
+    function generateReceiptHTML() {
+      const allowance = budgetData.allowance || 0;
+      const spent = budgetData.expenses.reduce((s, e) => s + (parseFloat(e.amount) || 0), 0);
+      const remaining = allowance - spent;
+      const dateStr = new Date().toLocaleString('en-PH', { dateStyle: 'medium', timeStyle: 'short' });
+
+      let lines = `
+        <div class="receipt-title">BUDGET RECEIPT</div>
+        <div class="receipt-date">${dateStr}</div>
+        <div class="receipt-divider"></div>
+        <div class="receipt-line"><span>Allowance</span><span>₱${allowance.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</span></div>
+      `;
+
+      budgetData.expenses.forEach((e, i) => {
+        const amt = parseFloat(e.amount) || 0;
+        const desc = (e.desc || 'Item').replace(/</g, '&lt;').slice(0, 30);
+        lines += `<div class="receipt-line"><span>${desc}</span><span>₱${amt.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</span></div>`;
+      });
+
+      lines += `
+        <div class="receipt-divider"></div>
+        <div class="receipt-line"><span>Total Deductions</span><span>₱${spent.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</span></div>
+        <div class="receipt-line receipt-total"><span>Remaining</span><span>₱${remaining.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</span></div>
+        <div class="receipt-divider"></div>
+        <div class="receipt-date">Thank you!</div>
+      `;
+
+      return lines;
+    }
+
+    document.getElementById('receipt-btn')?.addEventListener('click', () => {
+      receiptOutput.innerHTML = generateReceiptHTML();
+      receiptModal.classList.remove('hidden');
+    });
+
+    document.getElementById('receipt-close')?.addEventListener('click', () => {
+      receiptModal.classList.add('hidden');
+    });
+
+    document.getElementById('receipt-print')?.addEventListener('click', () => {
+      window.print();
+    });
+
+    document.getElementById('receipt-download')?.addEventListener('click', () => {
+      if (typeof html2canvas === 'undefined') return;
+      html2canvas(receiptOutput, { backgroundColor: '#ffffff', scale: 2 }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'budget-receipt-' + new Date().toISOString().slice(0,10) + '.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    });
+
+    receiptModal?.addEventListener('click', (e) => {
+      if (e.target === receiptModal) receiptModal.classList.add('hidden');
+    });
+
+    updateBudgetUI();
 
     // Flower picker - click to add flower (same flower can be added multiple times)
     const flowerPickerGrid = document.getElementById('flower-picker-grid');
@@ -2872,7 +3367,354 @@
       { q: 'Tramadol has both:', opts: ['Opioid and SNRI-like effects', 'Only opioid', 'Only antidepressant', 'No analgesic effect'], a: 0, subj: 'Pharmacology' },
       { q: 'Acetaminophen max daily dose (adult) is generally:', opts: ['3000–4000 mg', '2000 mg', '6000 mg', 'No limit'], a: 0, subj: 'Pharmacology' },
       { q: 'Aspirin for cardiac prevention is often:', opts: ['Low dose (81 mg)', 'High dose (325 mg)', 'No dose', 'PRN only'], a: 0, subj: 'Pharmacology' },
-      { q: 'Ketorolac is:', opts: ['Short-term NSAID, max 5 days', 'Long-term use', 'No limit', 'Topical only'], a: 0, subj: 'Pharmacology' }
+      { q: 'Ketorolac is:', opts: ['Short-term NSAID, max 5 days', 'Long-term use', 'No limit', 'Topical only'], a: 0, subj: 'Pharmacology' },
+      /* +100 Fundamentals */
+      { q: 'Primary prevention focuses on:', opts: ['Preventing disease before it occurs', 'Treating existing disease', 'Rehabilitation', 'Screening only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Secondary prevention includes:', opts: ['Screening and early detection', 'Vaccinations only', 'Surgery', 'Palliative care'], a: 0, subj: 'Fundamentals' },
+      { q: 'Tertiary prevention aims to:', opts: ['Reduce complications, manage chronic disease', 'Prevent new cases', 'Screen for disease', 'Cure disease'], a: 0, subj: 'Fundamentals' },
+      { q: 'Health promotion differs from disease prevention in that it:', opts: ['Focuses on wellness and positive health', 'Only prevents illness', 'Treats disease', 'Is the same'], a: 0, subj: 'Fundamentals' },
+      { q: 'A nursing care plan is:', opts: ['Individualized and dynamic', 'Same for all patients', 'Written by doctor only', 'Optional'], a: 0, subj: 'Fundamentals' },
+      { q: 'Expected outcomes should be:', opts: ['Measurable and time-bound', 'Vague and general', 'Written by family', 'Ignored'], a: 0, subj: 'Fundamentals' },
+      { q: 'Nursing interventions are:', opts: ['Actions to achieve outcomes', 'Diagnoses only', 'Doctor orders', 'Family requests'], a: 0, subj: 'Fundamentals' },
+      { q: 'Independent nursing interventions:', opts: ['Do not require physician order', 'Always need order', 'Are illegal', 'Only for RNs'], a: 0, subj: 'Fundamentals' },
+      { q: 'Dependent interventions require:', opts: ['Physician or prescriber order', 'No order', 'Family consent only', 'Nurse judgment only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Collaborative interventions involve:', opts: ['Multiple healthcare team members', 'Nurse only', 'Family only', 'No one else'], a: 0, subj: 'Fundamentals' },
+      { q: 'Clinical pathways are:', opts: ['Standardized care plans for common conditions', 'Individual only', 'Optional', 'Not evidence-based'], a: 0, subj: 'Fundamentals' },
+      { q: 'Critical thinking in nursing means:', opts: ['Analyzing, evaluating, making informed decisions', 'Following orders only', 'Guessing', 'Avoiding decisions'], a: 0, subj: 'Fundamentals' },
+      { q: 'Evidence-based practice combines:', opts: ['Research, clinical expertise, patient values', 'Opinion only', 'Tradition only', 'Cost only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Therapeutic relationship is built on:', opts: ['Trust, respect, professional boundaries', 'Friendship', 'Secrets', 'Favoritism'], a: 0, subj: 'Fundamentals' },
+      { q: 'Empathy in nursing means:', opts: ['Understanding patient feelings without losing objectivity', 'Feeling same as patient', 'Crying with patient', 'Avoiding emotion'], a: 0, subj: 'Fundamentals' },
+      { q: 'Sympathy differs from empathy in that sympathy:', opts: ['Involves sharing distress', 'Maintains professional distance', 'Is always wrong', 'Is the same'], a: 0, subj: 'Fundamentals' },
+      { q: 'Closed-ended questions elicit:', opts: ['Brief, specific answers', 'Long narratives', 'Feelings only', 'Nothing'], a: 0, subj: 'Fundamentals' },
+      { q: 'Open-ended questions encourage:', opts: ['Detailed patient response', 'Yes/no only', 'Silence', 'Short answers'], a: 0, subj: 'Fundamentals' },
+      { q: 'Clarifying in communication means:', opts: ['Asking for more information when unclear', 'Changing subject', 'Ignoring', 'Assuming'], a: 0, subj: 'Fundamentals' },
+      { q: 'Paraphrasing demonstrates:', opts: ['Active listening and understanding', 'Ignoring', 'Interrupting', 'Judgment'], a: 0, subj: 'Fundamentals' },
+      { q: 'Non-therapeutic communication includes:', opts: ['Giving advice, false reassurance', 'Listening', 'Clarifying', 'Reflecting'], a: 0, subj: 'Fundamentals' },
+      { q: 'When a patient is nonverbal, you can:', opts: ['Use touch, pictures, writing', 'Ignore them', 'Assume understanding', 'Leave'], a: 0, subj: 'Fundamentals' },
+      { q: 'Health literacy affects patient outcomes because:', opts: ['Low literacy impairs understanding of care', 'It does not matter', 'Only reading matters', 'Nurses explain everything'], a: 0, subj: 'Fundamentals' },
+      { q: 'An interpreter should be used when:', opts: ['Patient prefers or has limited English', 'Never', 'Family can translate', 'Nurse knows some words'], a: 0, subj: 'Fundamentals' },
+      { q: 'Family-centered care means:', opts: ['Involving family in care decisions', 'Ignoring family', 'Family makes all decisions', 'Excluding family'], a: 0, subj: 'Fundamentals' },
+      { q: 'Patient education should be:', opts: ['Individualized, clear, evaluated', 'One-size-fits-all', 'Brief only', 'Written only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Learning styles include:', opts: ['Visual, auditory, kinesthetic', 'Only reading', 'Only listening', 'None'], a: 0, subj: 'Fundamentals' },
+      { q: 'Barriers to learning include:', opts: ['Anxiety, pain, cognitive impairment', 'Nothing', 'Only age', 'Only language'], a: 0, subj: 'Fundamentals' },
+      { q: 'Discharge teaching should begin:', opts: ['At admission', 'Day of discharge', 'When family arrives', 'Never'], a: 0, subj: 'Fundamentals' },
+      { q: 'A transfer report includes:', opts: ['Current status, care plan, pending items', 'Only diagnosis', 'Nothing', 'Gossip'], a: 0, subj: 'Fundamentals' },
+      { q: 'Handoff communication reduces:', opts: ['Errors and omissions in care', 'Time', 'Documentation', 'Nothing'], a: 0, subj: 'Fundamentals' },
+      { q: 'I-SBAR adds:', opts: ['Introduction (who you are)', 'Nothing', 'Only Situation', 'Only Recommendation'], a: 0, subj: 'Fundamentals' },
+      { q: 'CUS words (Concerned, Uncomfortable, Safety) help:', opts: ['Escalate safety concerns', 'Ignore problems', 'Avoid conflict', 'Document only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Two-challenge rule means:', opts: ['Address concern twice before escalating', 'Challenge patient', 'Never escalate', 'Ignore first time'], a: 0, subj: 'Fundamentals' },
+      { q: 'TeamSTEPPS promotes:', opts: ['Team communication and safety', 'Individual work', 'Hierarchy only', 'Blame culture'], a: 0, subj: 'Fundamentals' },
+      { q: 'Cognitive load in nursing refers to:', opts: ['Mental demand of tasks', 'Physical load', 'Patient weight', 'Documentation only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Workarounds can:', opts: ['Introduce safety risks', 'Always improve care', 'Replace policy', 'Be ignored'], a: 0, subj: 'Fundamentals' },
+      { q: 'Near-miss reporting helps:', opts: ['Identify system improvements', 'Punish staff', 'Hide errors', 'Save time'], a: 0, subj: 'Fundamentals' },
+      { q: 'Root cause analysis aims to:', opts: ['Find system failures, not blame', 'Blame individuals', 'Punish', 'Hide issues'], a: 0, subj: 'Fundamentals' },
+      { q: 'Just culture balances:', opts: ['Accountability and learning', 'Blame only', 'No accountability', 'Secrecy'], a: 0, subj: 'Fundamentals' },
+      { q: 'Medication reconciliation compares:', opts: ['Current meds across care transitions', 'Only at admission', 'Never', 'Only discharge'], a: 0, subj: 'Fundamentals' },
+      { q: 'High-alert medications include:', opts: ['Insulin, heparin, opioids', 'Vitamins only', 'OTC only', 'None'], a: 0, subj: 'Fundamentals' },
+      { q: 'Look-alike, sound-alike (LASA) drugs require:', opts: ['Extra verification', 'No special care', 'Same storage', 'Ignoring'], a: 0, subj: 'Fundamentals' },
+      { q: 'Unit dose packaging reduces:', opts: ['Dosing errors', 'Cost only', 'Nothing', 'Storage'], a: 0, subj: 'Fundamentals' },
+      { q: 'Barcode scanning at bedside:', opts: ['Verifies right drug, dose, patient', 'Slows care', 'Not needed', 'Optional'], a: 0, subj: 'Fundamentals' },
+      { q: 'Tall man lettering (e.g., hydrALAzine) helps:', opts: ['Distinguish similar drug names', 'Nothing', 'Readability only', 'Marketing'], a: 0, subj: 'Fundamentals' },
+      { q: 'Abbreviations to avoid include:', opts: ['U (unit), QD, trailing zeros', 'All abbreviations', 'None', 'Only U'], a: 0, subj: 'Fundamentals' },
+      { q: 'Leading zeros (0.5 not .5) prevent:', opts: ['Overdose from misreading', 'Nothing', 'Confusion', 'Cost'], a: 0, subj: 'Fundamentals' },
+      { q: 'Trailing zeros (5 not 5.0) prevent:', opts: ['Overdose from misreading', 'Nothing', 'Underdose', 'Error'], a: 0, subj: 'Fundamentals' },
+      { q: 'Culture affects health beliefs including:', opts: ['Diet, treatment preferences, family role', 'Nothing', 'Only religion', 'Only language'], a: 0, subj: 'Fundamentals' },
+      { q: 'Spiritual distress may present as:', opts: ['Hopelessness, questioning meaning', 'Physical pain only', 'Anger only', 'Nothing'], a: 0, subj: 'Fundamentals' },
+      { q: 'Spiritual care includes:', opts: ['Presence, listening, facilitating practices', 'Converting', 'Ignoring', 'Medication only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Age affects drug absorption due to:', opts: ['Metabolic and organ changes', 'Nothing', 'Only weight', 'Only diet'], a: 0, subj: 'Fundamentals' },
+      { q: 'Polypharmacy increases risk of:', opts: ['Interactions, adverse effects', 'Cure', 'Nothing', 'Compliance only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Medication adherence barriers include:', opts: ['Cost, complexity, side effects', 'Nothing', 'Only forgetfulness', 'Only age'], a: 0, subj: 'Fundamentals' },
+      { q: 'Vulnerable populations may include:', opts: ['Elderly, homeless, mentally ill', 'No one', 'Only children', 'Only poor'], a: 0, subj: 'Fundamentals' },
+      { q: 'Social determinants of health include:', opts: ['Income, education, environment', 'Genes only', 'Nothing', 'Only diet'], a: 0, subj: 'Fundamentals' },
+      { q: 'Health disparities are:', opts: ['Avoidable differences in health outcomes', 'Same for all', 'Genetic only', 'Inevitable'], a: 0, subj: 'Fundamentals' },
+      { q: 'Advocacy in nursing means:', opts: ['Speaking up for patient rights and needs', 'Obeying only', 'Ignoring', 'Family only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Informed refusal must be:', opts: ['Documented like informed consent', 'Ignored', 'Overridden', 'Not documented'], a: 0, subj: 'Fundamentals' },
+      { q: 'Capacity to make decisions means:', opts: ['Ability to understand and decide', 'Always present', 'Never present', 'Same as competence'], a: 0, subj: 'Fundamentals' },
+      { q: 'Competence is a legal determination by:', opts: ['Court', 'Nurse', 'Doctor', 'Family'], a: 0, subj: 'Fundamentals' },
+      { q: 'A surrogate decision-maker acts when:', opts: ['Patient lacks capacity', 'Family requests', 'Always', 'Never'], a: 0, subj: 'Fundamentals' },
+      { q: 'POLST (Physician Orders for Life-Sustaining Treatment):', opts: ['Translates wishes into medical orders', 'Replaces advance directive', 'Is optional only', 'Expires daily'], a: 0, subj: 'Fundamentals' },
+      { q: 'Palliative care focuses on:', opts: ['Quality of life, symptom management', 'Cure only', 'End of life only', 'Hospice only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Hospice is for:', opts: ['Terminal illness, life expectancy limited', 'All patients', 'Recovery', 'Acute care'], a: 0, subj: 'Fundamentals' },
+      { q: 'DNR does not mean:', opts: ['Do not treat; comfort care still given', 'No care', 'No medication', 'Abandon patient'], a: 0, subj: 'Fundamentals' },
+      { q: 'Active listening involves:', opts: ['Full attention, nonverbal cues', 'Planning response', 'Interrupting', 'Multitasking'], a: 0, subj: 'Fundamentals' },
+      { q: 'Therapeutic silence allows:', opts: ['Patient to gather thoughts', 'Nurse to leave', 'Nothing', 'Awkwardness only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Touch in nursing should be:', opts: ['Appropriate, purposeful, patient-acceptable', 'Avoided', 'Frequent', 'Unplanned'], a: 0, subj: 'Fundamentals' },
+      { q: 'Personal space varies by:', opts: ['Culture, situation, individual', 'Nothing', 'Age only', 'Gender only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Documentation principles include:', opts: ['Factual, timely, accurate', 'Brief and vague', 'Delayed', 'Oral preferred'], a: 0, subj: 'Fundamentals' },
+      { q: 'Charting by exception documents:', opts: ['Only abnormal or significant findings', 'Everything', 'Nothing', 'Only meds'], a: 0, subj: 'Fundamentals' },
+      { q: 'SOAP format stands for:', opts: ['Subjective, Objective, Assessment, Plan', 'Same, Only, Always, Plan', 'Simple, Objective, Action', 'Status Only'], a: 0, subj: 'Fundamentals' },
+      { q: 'DAR (Data, Action, Response) is used in:', opts: ['Focus charting', 'SOAP only', 'Never', 'Narrative only'], a: 0, subj: 'Fundamentals' },
+      { q: 'A variance in documentation means:', opts: ['Deviation from expected outcome', 'Normal finding', 'Error', 'Nothing'], a: 0, subj: 'Fundamentals' },
+      { q: 'Correcting a charting error:', opts: ['Single line through, initial, date, correct', 'Erase', 'White-out', 'Delete'], a: 0, subj: 'Fundamentals' },
+      { q: 'Never chart:', opts: ['Before care is given', 'After care', 'At shift end', 'When busy'], a: 0, subj: 'Fundamentals' },
+      { q: 'Confidentiality in telehealth requires:', opts: ['Secure platform, private setting', 'Any video app', 'No special care', 'Phone only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Telehealth nursing considerations include:', opts: ['Technology access, safety assessment', 'Nothing', 'Only video', 'Only phone'], a: 0, subj: 'Fundamentals' },
+      { q: 'Remote patient monitoring allows:', opts: ['Data collection between visits', 'No monitoring', 'Only in hospital', 'Only vital signs'], a: 0, subj: 'Fundamentals' },
+      { q: 'Safe patient handling programs reduce:', opts: ['Nurse and patient injury', 'Time only', 'Cost only', 'Nothing'], a: 0, subj: 'Fundamentals' },
+      { q: 'Mechanical lifts should be used when:', opts: ['Per facility policy, patient assessment', 'Never', 'Always', 'Only bariatric'], a: 0, subj: 'Fundamentals' },
+      { q: 'Repositioning schedule for immobile patients:', opts: ['Every 2 hours or per protocol', 'Every 4 hours', 'Once per shift', 'When requested'], a: 0, subj: 'Fundamentals' },
+      { q: 'Pressure injury staging uses:', opts: ['Stages 1-4, plus unstageable and DTI', 'Numbers only', 'Color only', 'No staging'], a: 0, subj: 'Fundamentals' },
+      { q: 'Stage 1 pressure injury shows:', opts: ['Non-blanchable erythema', 'Open wound', 'Deep tissue', 'Necrosis'], a: 0, subj: 'Fundamentals' },
+      { q: 'Deep tissue injury (DTI) may appear:', opts: ['Purple or maroon localized area', 'Open wound', 'Stage 1', 'Healed'], a: 0, subj: 'Fundamentals' },
+      { q: 'Braden scale assesses:', opts: ['Pressure injury risk', 'Fall risk', 'Pain', 'Nutrition'], a: 0, subj: 'Fundamentals' },
+      { q: 'Moisture-associated skin damage (MASD) includes:', opts: ['Incontinence-associated dermatitis', 'Only pressure', 'Only friction', 'Nothing'], a: 0, subj: 'Fundamentals' },
+      { q: 'Skin tears are classified by:', opts: ['Payne-Martin or ISTAP system', 'Stage 1-4', 'Color', 'Size only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Wound assessment includes:', opts: ['Location, size, drainage, surrounding skin', 'Color only', 'Nothing', 'Depth only'], a: 0, subj: 'Fundamentals' },
+      { q: 'Granulation tissue in healing appears:', opts: ['Pink/red, moist', 'Yellow', 'Black', 'White'], a: 0, subj: 'Fundamentals' },
+      { q: 'Slough in a wound is:', opts: ['Yellow/white necrotic tissue', 'Healthy tissue', 'Infection', 'Granulation'], a: 0, subj: 'Fundamentals' },
+      { q: 'Eschar is:', opts: ['Black/brown hard necrotic tissue', 'Healthy', 'Infection', 'Drainage'], a: 0, subj: 'Fundamentals' },
+      { q: 'Negative pressure wound therapy (NPWT):', opts: ['Promotes healing by suction', 'Prevents healing', 'Is outdated', 'Causes infection'], a: 0, subj: 'Fundamentals' },
+      /* +100 Med-Surg */
+      { q: 'Acute coronary syndrome (ACS) includes:', opts: ['Unstable angina, NSTEMI, STEMI', 'Stable angina only', 'CHF only', 'Arrhythmia only'], a: 0, subj: 'Med-Surg' },
+      { q: 'STEMI requires:', opts: ['Urgent reperfusion (PCI or thrombolytics)', 'Observation only', 'Medication only', 'Discharge'], a: 0, subj: 'Med-Surg' },
+      { q: 'Cardiac biomarkers include:', opts: ['Troponin, CK-MB, BNP', 'Only BUN', 'Only creatinine', 'Only WBC'], a: 0, subj: 'Med-Surg' },
+      { q: 'BNP (B-type natriuretic peptide) elevates with:', opts: ['Heart failure', 'Liver failure', 'Kidney failure only', 'Lung cancer'], a: 0, subj: 'Med-Surg' },
+      { q: 'Heart failure classification (NYHA) assesses:', opts: ['Functional capacity and symptoms', 'Ejection fraction only', 'BP only', 'Weight only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Left-sided heart failure causes:', opts: ['Pulmonary congestion, dyspnea', 'Peripheral edema only', 'JVD only', 'No pulmonary effects'], a: 0, subj: 'Med-Surg' },
+      { q: 'Right-sided heart failure causes:', opts: ['JVD, peripheral edema, hepatomegaly', 'Pulmonary edema', 'Dyspnea only', 'Cough only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Cardiogenic shock presents with:', opts: ['Hypotension, poor perfusion, pump failure', 'Hypertension', 'Warm extremities', 'Good output'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hypovolemic shock results from:', opts: ['Blood or fluid loss', 'Heart failure', 'Infection', 'Allergy'], a: 0, subj: 'Med-Surg' },
+      { q: 'Distributive shock includes:', opts: ['Septic, neurogenic, anaphylactic', 'Hypovolemic only', 'Cardiogenic only', 'None'], a: 0, subj: 'Med-Surg' },
+      { q: 'Obstructive shock is caused by:', opts: ['Tamponade, PE, tension pneumothorax', 'Bleeding', 'Infection', 'Heart failure'], a: 0, subj: 'Med-Surg' },
+      { q: 'Chest tube bubbling in water seal indicates:', opts: ['Air leak ( assess significance)', 'Normal', 'Clogged', 'Disconnected'], a: 0, subj: 'Med-Surg' },
+      { q: 'Chest tube tidaling with respiration is:', opts: ['Normal, reflects pressure changes', 'Air leak', 'Clogged', 'Problem'], a: 0, subj: 'Med-Surg' },
+      { q: 'Pneumonia prevention includes:', opts: ['Vaccination, hand hygiene, mobility', 'Bed rest', 'Fluids only', 'Antibiotics only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Community-acquired vs hospital-acquired pneumonia:', opts: ['Different pathogens, treatment', 'Same always', 'No difference', 'Only location'], a: 0, subj: 'Med-Surg' },
+      { q: 'COPD exacerbation management includes:', opts: ['Bronchodilators, steroids, oxygen', 'High-flow oxygen always', 'No oxygen', 'Antibiotics only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Asthma action plan includes:', opts: ['Green/yellow/red zones, when to seek help', 'Nothing', 'Only meds', 'Only peak flow'], a: 0, subj: 'Med-Surg' },
+      { q: 'Peak flow monitoring helps:', opts: ['Detect worsening asthma early', 'Nothing', 'Only diagnose', 'Only in hospital'], a: 0, subj: 'Med-Surg' },
+      { q: 'Pulmonary embolism prophylaxis includes:', opts: ['SCDs, anticoagulation, early mobility', 'Bed rest', 'No prophylaxis', 'Compression only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Wells score assesses:', opts: ['DVT/PE probability', 'MI risk', 'Stroke risk', 'Bleeding risk'], a: 0, subj: 'Med-Surg' },
+      { q: 'Renal failure can cause:', opts: ['Fluid overload, electrolyte imbalance', 'Dehydration only', 'No metabolic effects', 'Hypertension only'], a: 0, subj: 'Med-Surg' },
+      { q: 'AKI phases include:', opts: ['Oliguric, diuretic, recovery', 'Only oliguric', 'Only recovery', 'No phases'], a: 0, subj: 'Med-Surg' },
+      { q: 'Contrast-induced nephropathy prevention:', opts: ['Hydration, limit contrast', 'No prevention', 'Diuretics', 'NPO'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hemodialysis removes:', opts: ['Waste, excess fluid via blood', 'Nothing', 'Only fluid', 'Only toxins'], a: 0, subj: 'Med-Surg' },
+      { q: 'Peritoneal dialysis uses:', opts: ['Peritoneum as filter, dwell fluid', 'Blood only', 'Kidney', 'Liver'], a: 0, subj: 'Med-Surg' },
+      { q: 'Dialysis disequilibrium can cause:', opts: ['Headache, nausea, neurologic changes', 'Nothing', 'Hypotension only', 'Infection only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hepatorenal syndrome is:', opts: ['Renal failure in liver disease', 'Liver failure only', 'Heart failure', 'Sepsis'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hepatic encephalopathy signs include:', opts: ['Altered mental status, asterixis', 'Jaundice only', 'Ascites only', 'No neurologic signs'], a: 0, subj: 'Med-Surg' },
+      { q: 'Asterixis (liver flap) indicates:', opts: ['Metabolic encephalopathy', 'Stroke', 'Seizure', 'Normal'], a: 0, subj: 'Med-Surg' },
+      { q: 'Lactulose for hepatic encephalopathy works by:', opts: ['Reducing ammonia absorption', 'Constipation', 'Diuresis', 'Nothing'], a: 0, subj: 'Med-Surg' },
+      { q: 'Esophageal varices rupture is:', opts: ['Life-threatening bleed', 'Minor', 'Rare', 'Preventable easily'], a: 0, subj: 'Med-Surg' },
+      { q: 'TIPS (transjugular intrahepatic portosystemic shunt):', opts: ['Relieves portal hypertension', 'Cures cirrhosis', 'Transplants liver', 'Removes fluid'], a: 0, subj: 'Med-Surg' },
+      { q: 'Spontaneous bacterial peritonitis (SBP):', opts: ['Infection of ascitic fluid', 'Bowel infection', 'Liver infection', 'Pneumonia'], a: 0, subj: 'Med-Surg' },
+      { q: 'Paracentesis large-volume requires:', opts: ['Albumin replacement', 'Nothing', 'Fluids only', 'No replacement'], a: 0, subj: 'Med-Surg' },
+      { q: 'Acute pancreatitis causes include:', opts: ['Gallstones, alcohol', 'Only alcohol', 'Only diet', 'Infection only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Ranson criteria predict:', opts: ['Pancreatitis severity', 'Survival', 'Recurrence', 'Nothing'], a: 0, subj: 'Med-Surg' },
+      { q: 'Chronic pancreatitis leads to:', opts: ['Malabsorption, diabetes, pain', 'Acute only', 'No sequelae', 'Cure'], a: 0, subj: 'Med-Surg' },
+      { q: 'Inflammatory bowel disease (IBD) includes:', opts: ['Crohn\'s, ulcerative colitis', 'IBS only', 'Celiac only', 'Diverticulitis'], a: 0, subj: 'Med-Surg' },
+      { q: 'IBS (irritable bowel) differs from IBD:', opts: ['No structural damage, functional', 'Same', 'IBD is functional', 'No difference'], a: 0, subj: 'Med-Surg' },
+      { q: 'C. diff treatment includes:', opts: ['Vancomycin or fidaxomicin', 'Metronidazole only now', 'No antibiotics', 'Surgery only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Fecal transplant (FMT) is used for:', opts: ['Recurrent C. diff', 'First episode', 'All diarrhea', 'Constipation'], a: 0, subj: 'Med-Surg' },
+      { q: 'Upper GI bleed presents with:', opts: ['Hematemesis, melena', 'Bright red stool only', 'No blood', 'Diarrhea only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Lower GI bleed may present with:', opts: ['Bright red or dark stool', 'Hematemesis', 'Melena only', 'No change'], a: 0, subj: 'Med-Surg' },
+      { q: 'GERD management includes:', opts: ['Lifestyle, PPIs, elevation', 'Surgery only', 'No treatment', 'Antibiotics'], a: 0, subj: 'Med-Surg' },
+      { q: 'Barrett\'s esophagus is:', opts: ['Metaplastic change, cancer risk', 'Normal', 'GERD only', 'No risk'], a: 0, subj: 'Med-Surg' },
+      { q: 'Type 1 diabetes is characterized by:', opts: ['Autoimmune, insulin deficiency', 'Insulin resistance', 'Obesity', 'Adult onset'], a: 0, subj: 'Med-Surg' },
+      { q: 'Type 2 diabetes involves:', opts: ['Insulin resistance, relative deficiency', 'No insulin', 'Autoimmune', 'Childhood only'], a: 0, subj: 'Med-Surg' },
+      { q: 'DKA treatment includes:', opts: ['IV fluids, insulin, electrolyte replacement', 'Oral hypoglycemics', 'No insulin', 'Observation'], a: 0, subj: 'Med-Surg' },
+      { q: 'HHNS (HHS) differs from DKA:', opts: ['Higher glucose, less ketosis', 'Same', 'More ketosis', 'Lower glucose'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hypoglycemia treatment (conscious):', opts: ['15-20g fast-acting carbs', 'Insulin', 'Glucagon', 'Wait'], a: 0, subj: 'Med-Surg' },
+      { q: 'Glucagon is for:', opts: ['Severe hypoglycemia when unable to eat', 'Mild hypo', 'DKA', 'HHNS'], a: 0, subj: 'Med-Surg' },
+      { q: 'Diabetic neuropathy affects:', opts: ['Nerves, sensation, autonomic function', 'Eyes only', 'Kidneys only', 'Heart only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Diabetic retinopathy can lead to:', opts: ['Blindness', 'Nothing', 'Kidney failure', 'Neuropathy'], a: 0, subj: 'Med-Surg' },
+      { q: 'Diabetic nephropathy progresses to:', opts: ['ESRD', 'Recovery', 'No progression', 'Cure'], a: 0, subj: 'Med-Surg' },
+      { q: 'Metabolic syndrome includes:', opts: ['Obesity, HTN, dyslipidemia, glucose', 'Diabetes only', 'Obesity only', 'Nothing'], a: 0, subj: 'Med-Surg' },
+      { q: 'Addisonian crisis treatment:', opts: ['IV hydrocortisone, fluids', 'Oral steroids', 'Observation', 'No steroids'], a: 0, subj: 'Med-Surg' },
+      { q: 'SIADH treatment may include:', opts: ['Fluid restriction, hypertonic saline', 'Free water', 'Diuretics only', 'No restriction'], a: 0, subj: 'Med-Surg' },
+      { q: 'Diabetes insipidus treatment:', opts: ['Vasopressin, fluids', 'Fluid restriction', 'Diuretics', 'Nothing'], a: 0, subj: 'Med-Surg' },
+      { q: 'Syndrome of inappropriate antidiuretic hormone:', opts: ['Causes hyponatremia', 'Hypernatremia', 'Hyperkalemia', 'Hypokalemia'], a: 0, subj: 'Med-Surg' },
+      { q: 'SIADH causes:', opts: ['Dilutional hyponatremia', 'Concentrated blood', 'Dehydration', 'Hypervolemia'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hyperkalemia EKG changes:', opts: ['Peaked T waves, widened QRS', 'Flat T waves', 'Short QT', 'Normal'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hypokalemia can cause:', opts: ['Muscle weakness, arrhythmias', 'Hyperreflexia', 'Peaked T waves', 'Bradycardia'], a: 0, subj: 'Med-Surg' },
+      { q: 'Calcium gluconate in hyperkalemia:', opts: ['Stabilizes cardiac membrane', 'Lowers potassium', 'Does nothing', 'Raises potassium'], a: 0, subj: 'Med-Surg' },
+      { q: 'Kayexalate removes potassium via:', opts: ['GI tract', 'Urine', 'Dialysis', 'IV'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hypermagnesemia can cause:', opts: ['Hyporeflexia, respiratory depression', 'Hyperreflexia', 'Seizures', 'Tachycardia'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hypomagnesemia often accompanies:', opts: ['Hypokalemia, hypocalcemia', 'Hyperkalemia', 'No other deficits', 'Hypermagnesemia'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hypocalcemia can cause:', opts: ['Tetany, Chvostek, Trousseau', 'Flaccidity', 'Hyperreflexia', 'Nothing'], a: 0, subj: 'Med-Surg' },
+      { q: 'Hypercalcemia treatment includes:', opts: ['Hydration, loop diuretics, bisphosphonates', 'Thiazides', 'Calcium supplements', 'No treatment'], a: 0, subj: 'Med-Surg' },
+      { q: 'Phosphate imbalance often relates to:', opts: ['Calcium, kidney function', 'Nothing', 'Sodium only', 'Potassium only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Sepsis is defined as:', opts: ['Life-threatening organ dysfunction from infection', 'Infection only', 'Fever only', 'Bacteremia'], a: 0, subj: 'Med-Surg' },
+      { q: 'Septic shock includes:', opts: ['Persistent hypotension despite fluids', 'Hypotension only', 'No fluids needed', 'Hypertension'], a: 0, subj: 'Med-Surg' },
+      { q: 'Sepsis bundle (Surviving Sepsis) includes:', opts: ['Lactate, cultures, antibiotics, fluids', 'Observation', 'Antibiotics only', 'Nothing'], a: 0, subj: 'Med-Surg' },
+      { q: 'SIRS criteria include:', opts: ['Temp, HR, RR, WBC abnormalities', 'BP only', 'Lactate only', 'Nothing'], a: 0, subj: 'Med-Surg' },
+      { q: 'qSOFA assesses:', opts: ['Sepsis risk (altered mental status, RR, BP)', 'DKA', 'Stroke', 'MI'], a: 0, subj: 'Med-Surg' },
+      { q: 'MODS (multi-organ dysfunction) is:', opts: ['Failure of multiple organ systems', 'Single organ', 'Reversible always', 'Rare'], a: 0, subj: 'Med-Surg' },
+      { q: 'ARDS diagnostic criteria include:', opts: ['Bilateral infiltrates, hypoxemia', 'Unilateral only', 'Normal oxygenation', 'No infiltrates'], a: 0, subj: 'Med-Surg' },
+      { q: 'Prone positioning in ARDS:', opts: ['Improves oxygenation', 'Worsens', 'No effect', 'Prevents'], a: 0, subj: 'Med-Surg' },
+      { q: 'VAP (ventilator-associated pneumonia) prevention:', opts: ['VAP bundle, oral care, elevation', 'Nothing', 'Antibiotics only', 'No elevation'], a: 0, subj: 'Med-Surg' },
+      { q: 'CLABSI prevention includes:', opts: ['Central line bundle, hand hygiene', 'Nothing', 'Antibiotics', 'No dressing changes'], a: 0, subj: 'Med-Surg' },
+      { q: 'CAUTI prevention includes:', opts: ['Remove catheter when not needed', 'Never remove', 'No care', 'Antibiotics only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Surgical site infection risk factors:', opts: ['Diabetes, obesity, prolonged surgery', 'None', 'Age only', 'Gender only'], a: 0, subj: 'Med-Surg' },
+      { q: 'ERAS (Enhanced Recovery After Surgery):', opts: ['Protocol to optimize surgical recovery', 'Prolongs stay', 'No evidence', 'Old protocol'], a: 0, subj: 'Med-Surg' },
+      { q: 'Post-op ileus resolves when:', opts: ['Bowel sounds, flatus return', 'Day 1', 'Never', 'With medication only'], a: 0, subj: 'Med-Surg' },
+      { q: 'Wound vacuum (VAC) therapy:', opts: ['Negative pressure for wound healing', 'Positive pressure', 'No pressure', 'Bandage only'], a: 0, subj: 'Med-Surg' },
+      /* +100 Psych */
+      { q: 'Therapeutic alliance is the:', opts: ['Collaborative relationship between clinician and patient', 'Friendship', 'Dependency', 'Control'], a: 0, subj: 'Psych' },
+      { q: 'Transference in therapy refers to:', opts: ['Patient redirects feelings from past onto therapist', 'Therapist feelings', 'Family involvement', 'Medication'], a: 0, subj: 'Psych' },
+      { q: 'Countertransference is when:', opts: ['Therapist\'s feelings affect the therapeutic relationship', 'Patient is angry', 'Family intervenes', 'Medication works'], a: 0, subj: 'Psych' },
+      { q: 'Boundaries in therapeutic relationship:', opts: ['Maintain professional role, avoid dual relationships', 'No boundaries', 'Friendship OK', 'Personal disclosure OK'], a: 0, subj: 'Psych' },
+      { q: 'Validation in DBT means:', opts: ['Acknowledging and accepting emotions as valid', 'Agreeing with all', 'Minimizing', 'Ignoring'], a: 0, subj: 'Psych' },
+      { q: 'Mindfulness in mental health care:', opts: ['Present-moment awareness, non-judgment', 'Meditation only', 'Religion', 'Ignoring thoughts'], a: 0, subj: 'Psych' },
+      { q: 'Distress tolerance skills help:', opts: ['Cope with crisis without making it worse', 'Eliminate distress', 'Avoid all stress', 'Ignore feelings'], a: 0, subj: 'Psych' },
+      { q: 'Emotion regulation aims to:', opts: ['Understand and modify emotional responses', 'Suppress emotions', 'Ignore emotions', 'Act on all emotions'], a: 0, subj: 'Psych' },
+      { q: 'Interpersonal effectiveness (DBT) focuses on:', opts: ['Assertiveness, relationships', 'Isolation', 'Conflict only', 'Avoidance'], a: 0, subj: 'Psych' },
+      { q: 'Exposure therapy is used for:', opts: ['Anxiety, PTSD, phobias', 'Depression only', 'Psychosis', 'Bipolar'], a: 0, subj: 'Psych' },
+      { q: 'Systematic desensitization involves:', opts: ['Gradual exposure with relaxation', 'Flooding only', 'Avoidance', 'No exposure'], a: 0, subj: 'Psych' },
+      { q: 'Flooding in exposure therapy:', opts: ['Intense, prolonged exposure', 'Gradual only', 'No exposure', 'Imaginary only'], a: 0, subj: 'Psych' },
+      { q: 'Cognitive restructuring targets:', opts: ['Irrational or distorted thoughts', 'Emotions only', 'Behavior only', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'Automatic thoughts are:', opts: ['Rapid, often distorted thoughts', 'Planned', 'Logical', 'Rare'], a: 0, subj: 'Psych' },
+      { q: 'Core beliefs in CBT are:', opts: ['Deep-seated assumptions about self/world', 'Surface thoughts', 'Facts', 'Irrelevant'], a: 0, subj: 'Psych' },
+      { q: 'Behavioral experiments in CBT:', opts: ['Test beliefs through action', 'Thought only', 'No testing', 'Avoidance'], a: 0, subj: 'Psych' },
+      { q: 'Psychoeducation provides:', opts: ['Information about illness and treatment', 'Medication only', 'Diagnosis only', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'Relapse prevention focuses on:', opts: ['Identifying triggers, coping plans', 'Cure', 'Avoidance only', 'Medication only'], a: 0, subj: 'Psych' },
+      { q: 'Warning signs of relapse include:', opts: ['Sleep changes, withdrawal, mood shifts', 'Nothing', 'Only hospitalization', 'Only medication noncompliance'], a: 0, subj: 'Psych' },
+      { q: 'Motivational interviewing uses:', opts: ['OARS: Open questions, Affirmations, Reflections, Summaries', 'Confrontation', 'Advice-giving', 'Directiveness'], a: 0, subj: 'Psych' },
+      { q: 'Stages of change model includes:', opts: ['Precontemplation, contemplation, preparation, action, maintenance', 'Action only', 'Two stages', 'No stages'], a: 0, subj: 'Psych' },
+      { q: 'Ambivalence in change means:', opts: ['Mixed feelings about changing', 'No feelings', 'Decided', 'Resistance only'], a: 0, subj: 'Psych' },
+      { q: 'Rolling with resistance means:', opts: ['Avoid arguing, explore', 'Confront', 'Give up', 'Force change'], a: 0, subj: 'Psych' },
+      { q: 'Expressed emotion (EE) in families:', opts: ['Criticism, hostility, overinvolvement', 'Support only', 'Nothing', 'Love only'], a: 0, subj: 'Psych' },
+      { q: 'High EE correlates with:', opts: ['Worse outcomes, relapse', 'Better outcomes', 'No effect', 'Cure'], a: 0, subj: 'Psych' },
+      { q: 'Family psychoeducation aims to:', opts: ['Reduce EE, improve support', 'Blame family', 'Exclude family', 'Medication only'], a: 0, subj: 'Psych' },
+      { q: 'Assertive community treatment (ACT):', opts: ['Intensive community-based care for SMI', 'Hospital only', 'Outpatient only', 'No outreach'], a: 0, subj: 'Psych' },
+      { q: 'SMI stands for:', opts: ['Serious mental illness', 'Somatic mental illness', 'Simple', 'Severe'], a: 0, subj: 'Psych' },
+      { q: 'Wraparound services provide:', opts: ['Individualized, comprehensive care planning', 'Standard care only', 'Hospital only', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'Crisis residential services offer:', opts: ['Short-term alternative to hospitalization', 'Long-term care', 'No care', 'Hospital only'], a: 0, subj: 'Psych' },
+      { q: 'Partial hospitalization (PHP) provides:', opts: ['Day treatment, return home at night', '24/7 care', 'Outpatient only', 'No structure'], a: 0, subj: 'Psych' },
+      { q: 'Intensive outpatient (IOP) typically:', opts: ['Several hours per day, several days/week', 'Once weekly', 'Daily 24hr', 'Monthly'], a: 0, subj: 'Psych' },
+      { q: 'Supported employment helps:', opts: ['Find and maintain jobs despite mental illness', 'Avoid work', 'Disability only', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'Clubhouse model provides:', opts: ['Peer support, work-ordered day', 'Medical care only', 'Housing only', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'Peer support specialists:', opts: ['Have lived experience of mental illness', 'Are always professionals', 'No training', 'Replace clinicians'], a: 0, subj: 'Psych' },
+      { q: 'Trauma-informed care recognizes:', opts: ['Impact of trauma on behavior and health', 'Nothing', 'Only PTSD', 'Only adults'], a: 0, subj: 'Psych' },
+      { q: 'ACE (Adverse Childhood Experiences) study showed:', opts: ['Link between trauma and health outcomes', 'No link', 'Only mental health', 'Only adults'], a: 0, subj: 'Psych' },
+      { q: 'Triggers in PTSD are:', opts: ['Reminders that evoke trauma response', 'Nothing', 'Only sights', 'Only sounds'], a: 0, subj: 'Psych' },
+      { q: 'Grounding techniques help with:', opts: ['Dissociation, flashbacks', 'Nothing', 'Only anxiety', 'Only depression'], a: 0, subj: 'Psych' },
+      { q: 'EMDR (Eye Movement Desensitization) is used for:', opts: ['PTSD, trauma', 'Depression only', 'Psychosis', 'Bipolar'], a: 0, subj: 'Psych' },
+      { q: 'Prolonged exposure therapy for PTSD:', opts: ['Repeated recounting and in-vivo exposure', 'Avoidance', 'Medication only', 'Brief only'], a: 0, subj: 'Psych' },
+      { q: 'CPT (Cognitive Processing Therapy) addresses:', opts: ['Trauma-related stuck points', 'Behavior only', 'Medication', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'Disorganized attachment may result from:', opts: ['Inconsistent or frightening caregiving', 'Good parenting', 'Genetics only', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'Attachment styles affect:', opts: ['Relationships, coping', 'Nothing', 'Only childhood', 'Only therapy'], a: 0, subj: 'Psych' },
+      { q: 'Object relations theory focuses on:', opts: ['Internalized relationships', 'External only', 'Behavior only', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'Splitting in BPD manifests as:', opts: ['Seeing people as all good or all bad', 'Dividing tasks', 'Sharing', 'Compromise'], a: 0, subj: 'Psych' },
+      { q: 'Dialectics in DBT means:', opts: ['Balancing opposites, both-and', 'Either-or', 'One truth', 'No balance'], a: 0, subj: 'Psych' },
+      { q: 'Self-harm assessment includes:', opts: ['Intent, lethality, function', 'Only cuts', 'Only suicide', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'NSSI (non-suicidal self-injury) may function to:', opts: ['Regulate emotion, punish self', 'Suicide attempt', 'Nothing', 'Attention only'], a: 0, subj: 'Psych' },
+      { q: 'Safety planning for suicide includes:', opts: ['Warning signs, coping strategies, supports', 'Contract only', 'Hospitalization only', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'No-suicide contract is:', opts: ['Not a substitute for thorough assessment', 'Always reliable', 'Legal document', 'Sufficient alone'], a: 0, subj: 'Psych' },
+      { q: 'Lethal means counseling aims to:', opts: ['Reduce access to lethal methods', 'Nothing', 'Only guns', 'Only medication'], a: 0, subj: 'Psych' },
+      { q: 'Serotonin syndrome can result from:', opts: ['Excess serotonergic activity', 'Too little serotonin', 'Dopamine', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'NMS vs serotonin syndrome: NMS involves:', opts: ['Dopamine blockade, rigidity', 'Serotonin', 'Both same', 'Neither'], a: 0, subj: 'Psych' },
+      { q: 'Anticholinergic toxicity presents with:', opts: ['Dry, hot, red, mad, blind', 'Wet, cold', 'No symptoms', 'Only GI'], a: 0, subj: 'Psych' },
+      { q: 'Toxic serotonin syndrome treatment:', opts: ['Stop serotonergic drugs, support', 'More SSRIs', 'Anticholinergics', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'Lithium toxicity signs include:', opts: ['Coarse tremor, ataxia, confusion', 'No signs', 'Only nausea', 'Only thirst'], a: 0, subj: 'Psych' },
+      { q: 'Lithium level should be checked:', opts: ['Regularly, with changes', 'Never', 'Once', 'Only if toxic'], a: 0, subj: 'Psych' },
+      { q: 'Valproate requires:', opts: ['Liver function, platelet monitoring', 'No monitoring', 'Kidney only', 'CBC only'], a: 0, subj: 'Psych' },
+      { q: 'Carbamazepine can cause:', opts: ['SIADH, blood dyscrasias', 'Nothing', 'Only sedation', 'Only weight gain'], a: 0, subj: 'Psych' },
+      { q: 'Lamotrigine requires:', opts: ['Slow titration (rash risk)', 'Rapid titration', 'No titration', 'No risk'], a: 0, subj: 'Psych' },
+      { q: 'Lamotrigine rash (SJS) is:', opts: ['Medical emergency', 'Benign', 'Common', 'Ignore'], a: 0, subj: 'Psych' },
+      { q: 'Antipsychotic metabolic effects include:', opts: ['Weight gain, diabetes, dyslipidemia', 'Weight loss', 'Nothing', 'Only sedation'], a: 0, subj: 'Psych' },
+      { q: 'Prolactin elevation from antipsychotics can cause:', opts: ['Galactorrhea, sexual dysfunction', 'Nothing', 'Only weight gain', 'Only sedation'], a: 0, subj: 'Psych' },
+      { q: 'QT prolongation risk with psychotropics:', opts: ['Some antipsychotics, antidepressants', 'None', 'Only lithium', 'Only benzos'], a: 0, subj: 'Psych' },
+      { q: 'Antidepressant discontinuation syndrome:', opts: ['Flu-like, dizziness when stopped abruptly', 'Nothing', 'Only with MAOIs', 'Rare'], a: 0, subj: 'Psych' },
+      { q: 'SSRIs should be tapered to:', opts: ['Reduce discontinuation symptoms', 'Nothing', 'Stop immediately', 'Double dose'], a: 0, subj: 'Psych' },
+      { q: 'MAOI diet restricts:', opts: ['Tyramine-containing foods', 'All food', 'Nothing', 'Only alcohol'], a: 0, subj: 'Psych' },
+      { q: 'Tyramine in MAOI use can cause:', opts: ['Hypertensive crisis', 'Hypotension', 'Nothing', 'Serotonin syndrome'], a: 0, subj: 'Psych' },
+      { q: 'Washout between MAOI and SSRI:', opts: ['Required (2-5 weeks typically)', 'Not needed', '1 day', '1 week'], a: 0, subj: 'Psych' },
+      { q: 'Delirium vs dementia: delirium is:', opts: ['Acute, fluctuating, often reversible', 'Chronic', 'Progressive only', 'Same'], a: 0, subj: 'Psych' },
+      { q: 'Sundowning in dementia refers to:', opts: ['Increased confusion/agitation in evening', 'Morning only', 'No pattern', 'Sleep only'], a: 0, subj: 'Psych' },
+      { q: 'Validation therapy in dementia:', opts: ['Acknowledge feelings, enter their reality', 'Reorient only', 'Correct always', 'Ignore'], a: 0, subj: 'Psych' },
+      { q: 'Reality orientation:', opts: ['Remind of time, place, person', 'Go along with delusions', 'Nothing', 'Only for mild dementia'], a: 0, subj: 'Psych' },
+      { q: 'Wandering in dementia management:', opts: ['Safe environment, activities', 'Restraints', 'Medication only', 'Ignore'], a: 0, subj: 'Psych' },
+      { q: 'Hoarding disorder treatment includes:', opts: ['CBT, harm reduction', 'Forced cleanup', 'Medication only', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'Body dysmorphic disorder involves:', opts: ['Preoccupation with perceived flaw', 'Actual deformity', 'Eating disorder only', 'Nothing'], a: 0, subj: 'Psych' },
+      { q: 'Trichotillomania is:', opts: ['Hair-pulling disorder', 'Skin picking', 'Nail biting', 'OCD only'], a: 0, subj: 'Psych' },
+      { q: 'Excoriation disorder is:', opts: ['Skin-picking disorder', 'Hair pulling', 'OCD', 'Dermatology only'], a: 0, subj: 'Psych' },
+      /* +100 Pharmacology */
+      { q: 'Bioavailability is:', opts: ['Fraction of drug reaching systemic circulation', 'Dose', 'Half-life', 'Peak level'], a: 0, subj: 'Pharmacology' },
+      { q: 'Half-life determines:', opts: ['Dosing interval, time to steady state', 'Efficacy', 'Toxicity only', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Steady state is reached after:', opts: ['~5 half-lives', '1 dose', '1 hour', '1 day'], a: 0, subj: 'Pharmacology' },
+      { q: 'First-pass metabolism occurs in:', opts: ['Liver after oral absorption', 'Kidney', 'Gut only', 'Blood'], a: 0, subj: 'Pharmacology' },
+      { q: 'CYP450 enzymes primarily in:', opts: ['Liver', 'Kidney', 'Gut', 'Blood'], a: 0, subj: 'Pharmacology' },
+      { q: 'CYP3A4 inhibitors include:', opts: ['Ketoconazole, grapefruit', 'Rifampin', 'Phenytoin', 'Carbamazepine'], a: 0, subj: 'Pharmacology' },
+      { q: 'CYP3A4 inducers include:', opts: ['Rifampin, phenytoin', 'Ketoconazole', 'Grapefruit', 'Erythromycin'], a: 0, subj: 'Pharmacology' },
+      { q: 'Prodrug requires:', opts: ['Metabolism to active form', 'No metabolism', 'Direct action', 'Activation only in liver'], a: 0, subj: 'Pharmacology' },
+      { q: 'Enterohepatic circulation:', opts: ['Drug reabsorbed from bile', 'Elimination only', 'First pass', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Volume of distribution (Vd) affects:', opts: ['Loading dose, tissue distribution', 'Efficacy', 'Half-life only', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Loading dose is used to:', opts: ['Reach therapeutic level quickly', 'Maintain level', 'Reduce toxicity', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Maintenance dose:', opts: ['Replaces eliminated drug', 'Loading only', 'Single dose', 'Bolus only'], a: 0, subj: 'Pharmacology' },
+      { q: 'Narrow therapeutic index means:', opts: ['Small difference between therapeutic and toxic', 'Wide margin', 'Safe', 'No monitoring'], a: 0, subj: 'Pharmacology' },
+      { q: 'Drugs with narrow therapeutic index include:', opts: ['Warfarin, digoxin, lithium', 'Acetaminophen', 'Ibuprofen', 'Metformin'], a: 0, subj: 'Pharmacology' },
+      { q: 'Trough level is drawn:', opts: ['Just before next dose', 'At peak', 'Random', 'After dose'], a: 0, subj: 'Pharmacology' },
+      { q: 'Peak level timing varies by:', opts: ['Drug, route', 'Always 1 hour', 'Always 30 min', 'No variation'], a: 0, subj: 'Pharmacology' },
+      { q: 'Renal dosing considers:', opts: ['GFR, creatinine clearance', 'Liver only', 'Weight only', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Hepatic dosing considers:', opts: ['Liver function, Child-Pugh', 'Kidney only', 'Nothing', 'Weight only'], a: 0, subj: 'Pharmacology' },
+      { q: 'Child-Pugh score assesses:', opts: ['Liver disease severity', 'Kidney', 'Heart', 'Lung'], a: 0, subj: 'Pharmacology' },
+      { q: 'Cockcroft-Gault estimates:', opts: ['Creatinine clearance', 'GFR only', 'Liver function', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Beers criteria list:', opts: ['Potentially inappropriate meds in elderly', 'All meds', 'Pediatric', 'Pregnancy'], a: 0, subj: 'Pharmacology' },
+      { q: 'START/STOPP criteria address:', opts: ['Medication appropriateness in elderly', 'Pediatrics', 'Pregnancy', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Black box warning indicates:', opts: ['Serious risk from FDA', 'Mild risk', 'No risk', 'Contraindication'], a: 0, subj: 'Pharmacology' },
+      { q: 'Contraindication means:', opts: ['Should not use', 'Use with caution', 'Same as precaution', 'Optional'], a: 0, subj: 'Pharmacology' },
+      { q: 'Precaution means:', opts: ['Use with caution, weigh risk/benefit', 'Do not use', 'Same as contraindication', 'No concern'], a: 0, subj: 'Pharmacology' },
+      { q: 'Adverse drug reaction (ADR):', opts: ['Harmful response to drug', 'Therapeutic effect', 'Placebo', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Type A adverse reaction is:', opts: ['Dose-dependent, predictable', 'Idiosyncratic', 'Allergic', 'Rare'], a: 0, subj: 'Pharmacology' },
+      { q: 'Type B adverse reaction is:', opts: ['Unpredictable, idiosyncratic', 'Dose-dependent', 'Common', 'Expected'], a: 0, subj: 'Pharmacology' },
+      { q: 'Anaphylaxis is:', opts: ['Life-threatening allergic reaction', 'Mild rash', 'Nausea', 'Headache'], a: 0, subj: 'Pharmacology' },
+      { q: 'Cross-sensitivity may occur between:', opts: ['Structurally similar drugs', 'Unrelated drugs', 'No drugs', 'All drugs'], a: 0, subj: 'Pharmacology' },
+      { q: 'Sulfa allergy may cross with:', opts: ['Sulfonamide antibiotics, some diuretics', 'Penicillins', 'Cephalosporins', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Penicillin allergy cross-reactivity with cephalosporins:', opts: ['Low with 2nd/3rd gen', 'High always', 'None', '100%'], a: 0, subj: 'Pharmacology' },
+      { q: 'Teratogenic drugs in pregnancy:', opts: ['Can cause fetal harm', 'Safe', 'All drugs', 'None'], a: 0, subj: 'Pharmacology' },
+      { q: 'Pregnancy category (old) X means:', opts: ['Contraindicated in pregnancy', 'Safe', 'Unknown', 'Caution'], a: 0, subj: 'Pharmacology' },
+      { q: 'Pregnancy Lactation Rule (new) provides:', opts: ['Risk summary for pregnancy and breastfeeding', 'Nothing', 'Old categories', 'Safety only'], a: 0, subj: 'Pharmacology' },
+      { q: 'Drugs excreted in breast milk:', opts: ['Vary; check compatibility', 'None', 'All', 'Only OTC'], a: 0, subj: 'Pharmacology' },
+      { q: 'LactMed is a resource for:', opts: ['Drug use in breastfeeding', 'Pregnancy only', 'Pediatrics', 'Elderly'], a: 0, subj: 'Pharmacology' },
+      { q: 'Pediatric dosing often uses:', opts: ['Weight or BSA', 'Adult dose', 'Age only', 'No calculation'], a: 0, subj: 'Pharmacology' },
+      { q: 'Clark\'s rule estimates pediatric dose from:', opts: ['Adult dose by weight', 'BSA', 'Age', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Young\'s rule uses:', opts: ['Age in formula for pediatric dose', 'Weight', 'BSA', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'IV compatibility means:', opts: ['Drugs can be mixed without reaction', 'Same syringe', 'Same bag', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Y-site compatibility:', opts: ['Compatibility when given through same IV line', 'Oral', 'IM', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Precipitation occurs when:', opts: ['Incompatible drugs form solid', 'Drug dissolves', 'Normal', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'IV push rate varies by:', opts: ['Drug; some must be slow', 'Always fast', 'Always slow', 'No variation'], a: 0, subj: 'Pharmacology' },
+      { q: 'Vesicant drugs can cause:', opts: ['Tissue damage if extravasated', 'Nothing', 'Mild irritation', 'Allergy'], a: 0, subj: 'Pharmacology' },
+      { q: 'Vinca alkaloids are:', opts: ['Vesicants', 'Irritants only', 'Safe', 'Never extravasate'], a: 0, subj: 'Pharmacology' },
+      { q: 'Antidote for vinca extravasation may include:', opts: ['Hyaluronidase', 'Nothing', 'Warm compress', 'Ice'], a: 0, subj: 'Pharmacology' },
+      { q: 'Doxorubicin extravasation:', opts: ['Requires prompt management', 'No concern', 'Ice only', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Antiemetic for chemotherapy:', opts: ['5-HT3 antagonists, NK1 antagonists', 'Opioids', 'Antibiotics', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Ondansetron is a:', opts: ['5-HT3 receptor antagonist', 'Dopamine antagonist', 'NK1 antagonist', 'Anticholinergic'], a: 0, subj: 'Pharmacology' },
+      { q: 'Aprepitant is:', opts: ['NK1 receptor antagonist', '5-HT3 antagonist', 'Dopamine antagonist', 'Corticosteroid'], a: 0, subj: 'Pharmacology' },
+      { q: 'Dexamethasone in chemo regimens:', opts: ['Enhances antiemetic effect', 'Causes nausea', 'No role', 'Replaces others'], a: 0, subj: 'Pharmacology' },
+      { q: 'G-CSF (filgrastim) stimulates:', opts: ['White blood cell production', 'RBC', 'Platelets', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Erythropoietin stimulates:', opts: ['Red blood cell production', 'WBC', 'Platelets', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Opioid rotation is used when:', opts: ['Tolerance or poor response', 'First choice', 'Never', 'Cost only'], a: 0, subj: 'Pharmacology' },
+      { q: 'Equianalgesic dosing:', opts: ['Converts between opioids at equivalent pain relief', 'Same dose', 'Random', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Morphine to hydromorphone conversion:', opts: ['Approximately 5:1 to 7.5:1', '1:1', '10:1', 'No conversion'], a: 0, subj: 'Pharmacology' },
+      { q: 'Fentanyl patch onset:', opts: ['12-24 hours to steady state', 'Immediate', '1 hour', '5 minutes'], a: 0, subj: 'Pharmacology' },
+      { q: 'Fentanyl patch has:', opts: ['Residual drug after removal', 'No residual', 'Short half-life', 'No risk'], a: 0, subj: 'Pharmacology' },
+      { q: 'Buprenorphine is:', opts: ['Partial opioid agonist', 'Full agonist', 'Antagonist', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Naloxone duration is:', opts: ['Shorter than many opioids; may need repeat', 'Longer', 'Same', 'No limit'], a: 0, subj: 'Pharmacology' },
+      { q: 'Methylnaltrexone is used for:', opts: ['Opioid-induced constipation', 'Overdose', 'Pain', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Alpha-2 agonists (clonidine, dexmedetomidine):', opts: ['Reduce sympathetic outflow', 'Stimulate', 'No cardiovascular effect', 'Hypertension'], a: 0, subj: 'Pharmacology' },
+      { q: 'Clonidine withdrawal can cause:', opts: ['Rebound hypertension', 'Hypotension', 'Nothing', 'Bradycardia'], a: 0, subj: 'Pharmacology' },
+      { q: 'Hydralazine is a:', opts: ['Direct vasodilator', 'ACE inhibitor', 'Beta-blocker', 'CCB'], a: 0, subj: 'Pharmacology' },
+      { q: 'Nitroprusside is:', opts: ['IV vasodilator for hypertensive emergency', 'Oral', 'Long-acting', 'Not for emergency'], a: 0, subj: 'Pharmacology' },
+      { q: 'Nitroprusside can cause:', opts: ['Cyanide/thiocyanate toxicity with prolonged use', 'Nothing', 'Hypotension only', 'Hypertension'], a: 0, subj: 'Pharmacology' },
+      { q: 'Labetalol has:', opts: ['Alpha and beta blocking activity', 'Only beta', 'Only alpha', 'Neither'], a: 0, subj: 'Pharmacology' },
+      { q: 'Esmolol is:', opts: ['Short-acting IV beta-blocker', 'Long-acting', 'Oral only', 'Alpha-blocker'], a: 0, subj: 'Pharmacology' },
+      { q: 'Diltiazem and verapamil are:', opts: ['Non-dihydropyridine CCBs', 'Dihydropyridine', 'Beta-blockers', 'ACE inhibitors'], a: 0, subj: 'Pharmacology' },
+      { q: 'Amlodipine is:', opts: ['Dihydropyridine CCB', 'Non-DHP', 'Beta-blocker', 'ACE inhibitor'], a: 0, subj: 'Pharmacology' },
+      { q: 'ARBs (e.g., losartan) block:', opts: ['Angiotensin II receptors', 'ACE', 'Beta receptors', 'Calcium'], a: 0, subj: 'Pharmacology' },
+      { q: 'ARBs do not typically cause:', opts: ['Dry cough (unlike ACEi)', 'Hyperkalemia', 'Renal effects', 'Hypotension'], a: 0, subj: 'Pharmacology' },
+      { q: 'Sacubitril/valsartan (Entresto) is for:', opts: ['Heart failure with reduced EF', 'Hypertension only', 'MI only', 'Arrhythmia'], a: 0, subj: 'Pharmacology' },
+      { q: 'Spironolactone in heart failure:', opts: ['Aldosterone antagonist, mortality benefit', 'Only diuresis', 'No benefit', 'Contraindicated'], a: 0, subj: 'Pharmacology' },
+      { q: 'Ivabradine reduces:', opts: ['Heart rate in HF', 'BP', 'Fluid', 'Nothing'], a: 0, subj: 'Pharmacology' },
+      { q: 'Sacubitril/valsartan requires:', opts: ['36-hour washout from ACEi', 'No washout', '1 day', '1 week'], a: 0, subj: 'Pharmacology' },
+      { q: 'Entresto and ACEi together:', opts: ['Contraindicated (angioedema risk)', 'Recommended', 'No interaction', 'Optional'], a: 0, subj: 'Pharmacology' },
+      { q: 'Prasugrel and ticagrelor are:', opts: ['P2Y12 inhibitors (antiplatelet)', 'Anticoagulants', 'Statins', 'ACE inhibitors'], a: 0, subj: 'Pharmacology' },
+      { q: 'Clopidogrel is a prodrug requiring:', opts: ['CYP2C19 activation', 'No metabolism', 'Liver only', 'Kidney'], a: 0, subj: 'Pharmacology' },
+      { q: 'CYP2C19 poor metabolizers with clopidogrel:', opts: ['May have reduced efficacy', 'Better efficacy', 'No difference', 'Toxicity'], a: 0, subj: 'Pharmacology' },
+      { q: 'Apixaban and rivaroxaban are:', opts: ['Factor Xa inhibitors', 'Factor IIa', 'Vitamin K antagonists', 'Antiplatelet'], a: 0, subj: 'Pharmacology' },
+      { q: 'Dabigatran is:', opts: ['Direct thrombin inhibitor', 'Factor Xa', 'Vitamin K antagonist', 'Antiplatelet'], a: 0, subj: 'Pharmacology' },
+      { q: 'DOAC reversal: andexanet for:', opts: ['Factor Xa inhibitors', 'Dabigatran', 'Warfarin', 'Heparin'], a: 0, subj: 'Pharmacology' },
+      { q: 'Idarucizumab reverses:', opts: ['Dabigatran only', 'All DOACs', 'Warfarin', 'Heparin'], a: 0, subj: 'Pharmacology' }
     ];
     const QUIZ_GAME_SIZE = 20;
     const QUIZ_TOPICS = ['Fundamentals', 'Med-Surg', 'Psych', 'Pharmacology'];
@@ -3256,6 +4098,66 @@
     window.addEventListener('beforeunload', () => {
       if (stream) stream.getTracks().forEach(t => t.stop());
     });
+
+    /* --- Hidden developer feature: live user count ---
+     * Trigger: triple-click the "Bea's Photo Booth" title
+     * Setup: Add your Firebase config below. Get it at console.firebase.google.com
+     * Create project → Realtime Database → Copy config. Set rules:
+     * { "rules": { "presence": { ".read": true, ".write": true } } }
+     */
+    (function() {
+      const DEV_CONFIG = null; /* Replace with: { apiKey:"...", authDomain:"...", databaseURL:"...", projectId:"...", storageBucket:"...", messagingSenderId:"...", appId:"..." } */
+      const badge = document.getElementById('dev-presence-badge');
+      const h1 = document.querySelector('h1');
+      let db = null, presenceRef = null, myUid = null;
+
+      function setBadge(text) {
+        if (badge) badge.textContent = '👥 Online: ' + text;
+      }
+
+      function toggleBadge() {
+        if (!badge) return;
+        badge.classList.toggle('visible');
+        if (badge.classList.contains('visible') && DEV_CONFIG) {
+          initPresence();
+        } else if (badge.classList.contains('visible') && !DEV_CONFIG) {
+          setBadge('Firebase not configured');
+        }
+      }
+
+      function initPresence() {
+        if (db) return;
+        try {
+          if (typeof firebase === 'undefined') { setBadge('Firebase not loaded'); return; }
+          const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(DEV_CONFIG);
+          db = firebase.database(app);
+          myUid = 'u_' + Math.random().toString(36).slice(2) + '_' + Date.now();
+          presenceRef = db.ref('presence/' + myUid);
+          presenceRef.onDisconnect().remove();
+          presenceRef.set({ ts: Date.now() });
+          db.ref('presence').on('value', snap => {
+            const count = snap.numChildren();
+            setBadge(count);
+          });
+        } catch (e) {
+          setBadge('Error');
+        }
+      }
+
+      if (h1) {
+        let clicks = 0, t = 0;
+        h1.addEventListener('click', () => {
+          const now = Date.now();
+          if (now - t > 400) clicks = 0;
+          t = now;
+          clicks++;
+          if (clicks >= 3) {
+            clicks = 0;
+            toggleBadge();
+          }
+        });
+      }
+    })();
   </script>
 </body>
 </html>
