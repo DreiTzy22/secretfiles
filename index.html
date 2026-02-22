@@ -1214,7 +1214,7 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.95);
       border: 1px solid rgba(233, 30, 140, 0.15);
       min-height: 400px;
-      overflow: hidden;
+      overflow: visible;
       transition: box-shadow 0.4s ease, transform 0.3s ease;
       animation: love-letter-appear 0.6s ease-out;
     }
@@ -3991,12 +3991,56 @@
     async function renderLoveLetterToCanvas() {
       const SCALE = 4;
       const CARD_W = 560 * SCALE;
-      const CARD_H = 480 * SCALE;
       const PAD = 48 * SCALE;
       const MAX_PHOTO_W = 300 * SCALE;
       const MAX_PHOTO_H = (300 * 3 / 4) * SCALE;
       const PHOTO_GAP = 18 * SCALE;
       const MSG = messageInput.value.trim();
+      const contentW = CARD_W - 72;
+
+      // Pre-measure text to compute required height
+      const measureCtx = document.createElement('canvas').getContext('2d');
+      measureCtx.font = `${18 * SCALE}px Nunito, sans-serif`;
+      const measureMaxW = CARD_W - 80;
+      const measureText = MSG || 'Write your message above...';
+      const measureWords = measureText.split(/\s+/);
+      let lineCount = 0;
+      let measureLine = '';
+      for (const word of measureWords) {
+        const test = measureLine ? measureLine + ' ' + word : word;
+        if (measureCtx.measureText(test).width > measureMaxW && measureLine) {
+          lineCount++;
+          measureLine = word;
+        } else {
+          measureLine = test;
+        }
+      }
+      if (measureLine) lineCount++;
+
+      const LINE_H = 28 * SCALE;
+      const photoList = selectedPhotoIndices.slice(0, 3).map(i => capturedPhotos[i]).filter(Boolean);
+      const n = photoList.length;
+      let photoBlockH = 0;
+      if (n === 1) {
+        const cellW = Math.min(MAX_PHOTO_W + 24 * SCALE, contentW);
+        photoBlockH = Math.min(MAX_PHOTO_H + 40 * SCALE, contentW * 0.75 + 40 * SCALE);
+      } else if (n === 2) {
+        const cellW = (contentW - PHOTO_GAP) / 2;
+        photoBlockH = Math.min(MAX_PHOTO_H, cellW * 0.75);
+      } else if (n === 3) {
+        const bigH = Math.min(MAX_PHOTO_H * 0.8, contentW * 0.4);
+        const smallW = (contentW - PHOTO_GAP) / 2;
+        const smallH = Math.min(MAX_PHOTO_H * 0.6, smallW * 0.75);
+        photoBlockH = bigH + PHOTO_GAP + smallH;
+      }
+
+      const titleH = 40 * SCALE + 32 * SCALE + 24 * SCALE;
+      const msgH = lineCount * LINE_H + 24 * SCALE;
+      const dateH = 48 * SCALE;
+      const bottomPad = 48 * SCALE;
+      const computedCardH = titleH + (n > 0 ? photoBlockH + 28 * SCALE : 0) + msgH + dateH + bottomPad;
+      const CARD_H = Math.max(480 * SCALE, computedCardH);
+      const contentH = CARD_H - 72;
 
       const cvs = document.createElement('canvas');
       cvs.width = CARD_W + PAD * 2;
@@ -4065,8 +4109,6 @@
 
       // Free-form flowers (x,y as 0-100 % of content area)
       const FLOWER_SIZE = 64 * SCALE;
-      const contentW = cardW - 72;
-      const contentH = cardH - 72;
       for (const fd of flowerDecorations) {
         const drawX = cardX + 36 + (fd.x / 100) * contentW - FLOWER_SIZE / 2;
         const drawY = cardY + 36 + (fd.y / 100) * contentH - FLOWER_SIZE / 2;
@@ -4093,17 +4135,15 @@
       y += 24 * SCALE;
 
       // Photos: layout-aware, max 3 (1=centered, 2=side-by-side, 3=1 large+2 small)
-      const photos = selectedPhotoIndices.slice(0, 3).map(i => capturedPhotos[i]).filter(Boolean);
-      if (photos.length > 0) {
-        const contentW = cardW - 72;
-        const n = photos.length;
+      if (photoList.length > 0) {
+        const n = photoList.length;
         const loaded = [];
-        for (let i = 0; i < photos.length; i++) {
+        for (let i = 0; i < photoList.length; i++) {
           const img = new Image();
           await new Promise((res, rej) => {
             img.onload = () => res();
             img.onerror = () => rej(new Error('Failed to load photo'));
-            img.src = photos[i];
+            img.src = photoList[i];
           });
           loaded.push({ img, w: img.naturalWidth, h: img.naturalHeight });
         }
