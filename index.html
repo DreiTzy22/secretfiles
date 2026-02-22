@@ -1473,14 +1473,14 @@
       <div id="game-quiz" class="minigame-panel">
         <p>Test your nursing knowledge with quick care questions!</p>
         <div id="quiz-topic-selector" class="quiz-topic-selector">
-          <p class="quiz-topic-prompt">Select topics to quiz (choose 2 or more):</p>
+          <p class="quiz-topic-prompt">Select topics to quiz (choose 1 or more):</p>
           <div class="quiz-topic-options">
             <label><input type="checkbox" name="quiz-topic" value="Fundamentals"> Fundamentals</label>
             <label><input type="checkbox" name="quiz-topic" value="Med-Surg"> Med-Surg</label>
             <label><input type="checkbox" name="quiz-topic" value="Psych"> Psych</label>
             <label><input type="checkbox" name="quiz-topic" value="Pharmacology"> Pharmacology</label>
           </div>
-          <p id="quiz-topic-error" class="quiz-topic-error hidden">Please select at least 2 topics.</p>
+          <p id="quiz-topic-error" class="quiz-topic-error hidden">Please select at least 1 topic.</p>
           <button type="button" class="btn btn-primary" id="quiz-start">Start Quiz</button>
         </div>
         <div class="minigame-stats" id="quiz-stats" style="display:none;">
@@ -2900,7 +2900,7 @@
 
     function startQuizFromTopics() {
       const selected = Array.from(document.querySelectorAll('input[name="quiz-topic"]:checked')).map(cb => cb.value);
-      if (selected.length < 2) {
+      if (selected.length < 1) {
         quizTopicError.classList.remove('hidden');
         return;
       }
