@@ -31,11 +31,17 @@ function resolveFilePath(urlPathname) {
   const rawPath = decodeURIComponent(urlPathname || "/");
   const safePath = String(rawPath).replace(/\\/g, "/");
   const normalized = path.posix.normalize(safePath);
-  const relative = normalized.startsWith("/") ? normalized.slice(1) : normalized;
+  const relative = normalized.startsWith("/")
+    ? normalized.slice(1)
+    : normalized;
   const resolved = path.resolve(ROOT_DIR, relative);
   const rootResolved = path.resolve(ROOT_DIR);
 
-  if (!resolved.startsWith(rootResolved + path.sep) && resolved !== rootResolved) return null;
+  if (
+    !resolved.startsWith(rootResolved + path.sep) &&
+    resolved !== rootResolved
+  )
+    return null;
   if (resolved === rootResolved) return path.join(rootResolved, "index.html");
   return resolved;
 }
