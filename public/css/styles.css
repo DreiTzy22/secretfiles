@@ -43,8 +43,8 @@
       position: fixed;
       inset: 0;
       background-image:
-        url('cute-capibara-character-different-poses.png'),
-        url('cute-capibara-character-different-poses.png'),
+        url('../images/cute-capibara-character-different-poses.png'),
+        url('../images/cute-capibara-character-different-poses.png'),
         radial-gradient(circle at 10% 20%, rgba(156, 175, 136, 0.08) 0%, transparent 25%),
         radial-gradient(circle at 90% 80%, rgba(100, 181, 246, 0.08) 0%, transparent 25%);
       background-size: 200px auto, 180px auto, auto, auto;
